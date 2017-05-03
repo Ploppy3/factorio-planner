@@ -40,7 +40,7 @@ export class Node {
         } else {
           this.category = 'crafting'; //default
         }
-        this.quantityPerCraft = 0; // reset value (needed for root node only)
+        this.quantityPerCraft = 1; // reset value (needed for root node only)
         if (recipe.normal) { // normal
           if (recipe.normal.ingredients) ingredients = recipe.normal.ingredients;
           if (recipe.normal.energy_required) this.craftingTime = recipe.normal.energy_required;
