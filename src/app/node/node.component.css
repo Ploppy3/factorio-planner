@@ -1,0 +1,15 @@
+:host{
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 2px;
+  background-color: #eee;
+  transition-duration: .5s;
+  will-change: transform;
+}
+:host:hover{
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .24);
+}
+input[type="number"]{
+  width: 2.5em;
+}

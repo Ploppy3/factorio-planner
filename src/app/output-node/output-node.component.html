@@ -1,0 +1,54 @@
+<div class="half-padding">
+  <div class="half-padding">
+    <md-input-container>
+      <input mdInput type="number" min="1" [(ngModel)]="node.output" [formControl]="control_output">
+    </md-input-container>
+    <img *ngIf="node.name != 'Item'" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name">
+    <md-input-container floatPlaceholder="never">
+      <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
+    </md-input-container>
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let recipe of filteredRecipes | async" [value]="recipe.name">{{recipe.name}}</md-option>
+    </md-autocomplete>
+    /s
+  </div>
+  <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
+    <div class="self-center">#</div>
+    <md-select flex="true" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
+      <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
+        <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+      </md-option>
+    </md-select>
+    <div class="self-center nowrapText">: {{ node.numberMachines | number:'1.2-2' }}</div>
+    <div class="flex-grow"></div>
+  </div>
+  <div class="info" *ngIf="node.showOptions half-padding">
+    <div class="nowrapText half-padding">
+      Recipe Request: {{node.output}}
+    </div>
+    <div class="nowrapText half-padding">
+      Quantity per Craft: {{node.quantityPerCraft}}
+    </div>
+    <div class="nowrapText half-padding">
+      Crafting Time: {{node.craftingTime}}
+    </div>
+    <div class="nowrapText half-padding">
+      Crafting Speed: {{node.craftingSpeed}}
+    </div>
+    <div class="nowrapText half-padding">
+      Category: {{node.category}}
+    </div>
+    <div class="nowrapText half-padding">
+      Attenuation: {{node.attenuation}}
+    </div>
+  </div>
+  <div class="quarter-padding">
+    <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+  </div>
+  <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
+</div>
+<div *ngIf="node.childs.length > 0" class="flex quarter-padding">
+  <div class="quarter-padding" *ngFor="let _node of node.childs">
+    <app-node [node]="_node"></app-node>
+  </div>
+</div>
