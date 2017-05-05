@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
-  private reloadData() {
+  public reloadData() {
     this.dataService.loadData(this.dataVersionId);
     this.outputNode.reload();
   }
