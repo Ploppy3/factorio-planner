@@ -1,14 +1,15 @@
 :host{
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, .12);
-  border-radius: 2px;
-  background-color: #eee;
-  transition-duration: .5s;
-  will-change: transform;
+  border-radius: 6px;
+  /*background-color: #eee;*/
+  /*transition-duration: .5s;*/
+  will-change: contents;
 }
 :host:hover{
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, .24);
+  /*background-color: #fff;*/
+  /*border: 1px solid rgba(0, 0, 0, .24);*/
+  border: 1px solid #2196F3;
 }
 input[type="number"]{
   width: 2.5em;

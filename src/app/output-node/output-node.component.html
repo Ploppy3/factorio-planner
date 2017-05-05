@@ -1,7 +1,7 @@
 <div class="half-padding">
   <div class="half-padding">
     <md-input-container>
-      <input mdInput type="number" min="1" [(ngModel)]="node.output" [formControl]="control_output">
+      <input mdInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
     </md-input-container>
     <img #imageRecipe *ngIf="node.name != 'Item'" [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
     <md-input-container floatPlaceholder="never">
@@ -14,7 +14,7 @@
   </div>
   <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
     <div class="self-center">#</div>
-    <md-select flex="true" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
+    <md-select class="autoSize" flex="true" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
       <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
         <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
       </md-option>
@@ -24,7 +24,7 @@
   </div>
   <div class="info" *ngIf="node.showOptions half-padding">
     <div class="nowrapText half-padding">
-      Recipe Request: {{node.output}}
+      Recipe Request: {{node.recipeRequest}}
     </div>
     <div class="nowrapText half-padding">
       Quantity per Craft: {{node.quantityPerCraft}}
@@ -37,9 +37,6 @@
     </div>
     <div class="nowrapText half-padding">
       Category: {{node.category}}
-    </div>
-    <div class="nowrapText half-padding">
-      Attenuation: {{node.attenuation}}
     </div>
   </div>
   <div class="quarter-padding">

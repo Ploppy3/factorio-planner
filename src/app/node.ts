@@ -1,16 +1,19 @@
 export class Node {  
 
+  //for test purpose
+  public outputRate: number = 1;
+
   public name: string = 'Item';
-  public output: number = 1;
+  public recipeRequest: number = 1;
   public quantityPerCraft: number = 1;
   public craftingSpeed: number = .0;
   public craftingTime: number = .5;
   public numberMachines: number = 1;
-  public rate = 0;
+  //public rate = 0;
 
   public parent: Node;  
   public childs: Node[] = [];
-  public attenuation: number = 1;
+  //public attenuation: number = 1;
   public showOptions: boolean = false;
   public category: string = 'unknown'; // crafting, crafting-with-fluid, advanced-crafting, smelting, chemistry
   public machines: any[] = [];
@@ -18,9 +21,11 @@ export class Node {
   constructor(){}
 
   public calculate() {
-    this.attenuation = (this.output / this.quantityPerCraft) * this.parent.attenuation;
-    this.numberMachines = this.craftingTime * (this.output * this.parent.attenuation) / this.craftingSpeed / this.quantityPerCraft;
-    this.rate = this.quantityPerCraft / this.craftingTime * this.craftingSpeed * this.numberMachines;
+    //this.attenuation = (this.recipeRequest / this.quantityPerCraft) * this.parent.attenuation;
+    //this.numberMachines = this.craftingTime * (this.recipeRequest * this.parent.attenuation) / this.craftingSpeed / this.quantityPerCraft;
+    this.outputRate = this.parent.outputRate / this.parent.quantityPerCraft * this.recipeRequest;
+    this.numberMachines =  this.outputRate / ((1 * this.craftingSpeed) / this.craftingTime);
+    //this.rate = this.quantityPerCraft / this.craftingTime * this.craftingSpeed * this.numberMachines;
     //this.rate = 0;
     this.childs.forEach(node => {
       node.calculate();
@@ -60,14 +65,14 @@ export class Node {
         if (machines.length > 0) {
           this.machines = machines;
           this.craftingSpeed = machines[0].crafting_speed;
-          console.log('using machine:', machines[0], 'for', recipe.name);
+          //console.log('using machine:', machines[0], 'for', recipe.name);
         }
         //-------------------------------
         this.calculate(); // do it at this moment to prevent calculate call to propagate to its childs
         //-------------------------------
         ingredients.forEach(ingredient => {
           if (Array.isArray(ingredient)) { // type 1 - array
-            this.addChild(ingredient[0], ingredient[1]); 
+            this.addChild(ingredient[0], ingredient[1]);  // name, amount
           } else { // type 2 - object
             this.addChild(ingredient.name, ingredient.amount);
           }
@@ -83,7 +88,7 @@ export class Node {
     let node = new Node();
     node.parent = this;
     if (name) node.name = name
-    if (output) node.output = output;
+    if (output) node.recipeRequest = output;
     node.calculate();
     this.childs.push(node);
   }
