@@ -3,7 +3,7 @@
     <md-input-container>
       <input mdInput type="number" min="1" [(ngModel)]="node.output" [formControl]="control_output">
     </md-input-container>
-    <img *ngIf="node.name != 'Item'" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name">
+    <img #imageRecipe *ngIf="node.name != 'Item'" [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
     <md-input-container floatPlaceholder="never">
       <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
     </md-input-container>

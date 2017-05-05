@@ -32,6 +32,10 @@ export class OutputNodeComponent implements OnInit {
     this.filteredRecipes = this.control_recipe.valueChanges.startWith(null).map(val => this.filterRecipes(val).slice(0, 7));
     this.control_recipe.valueChanges.subscribe(val => { this.node.name = val; this.node.findRecipeByName(this.dataService); });
   }
+
+  public reload() {
+    this.node.findRecipeByName(this.dataService);
+  }
   
   private filterRecipes(val: string): any[] {
     return val ? this.dataService.recipes.filter(recipe => new RegExp(`${val}`, 'gi').test(recipe.name))
