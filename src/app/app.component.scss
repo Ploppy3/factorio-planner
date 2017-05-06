@@ -1,0 +1,20 @@
+@import '../material.theme.scss';
+
+:host{
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+#title{
+  color: mat-color($primary);
+  font-weight: bold;
+}
+#factorioVersion{
+  margin-right: 8px;
+}
+#selectVersion{
+  min-width: 75px;
+}
+#donate{
+  margin-left: 8px;
+}
