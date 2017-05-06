@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";  
 
-import { data_recipe_15_5, data_recipe_15_7 } from "./recipe";
+import { data_recipe_15_5, data_recipe_15_7, data_recipe_15_8 } from "./recipe";
 
 @Injectable()
 export class DataService {
 
-  public dataVersions: any[] = [{ name: '15.5', data: data_recipe_15_5 }, { name: '15.7', data: data_recipe_15_7 }];
+  public dataVersions: any[] = [
+    { name: '15.5', data: data_recipe_15_5 },
+    { name: '15.7', data: data_recipe_15_7 },
+    { name: '15.8 to 15.9', data: data_recipe_15_8 },
+  ];
   public recipes: any[] = [];
   public assemblingMachines: any[] = [];
 
