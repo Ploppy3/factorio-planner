@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   private readonly CLOSE_BRACE: number = 1;
 
   constructor(
-    private dataService: DataService,
+    public dataService: DataService,
     private plannerService: PlannerService,
   ){}
 
