@@ -10,17 +10,7 @@
     <md-autocomplete #auto="mdAutocomplete">
       <md-option *ngFor="let recipe of filteredRecipes | async" [value]="recipe.name">{{recipe.name}}</md-option>
     </md-autocomplete>
-    /s
-  </div>
-  <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
-    <div class="self-center">#</div>
-    <md-select class="autoSize" flex="true" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
-      <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
-        <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
-      </md-option>
-    </md-select>
-    <div class="self-center nowrapText">: {{ node.numberMachines | number:'1.2-2' }}</div>
-    <div class="flex-grow"></div>
+    /s <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
   <div class="info" *ngIf="node.showOptions half-padding">
     <div class="nowrapText half-padding">
@@ -39,8 +29,15 @@
       Category: {{node.category}}
     </div>
   </div>
-  <div class="quarter-padding">
-    <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+  <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
+    <div class="self-center">#</div>
+    <md-select class="autoSize" flex="true" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
+      <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
+        <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+      </md-option>
+    </md-select>
+    <div class="self-center nowrapText">: {{ node.numberMachines | number:'1.2-2' }}</div>
+    <div class="flex-grow"></div>
   </div>
   <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
 </div>
