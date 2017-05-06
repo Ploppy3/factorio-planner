@@ -1,3 +1,6 @@
+import { DataService } from "./data.service";
+import { PlannerService } from "./planner.service";
+
 export class Node {  
 
   //for test purpose
@@ -18,7 +21,7 @@ export class Node {
   public category: string = 'unknown'; // crafting, crafting-with-fluid, advanced-crafting, smelting, chemistry
   public machines: any[] = [];
 
-  constructor(){}
+  constructor(private dataService: DataService, private plannerService: PlannerService){}
 
   public calculate() {
     //this.attenuation = (this.recipeRequest / this.quantityPerCraft) * this.parent.attenuation;
@@ -32,10 +35,10 @@ export class Node {
     });
   }
 
-  public findRecipeByName(dataService) {
+  public findRecipeByName() {
     this.childs = [];
-    for (let i = 0; i < dataService.recipes.length; i++) {
-      let recipe = dataService.recipes[i];
+    for (let i = 0; i < this.dataService.recipes.length; i++) {
+      let recipe = this.dataService.recipes[i];
       if (recipe.name == this.name) {
         console.log(recipe);
         let ingredients: any[] = [];
@@ -46,7 +49,11 @@ export class Node {
           this.category = 'crafting'; //default
         }
         this.quantityPerCraft = 1; // reset value (needed for root node only)
-        if (recipe.normal) { // normal
+        if (recipe.expensive && this.plannerService.$useExpensiveRecipes.value) { // expensive
+          if (recipe.normal.ingredients) ingredients = recipe.expensive.ingredients;
+          if (recipe.normal.energy_required) this.craftingTime = recipe.expensive.energy_required;
+          //console.log('using expensive recipe for', recipe)
+        } else if (recipe.normal) { // normal
           if (recipe.normal.ingredients) ingredients = recipe.normal.ingredients;
           if (recipe.normal.energy_required) this.craftingTime = recipe.normal.energy_required;
         } else { // basic
@@ -61,7 +68,7 @@ export class Node {
             }
           });
         }
-        let machines = dataService.getAssemblingMachinesByCategory(this.category, ingredients.length);
+        let machines = this.dataService.getAssemblingMachinesByCategory(this.category, ingredients.length);
         if (machines.length > 0) {
           this.machines = machines;
           this.craftingSpeed = machines[0].crafting_speed;
@@ -85,7 +92,7 @@ export class Node {
   }
 
   public addChild(name?: string, output?: number, category?: string) {
-    let node = new Node();
+    let node = new Node(this.dataService, this.plannerService);
     node.parent = this;
     if (name) node.name = name
     if (output) node.recipeRequest = output;

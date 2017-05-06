@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { Observable } from "rxjs/Observable";
+
 import { Node } from "../node";
 import { fadeInOut, reveal } from "../animations";
 import { DataService } from "../data.service";
+import { PlannerService } from "../planner.service";
 
 @Component({
   selector: 'app-node',
@@ -10,18 +13,20 @@ import { DataService } from "../data.service";
   styleUrls: ['./node.component.css'],
   animations: [fadeInOut, reveal],
 })
-export class NodeComponent extends Node implements OnInit {
+export class NodeComponent implements OnInit {
 
   @Input() node: Node;
 
+  public $useExpensiveRecipes: Observable<boolean>;
+
   constructor(
     public dataService: DataService,
+    public plannerService : PlannerService,
   ) {
-    super();
   }
 
   ngOnInit() {
-    this.node.findRecipeByName(this.dataService);
+    this.node.findRecipeByName();
     //this.findRecipeByName(this.node.name);
   }
 

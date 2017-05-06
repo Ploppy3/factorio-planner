@@ -8,9 +8,12 @@
       <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
     </md-input-container>
     <md-autocomplete #auto="mdAutocomplete">
-      <md-option *ngFor="let recipe of filteredRecipes | async" [value]="recipe.name">{{recipe.name}}</md-option>
+      <md-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name">{{recipe.name}}</md-option>
     </md-autocomplete>
     /s <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+  </div>
+  <div class="half-padding">
+    <md-checkbox #checkboxExpensive [checked]="$useExpensiveRecipes | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensipe recipes (Marathon)</md-checkbox>
   </div>
   <div class="info" *ngIf="node.showOptions half-padding">
     <div class="nowrapText half-padding">

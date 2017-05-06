@@ -6,7 +6,7 @@ import {
   MdAutocompleteModule,
   MdInputModule,
   MdSelectModule,
-  MdTooltipModule,
+  MdCheckboxModule,
 } from "@angular/material";
 
 @NgModule({
@@ -19,7 +19,7 @@ import {
     MdAutocompleteModule,
     MdInputModule,
     MdSelectModule,
-    MdTooltipModule,
+    MdCheckboxModule,
   ],
   declarations: []
 })
