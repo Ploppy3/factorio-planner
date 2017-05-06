@@ -1,0 +1,15 @@
+{
+  "lang": "en",
+  "name": "Factorio Planner",
+  "short_name": "Planner",
+  "theme_color": "#2196f3",
+  "background_color": "#fff",
+  "display": "standalone",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [{
+    "src": "assets/ic_launcher.png", 
+    "sizes": "192x192"
+  }]
+}

@@ -9,7 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "manifest.webmanifest"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -21,6 +21,7 @@
       "styles": [
         "styles.scss"
       ],
+      "serviceWorker": true,
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
