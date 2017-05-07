@@ -43,7 +43,7 @@ export class OutputNodeComponent implements OnInit {
   }
 
   private filterRecipes(val: string): any[] {
-    return val ? this.dataService.recipes.filter(recipe => new RegExp(`${val}`, 'gi').test(recipe.name)) : this.dataService.recipes;
+    return val ? this.dataService.recipes.filter(recipe => new RegExp(`${val}`, 'gi').test(recipe.name)) : [];
   }
 
   public onExpensiveRecipesValueChange(value: boolean) {
