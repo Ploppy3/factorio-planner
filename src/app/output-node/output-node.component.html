@@ -38,13 +38,12 @@
     </div>
   </div>
   <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
-    <div class="self-center">#</div>
     <md-select class="autoSize" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
       <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
         <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
       </md-option>
     </md-select>
-    <div class="self-center nowrapText">: {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
+    <div class="self-center nowrapText">x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
     <div class="flex-grow"></div>
   </div>
   <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
