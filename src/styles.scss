@@ -47,6 +47,9 @@ select{
 .flex{
   display: flex;
 }
+.flex.column{
+  flex-direction: column;
+}
 .flex-grow{
   flex-grow: 1;
 }

@@ -1,30 +1,30 @@
-<div class="half-padding">
+<div class="quarter-padding">
   <!--
   <div *ngIf="node.category != 'unknown'" class="nowrap half-padding">
     (rate) {{node.rate | number:'1.2-2' }} <img [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name"> /s
   </div>
   -->
-  <div class="nowrapText half-padding">
+  <div class="nowrapText quarter-padding">
     {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} <img #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"> <span *ngIf="imageRecipe.hidden">{{node.name}}</span> /s <button *ngIf="node.category != 'unknown'" md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
   <div *ngIf="node.showOptions">
-    <div class="nowrapText half-padding">
+    <div class="nowrapText quarter-padding">
       Recipe Request: {{node.recipeRequest}}
     </div>
-    <div class="nowrapText half-padding">
+    <div class="nowrapText quarter-padding">
       Quantity per Craft: {{node.quantityPerCraft}}
     </div>
-    <div class="nowrapText half-padding">
+    <div class="nowrapText quarter-padding">
       Crafting Time: {{node.craftingTime}}
     </div>
-    <div class="nowrapText half-padding">
+    <div class="nowrapText quarter-padding">
       Crafting Speed: {{node.craftingSpeed}}
     </div>
-    <div class="nowrapText half-padding">
+    <div class="nowrapText quarter-padding">
       Category: {{node.category}}
     </div>
   </div>
-  <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
+  <div class="flex nowrap quarter-padding" *ngIf="node.category != 'unknown'">
     <md-select class="autoSize" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
       <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
         <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
