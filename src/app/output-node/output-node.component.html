@@ -18,7 +18,7 @@
     <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
   <div class="half-padding">
-    <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensipe recipes (Marathon)</md-checkbox>
+    <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</md-checkbox>
   </div>
   <div class="info" *ngIf="node.showOptions half-padding">
     <div class="nowrapText half-padding">
