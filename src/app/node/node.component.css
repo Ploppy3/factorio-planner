@@ -1,16 +1,46 @@
 :host{
   display: inline-block;
-  border: 1px solid rgba(0, 0, 0, .12);
-  border-radius: 6px;
-  /*background-color: #eee;*/
-  /*transition-duration: .5s;*/
   will-change: contents;
+  position: relative;
 }
-:host:hover{
-  /*background-color: #fff;*/
-  /*border: 1px solid rgba(0, 0, 0, .24);*/
-  border: 1px solid #2196F3;
+:host::before{
+  display: inline-block;
+  position: absolute;
+  height: 21px;
+  width: 24px;
+  left: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .87);
+  content: '';
+}
+:host.last::before{
+  display: inline-block;
+  position: absolute;
+  height: 21px;
+  width: 24px;
+  left: 0;
+  border-left: 1px solid rgba(0, 0, 0, .87);
+  border-bottom: 1px solid rgba(0, 0, 0, .87);
+  border-bottom-left-radius: 4px;
+  content: '';
+}
+:host{
+  border-left: 1px solid rgba(0, 0, 0, .87);
+  padding-left: 24px;
+}
+:host.last{
+  border-left: none;
 }
 input[type="number"]{
   width: 2.5em;
+}
+.info{
+  background-color: rgba(0, 0, 0, .12);
+  margin-bottom: 8px;
+}
+.wrapper-nodeName{
+  margin-left: 4px;
+}
+.nodeName{
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .12);
 }

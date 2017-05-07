@@ -18,6 +18,7 @@ export class NodeComponent implements OnInit {
   @Input() node: Node;
 
   public $useExpensiveRecipes: Observable<boolean>;
+  public showChilds: boolean = true;
 
   constructor(
     public dataService: DataService,

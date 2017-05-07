@@ -71,6 +71,17 @@ select{
 .quarter-padding{
   padding: 4px;
 }
+.node-padding{
+  margin-left: 20px;
+}
+.inline-block{
+  display: inline-block;
+  vertical-align: middle;
+}
+.clickable{
+  position: relative;
+  cursor: pointer;
+}
 /*
 .mat-select-value-text{
   overflow: initial !important;

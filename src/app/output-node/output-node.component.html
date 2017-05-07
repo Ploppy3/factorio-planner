@@ -48,8 +48,8 @@
   </div>
   <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
 </div>
-<div *ngIf="node.childs.length > 0" class="flex quarter-padding">
-  <div class="quarter-padding" *ngFor="let _node of node.childs">
-    <app-node [node]="_node"></app-node>
+<div *ngIf="node.childs.length > 0" class="flex column">
+  <div class="node-padding" *ngFor="let _node of node.childs; let i = index">
+    <app-node [class.last]="i == node.childs.length - 1" [node]="_node"></app-node>
   </div>
 </div>
