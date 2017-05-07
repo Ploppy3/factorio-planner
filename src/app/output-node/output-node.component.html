@@ -1,53 +1,51 @@
 <div class="half-padding">
-  <div class="half-padding">
-    <md-input-container>
-      <input mdInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
-    </md-input-container>
-    <img #imageRecipe *ngIf="node.name != 'Item'" [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
-    <md-input-container floatPlaceholder="never">
-      <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
-    </md-input-container>
-    <md-autocomplete #auto="mdAutocomplete">
-      <md-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">{{recipe.name}}</md-option>
-    </md-autocomplete>
-    <md-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (change)="onTimeUnitChange()">
-      <md-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
-        {{unit}}
-      </md-option>
-    </md-select>
-    <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
-  </div>
-  <div class="half-padding">
-    <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</md-checkbox>
-  </div>
-  <div class="info" *ngIf="node.showOptions half-padding">
-    <div class="nowrapText half-padding">
-      Recipe Request: {{node.recipeRequest}}
-    </div>
-    <div class="nowrapText half-padding">
-      Quantity per Craft: {{node.quantityPerCraft}}
-    </div>
-    <div class="nowrapText half-padding">
-      Crafting Time: {{node.craftingTime}}
-    </div>
-    <div class="nowrapText half-padding">
-      Crafting Speed: {{node.craftingSpeed}}
-    </div>
-    <div class="nowrapText half-padding">
-      Category: {{node.category}}
-    </div>
-  </div>
-  <div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
-    <md-select class="autoSize" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
-      <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
-        <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
-      </md-option>
-    </md-select>
-    <div class="self-center nowrapText">x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
-    <div class="flex-grow"></div>
-  </div>
-  <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
+  <md-input-container>
+    <input mdInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
+  </md-input-container>
+  <img #imageRecipe *ngIf="node.name != 'Item'" [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
+  <md-input-container floatPlaceholder="never">
+    <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
+  </md-input-container>
+  <md-autocomplete #auto="mdAutocomplete">
+    <md-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">{{recipe.name}}</md-option>
+  </md-autocomplete>
+  <md-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (change)="onTimeUnitChange()">
+    <md-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
+      {{unit}}
+    </md-option>
+  </md-select>
+  <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
 </div>
+<div class="info" *ngIf="node.showOptions half-padding">
+  <div class="nowrapText half-padding">
+    Recipe Request: {{node.recipeRequest}}
+  </div>
+  <div class="nowrapText half-padding">
+    Quantity per Craft: {{node.quantityPerCraft}}
+  </div>
+  <div class="nowrapText half-padding">
+    Crafting Time: {{node.craftingTime}}
+  </div>
+  <div class="nowrapText half-padding">
+    Crafting Speed: {{node.craftingSpeed}}
+  </div>
+  <div class="nowrapText half-padding">
+    Category: {{node.category}}
+  </div>
+</div>
+<div class="half-padding">
+  <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</md-checkbox>
+</div>
+<div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
+  <md-select class="autoSize" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
+    <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
+      <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+    </md-option>
+  </md-select>
+  <div class="self-center nowrapText">x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
+  <div class="flex-grow"></div>
+</div>
+<!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
 <div *ngIf="node.childs.length > 0" class="flex column">
   <div class="node-padding" *ngFor="let _node of node.childs; let i = index">
     <app-node [class.last]="i == node.childs.length - 1" [node]="_node"></app-node>
