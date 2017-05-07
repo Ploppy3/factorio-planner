@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   @ViewChild('outputNode') outputNode: OutputNodeComponent;
 
   public appVersion: string = version;
-  public dataVersionId: number = this.dataService.dataVersions.length - 1;
+  public dataVersionId: number = 0;
 
   private readonly OPEN_BRACE: number = 0;
   private readonly CLOSE_BRACE: number = 1;
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   }
 
   public reloadData() {
-    this.dataService.loadData(this.dataVersionId);
+    this.dataService.loadData(0);
     this.outputNode.reload();
   }
 }

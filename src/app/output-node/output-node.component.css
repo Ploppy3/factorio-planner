@@ -2,8 +2,5 @@
   display: block;
 }
 input[type="number"]{
-  width: 2.5em;
-}
-md-select{
-  /*width: 180px;*/
+  width: 60px;
 }

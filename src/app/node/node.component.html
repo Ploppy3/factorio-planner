@@ -5,7 +5,7 @@
   </div>
   -->
   <div class="nowrapText half-padding">
-    {{node.outputRate | number:'1.2-2' }} <img #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"> <span *ngIf="imageRecipe.hidden">{{node.name}}</span> /s <button *ngIf="node.category != 'unknown'" md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+    {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} <img #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"> <span *ngIf="imageRecipe.hidden">{{node.name}}</span> /s <button *ngIf="node.category != 'unknown'" md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
   <div *ngIf="node.showOptions">
     <div class="nowrapText half-padding">
@@ -31,7 +31,7 @@
         <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
       </md-option>
     </md-select>
-    <div class="self-center nowrapText">: {{ node.numberMachines | number:'1.2-2' }}</div>
+    <div class="self-center nowrapText">: {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
   </div>
 </div>
 <div *ngIf="node.childs.length > 0" class="flex quarter-padding">

@@ -27,7 +27,7 @@ export class Node {
     //this.attenuation = (this.recipeRequest / this.quantityPerCraft) * this.parent.attenuation;
     //this.numberMachines = this.craftingTime * (this.recipeRequest * this.parent.attenuation) / this.craftingSpeed / this.quantityPerCraft;
     this.outputRate = this.parent.outputRate / this.parent.quantityPerCraft * this.recipeRequest;
-    this.numberMachines =  this.outputRate / ((1 * this.craftingSpeed) / this.craftingTime);
+    this.numberMachines = this.outputRate / ((1 * this.craftingSpeed) / this.craftingTime);
     //this.rate = this.quantityPerCraft / this.craftingTime * this.craftingSpeed * this.numberMachines;
     //this.rate = 0;
     this.childs.forEach(node => {
@@ -49,7 +49,7 @@ export class Node {
           this.category = 'crafting'; //default
         }
         this.quantityPerCraft = 1; // reset value (needed for root node only)
-        if (recipe.expensive && this.plannerService.$useExpensiveRecipes.value) { // expensive
+        if (recipe.expensive && this.plannerService.useExpensiveRecipes$.value) { // expensive
           if (recipe.normal.ingredients) ingredients = recipe.expensive.ingredients;
           if (recipe.normal.energy_required) this.craftingTime = recipe.expensive.energy_required;
           //console.log('using expensive recipe for', recipe)
