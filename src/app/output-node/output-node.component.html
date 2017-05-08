@@ -19,12 +19,12 @@
   <button md-icon-button color="accent" (click)="openGlobalSettings()"><md-icon>settings</md-icon></button>
 </div>
 <ng-container *ngIf="node.category != 'unknown'">
-  <div class="flex nowrap quarter-padding" *ngIf="node.machines.length > 0">
+  <div class="flex nowrap quarter-padding">
     <div class="quarter-padding" [hidden]="imageRecipe.hidden">
       <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
     </div>
     <div class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
-    <div class="quarter-padding">
+    <div class="quarter-padding" *ngIf="node.machines.length > 0">
       <md-select class="autoSize" floatPlaceholder="never" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
         <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
           <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
