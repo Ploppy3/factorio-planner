@@ -7,6 +7,7 @@ import {
   MdInputModule,
   MdSelectModule,
   MdCheckboxModule,
+  MdDialogModule,
 } from "@angular/material";
 
 @NgModule({
@@ -20,6 +21,7 @@ import {
     MdInputModule,
     MdSelectModule,
     MdCheckboxModule,
+    MdDialogModule,
   ],
   declarations: []
 })
