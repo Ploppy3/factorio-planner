@@ -1,0 +1,11 @@
+md-dialog-content{
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  border-top: 1px solid rgba(0, 0, 0, .12);
+  padding: 16px 24px;
+}
+.wrapper-version{
+  padding-bottom: 16px;
+}
+.wrapper-version:last-child{
+  padding-bottom: 0;
+}

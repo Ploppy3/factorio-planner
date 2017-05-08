@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MdDialog } from "@angular/material";
 
 import { OutputNodeComponent } from "./output-node/output-node.component";
 import { DataService } from "./data.service";
 import { PlannerService } from "./planner.service";
+import { DialogChangelogComponent } from "./dialog-changelog/dialog-changelog.component";
 
 declare var require: any;
 const { version } = require('../../package.json');
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
   constructor(
     public dataService: DataService,
     private plannerService: PlannerService,
+    private mdDialog: MdDialog,
   ){}
 
   ngOnInit() {
@@ -33,6 +36,10 @@ export class AppComponent implements OnInit {
 
   public reloadData() {
     this.dataService.loadData(0);
-    this.outputNode.reload();
+    this.outputNode.fullRefresh();
+  }
+
+  public showChangelog() {
+    this.mdDialog.open(DialogChangelogComponent);
   }
 }
