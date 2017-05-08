@@ -9,13 +9,17 @@ import { AppComponent } from './app.component';
 import { NodeComponent } from './node/node.component';
 import { OutputNodeComponent } from './output-node/output-node.component';
 import { UrlImgPipe } from './url-img.pipe';
+import { GlobalSettingsDialogComponent } from './global-settings-dialog/global-settings-dialog.component';
+import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NodeComponent,
     OutputNodeComponent,
-    UrlImgPipe
+    UrlImgPipe,
+    GlobalSettingsDialogComponent,
+    DialogChangelogComponent
   ],
   imports: [
     MaterialModule,
@@ -24,6 +28,10 @@ import { UrlImgPipe } from './url-img.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+  ],
+  entryComponents: [
+    GlobalSettingsDialogComponent,
+    DialogChangelogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
