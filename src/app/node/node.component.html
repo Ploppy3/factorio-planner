@@ -5,9 +5,9 @@
   </div>
   -->
   <div class="nowrapText wrapper-nodeName">
-    <img md-ripple class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"> <span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
-    <div class="inline-block">
-      <div class=" flex nowrap quarter-padding" *ngIf="node.category != 'unknown'">
+    <img class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
+    <div *ngIf="node.craftingSpeed > 0 && node.category != 'unknown'" class="inline-block">
+      <div class="flex nowrap quarter-padding">
         <md-select class="autoSize" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
           <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
             <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
@@ -18,7 +18,7 @@
     </div>
     <button *ngIf="node.category != 'unknown'" md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
-  <div class="info" *ngIf="node.showOptions">
+  <div class="info inline-block" *ngIf="node.showOptions">
     <div class="nowrapText quarter-padding">
       Output Rate: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }}  /s
     </div>
@@ -39,7 +39,7 @@
     </div>
   </div>
 </div>
-<div><button *ngIf="node.childs.length > 0 && !showChilds" md-icon-button (click)="showChilds = true"><md-icon>add</md-icon></button></div>
+<div class="wrapper-expandButton" *ngIf="node.childs.length > 0 && !showChilds"><button md-icon-button (click)="showChilds = true"><md-icon>add</md-icon></button></div>
 <div *ngIf="node.childs.length > 0 && showChilds" class="flex column">
   <div class="node-padding" *ngFor="let _node of node.childs; let i = index">
     <app-node [class.last]="i == node.childs.length - 1" [node]="_node"></app-node>
