@@ -23,8 +23,7 @@ export class NodeComponent implements OnInit {
   constructor(
     public dataService: DataService,
     public plannerService : PlannerService,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.node.findRecipeByName();
