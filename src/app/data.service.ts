@@ -13,9 +13,10 @@ export class DataService {
   ];
   public recipes: any[] = [];
   public assemblingMachines: any[] = [];
+  public assemblingMachinesSettings: any[] = [];
 
   constructor() {
-    console.log('constructor');
+    //console.log('constructor');
     this.loadData(0);
   }
 
@@ -23,17 +24,21 @@ export class DataService {
     let data = JSON.parse(this.dataVersions[index].data);
     this.recipes = [];
     this.assemblingMachines = [];
+    this.assemblingMachinesSettings = [];
     for (let key in data.prototypes.recipe) {
       this.recipes.push(data.prototypes.recipe[key]);
     }
     for (let key in data.prototypes.furnace) {
       this.assemblingMachines.push(data.prototypes.furnace[key]);
+      this.assemblingMachinesSettings.push({ name: data.prototypes.furnace[key].name, enabled: true});
     }
     for (let key in data.prototypes['assembling-machine']) {
       this.assemblingMachines.push(data.prototypes['assembling-machine'][key]);
+      this.assemblingMachinesSettings.push({ name: data.prototypes['assembling-machine'][key].name, enabled: true});
     }
     //console.log(this.recipes);
     console.log(this.assemblingMachines);
+    console.log(this.assemblingMachinesSettings);
   }
  
   // retrieve machines for a node
@@ -43,7 +48,13 @@ export class DataService {
       if (machine.crafting_categories) {
         machine.crafting_categories.forEach(_category => {
           let ingredient_count = machine.ingredient_count || Infinity;
-          if (_category == category && ingredient_count >= recipeIngredients) {
+          let enabledInSettings: boolean = false;
+          this.assemblingMachinesSettings.forEach(machineInSettings => {
+            if (machine.name == machineInSettings.name) {
+              if (machineInSettings.enabled) enabledInSettings = true;
+            }
+          });
+          if (_category == category && ingredient_count >= recipeIngredients && enabledInSettings) {
             response.push(machine);
           }
         });
