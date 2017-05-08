@@ -31,18 +31,8 @@ button{
 .secondary{
   color: rgba(0, 0, 0, .54);
 }
-select, input{
-  font-size: 1em;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, .54);
-  background-color: transparent;
-  color: rgba(0, 0, 0, .87);
-}
-select:hover, select:focus, input:hover, input:focus{
-  border-color: #FF4081;
-}
-select{
-  cursor: pointer;
+.underline{
+  text-decoration: underline;
 }
 .flex{
   display: flex;
@@ -105,3 +95,30 @@ md-select.autoSize .mat-select-value-text{
 md-select.autoSize .mat-select-value{
   position: initial !important;
 }
+/* Material temporary fixes */
+md-checkbox{
+  cursor: pointer;
+}
+button{
+  text-transform: uppercase;
+}
+.mat-menu-panel{
+  background-color: #fff;
+  overflow: hidden;
+}
+div.mat-dialog-title{
+  color: mat-color($primary);
+}
+md-dialog-content.mat-dialog-content{
+  padding-bottom: 24px;
+}
+md-dialog-actions.mat-dialog-actions{
+  justify-content: flex-end;
+  padding: 8px 4px;
+  margin-right: -24px;
+  color: rgba(0, 0, 0, .87);
+}
+md-dialog-actions.mat-dialog-actions button{
+  margin: 0 4px;
+}
+/* ------------------------ */
