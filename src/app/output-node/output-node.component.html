@@ -1,8 +1,10 @@
 <div class="half-padding">
+  <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</md-checkbox>
+</div>
+<div class="half-padding">
   <md-input-container>
     <input mdInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
   </md-input-container>
-  <img #imageRecipe *ngIf="node.name != 'Item'" [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
   <md-input-container floatPlaceholder="never">
     <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
   </md-input-container>
@@ -14,40 +16,50 @@
       {{unit}}
     </md-option>
   </md-select>
-  <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+  <button md-icon-button color="accent" (click)="openGlobalSettings()"><md-icon>settings</md-icon></button>
 </div>
-<div class="info" *ngIf="node.showOptions half-padding">
-  <div class="nowrapText half-padding">
-    Recipe Request: {{node.recipeRequest}}
+<ng-container *ngIf="node.category != 'unknown'">
+  <div class="flex nowrap quarter-padding" *ngIf="node.machines.length > 0">
+    <div class="quarter-padding" [hidden]="imageRecipe.hidden">
+      <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
+    </div>
+    <div class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
+    <div class="quarter-padding">
+      <md-select class="autoSize" floatPlaceholder="never" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
+        <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
+          <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+        </md-option>
+      </md-select>
+    </div>
+    <div *ngIf="node.craftingSpeed > 0" class="self-center nowrapText quarter-padding">x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
+    <button md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
-  <div class="nowrapText half-padding">
-    Quantity per Craft: {{node.quantityPerCraft}}
+  <div *ngIf="node.showOptions" class="half-padding">
+    <div id="info" class="inline-block quarter-padding">
+      <div class="nowrapText quarter-padding">
+        Output Rate: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }}  /s
+      </div>
+      <div class="nowrapText quarter-padding">
+        Recipe Request: {{node.recipeRequest}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Quantity per Craft: {{node.quantityPerCraft}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Crafting Time: {{node.craftingTime}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Crafting Speed: {{node.craftingSpeed}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Category: {{node.category}}
+      </div>
+    </div>
   </div>
-  <div class="nowrapText half-padding">
-    Crafting Time: {{node.craftingTime}}
+  <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
+  <div *ngIf="node.childs.length > 0" class="flex column">
+    <div class="node-padding" *ngFor="let _node of node.childs; let i = index;">
+      <app-node [class.last]="i == node.childs.length - 1" [node]="_node"></app-node>
+    </div>
   </div>
-  <div class="nowrapText half-padding">
-    Crafting Speed: {{node.craftingSpeed}}
-  </div>
-  <div class="nowrapText half-padding">
-    Category: {{node.category}}
-  </div>
-</div>
-<div class="half-padding">
-  <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</md-checkbox>
-</div>
-<div class="flex nowrap half-padding" *ngIf="node.category != 'unknown'">
-  <md-select class="autoSize" floatPlaceholder="never" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
-    <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
-      <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
-    </md-option>
-  </md-select>
-  <div class="self-center nowrapText">x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
-  <div class="flex-grow"></div>
-</div>
-<!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
-<div *ngIf="node.childs.length > 0" class="flex column">
-  <div class="node-padding" *ngFor="let _node of node.childs; let i = index">
-    <app-node [class.last]="i == node.childs.length - 1" [node]="_node"></app-node>
-  </div>
-</div>
+</ng-container>
