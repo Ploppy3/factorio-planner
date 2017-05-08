@@ -4,6 +4,7 @@
   display: block;
   height: 100%;
   overflow: auto;
+  will-change: transform;
 }
 #title{
   color: mat-color($primary);
