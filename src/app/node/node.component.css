@@ -40,8 +40,15 @@ input[type="number"]{
 }
 .wrapper-nodeName{
   margin-left: 4px;
+  min-height: 41px;
+}
+.wrapper-expandButton{
+  min-height: 41px;
 }
 .nodeName{
+  margin-top: 7px;
+  margin-bottom: 8px;
+  display: inline-block;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, .12);
 }
