@@ -1,0 +1,10 @@
+<div md-dialog-title cdk-focus-start>Global Settings</div>
+<md-dialog-content id="wrapper-content">
+  <div class="inline-block wrapper-machine" *ngFor="let machine of machines">
+    <md-checkbox [(ngModel)]="machine.enabled"><img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"></md-checkbox>
+  </div>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>discard</button>
+  <button md-button (click)="saveAndClose()">save</button>
+</md-dialog-actions>
