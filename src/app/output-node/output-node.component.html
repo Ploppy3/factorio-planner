@@ -23,7 +23,7 @@
     <div class="quarter-padding" [hidden]="imageRecipe.hidden">
       <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
     </div>
-    <div class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
+    <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
     <div class="quarter-padding" *ngIf="node.machines.length > 0">
       <md-select class="autoSize" floatPlaceholder="never" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
         <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
