@@ -29,7 +29,7 @@ export class Node {
     //this.attenuation = (this.recipeRequest / this.quantityPerCraft) * this.parent.attenuation;
     //this.numberMachines = this.craftingTime * (this.recipeRequest * this.parent.attenuation) / this.craftingSpeed / this.quantityPerCraft;
     this.outputRate = this.parent.outputRate / this.parent.quantityPerCraft * this.recipeRequest;
-    this.numberMachines = this.outputRate / ((1 * this.craftingSpeed) /  this.craftingTime);
+    this.numberMachines = this.outputRate / this.quantityPerCraft / ((1 * this.craftingSpeed) /  this.craftingTime);
     //this.rate = this.quantityPerCraft / this.craftingTime * this.craftingSpeed * this.numberMachines;
     //this.rate = 0;
     this.childs.forEach(node => {
