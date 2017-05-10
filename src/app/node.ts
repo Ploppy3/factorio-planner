@@ -46,7 +46,7 @@ export class Node {
 
   public initialize() {
     if (!this.recipe) { return; }
-    //console.log(recipe);
+    //console.log(this.recipe);
     let ingredients: any[] = [];
     //-------------------------------
     if (this.recipe.category) {
@@ -55,10 +55,9 @@ export class Node {
       this.category = 'crafting'; //default
     }
     this.quantityPerCraft = 1; // reset value (needed for root node only)
-    let craftingTime_expensive: number = null;
     if (this.recipe.expensive && this.plannerService.useExpensiveRecipes$.value) { // expensive
-      if (this.recipe.normal.ingredients) ingredients = this.recipe.expensive.ingredients;
-      if (this.recipe.normal.energy_required) craftingTime_expensive = this.recipe.expensive.energy_required;
+      if (this.recipe.expensive.ingredients) ingredients = this.recipe.expensive.ingredients;
+      if (this.recipe.expensive.energy_required) this.craftingTime = this.recipe.expensive.energy_required;
       //console.log('using expensive recipe', this.recipe.name);
     } else if (this.recipe.normal) { // normal
       if (this.recipe.normal.ingredients) ingredients = this.recipe.normal.ingredients;
