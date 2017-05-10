@@ -2,7 +2,7 @@ img{
   width: 32px;
   height: 32px;
 }
-.wrapper-machine{
+.wrapper-machine:not(:last-child){
   padding-right: 24px;
 }
 #wrapper-content{
