@@ -40,7 +40,7 @@ export class OutputNodeComponent implements OnInit {
     this.$filteredRecipes = this.control_recipe.valueChanges.startWith(null).map(val => this.filterRecipes(val).slice(0, 7));
     this.control_recipe.valueChanges.subscribe(val => { this.node.name = val; this.node.findRecipeByName(); });
     this.plannerService.useExpensiveRecipes$.subscribe(useExpensiveRecipes => { this.node.findRecipeByName(); });
-    //this.control_recipe.setValue('science-pack-1');
+    //this.control_recipe.setValue('science-pack-3');
   }
 
   public fullRefresh() { // force refresh of component
