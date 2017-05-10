@@ -5,7 +5,9 @@
   </div>
   -->
   <div class="nowrapText wrapper-nodeName">
-    <img class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
+    <img class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
+      [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding"
+      *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
     <div *ngIf="node.craftingSpeed > 0 && node.category != 'unknown'" class="inline-block">
       <div class="flex nowrap quarter-padding">
         <md-select class="autoSize" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
@@ -20,7 +22,7 @@
   </div>
   <div class="info inline-block" *ngIf="node.showOptions">
     <div class="nowrapText quarter-padding">
-      Output Rate: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }}  /s
+      Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
     </div>
     <div class="nowrapText quarter-padding">
       Recipe Request: {{node.recipeRequest}}

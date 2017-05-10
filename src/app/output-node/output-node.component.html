@@ -21,7 +21,8 @@
 <ng-container *ngIf="node.category != 'unknown'">
   <div class="flex nowrap quarter-padding">
     <div class="quarter-padding" [hidden]="imageRecipe.hidden">
-      <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
+      <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
+        (error)="imageRecipe.hidden = true" [alt]="node.name">
     </div>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
     <div class="quarter-padding" *ngIf="node.machines.length > 0">
@@ -37,7 +38,7 @@
   <div *ngIf="node.showOptions" class="half-padding">
     <div id="info" class="inline-block quarter-padding">
       <div class="nowrapText quarter-padding">
-        Output Rate: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }}  /s
+        Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
       </div>
       <div class="nowrapText quarter-padding">
         Recipe Request: {{node.recipeRequest}}
