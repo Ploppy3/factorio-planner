@@ -18,6 +18,7 @@ export class DataService {
     { name: '15.5 to 15.6', data: data_recipe_15_5 },
   ];
   public recipes: any[] = [];
+  public recipesObject: {} = {};
   public assemblingMachines: any[] = [];
   public assemblingMachinesSettings: any[] = [];
 
@@ -31,9 +32,12 @@ export class DataService {
     this.recipes = [];
     this.assemblingMachines = [];
     this.assemblingMachinesSettings = [];
+    //console.log(data.prototypes.recipe);
     for (let key in data.prototypes.recipe) {
       this.recipes.push(data.prototypes.recipe[key]);
+      this.recipesObject[key] = data.prototypes.recipe[key];
     }
+    //console.log(this.recipesObject);
     for (let key in data.prototypes.furnace) {
       this.assemblingMachines.push(data.prototypes.furnace[key]);
       this.assemblingMachinesSettings.push({ name: data.prototypes.furnace[key].name, enabled: true});
@@ -43,8 +47,8 @@ export class DataService {
       this.assemblingMachinesSettings.push({ name: data.prototypes['assembling-machine'][key].name, enabled: true});
     }
     //console.log(this.recipes);
-    console.log(this.assemblingMachines);
-    console.log(this.assemblingMachinesSettings);
+    //console.log(this.assemblingMachines);
+    //console.log(this.assemblingMachinesSettings);
   }
  
   // retrieve machines for a node
@@ -61,7 +65,8 @@ export class DataService {
             }
           });
           if (_category == category && ingredient_count >= recipeIngredients && enabledInSettings) {
-            response.push(machine);
+            let _machine = {name: machine.name, crafting_speed: machine.crafting_speed}
+            response.push(_machine);
           }
         });
       }  
