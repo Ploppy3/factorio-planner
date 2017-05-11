@@ -30,13 +30,4 @@ export class NodeComponent implements OnInit {
     //this.findRecipeByName(this.node.name);
   }
 
-  public deleteNode() {
-    let index = this.node.parent.childs.indexOf(this.node);
-    if (index > -1) {
-      this.node.parent.childs.splice(index, 1);
-    } else {
-      console.warn("can't find node to delete in parent");
-    }
-  }
-
 }

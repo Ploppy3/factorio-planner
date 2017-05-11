@@ -28,6 +28,9 @@ button{
   min-width: 36px;
 }
 */
+.primary{
+  color: mat-color($primary);
+}
 .secondary{
   color: rgba(0, 0, 0, .54);
 }
@@ -42,6 +45,9 @@ button{
 }
 .flex-grow{
   flex-grow: 1;
+}
+.flex.wrap{
+  flex-wrap: wrap;
 }
 .flex.nowrap{
   flex-wrap: nowrap;
@@ -81,6 +87,9 @@ button{
   position: initial !important;
 }
 */
+button.mat-icon-button.secondary{
+  opacity: .60;
+}
 md-select{
   vertical-align: middle;
   margin-bottom: 3px;
