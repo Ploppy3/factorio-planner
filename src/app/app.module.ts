@@ -11,6 +11,7 @@ import { OutputNodeComponent } from './output-node/output-node.component';
 import { UrlImgPipe } from './url-img.pipe';
 import { GlobalSettingsDialogComponent } from './global-settings-dialog/global-settings-dialog.component';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
+import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.co
     OutputNodeComponent,
     UrlImgPipe,
     GlobalSettingsDialogComponent,
-    DialogChangelogComponent
+    DialogChangelogComponent,
+    DialogOverviewComponent
   ],
   imports: [
     MaterialModule,
@@ -32,6 +34,7 @@ import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.co
   entryComponents: [
     GlobalSettingsDialogComponent,
     DialogChangelogComponent,
+    DialogOverviewComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
