@@ -9,7 +9,7 @@
   height: 21px;
   width: 24px;
   left: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, .87);
+  border-bottom: 1px solid rgba(0, 0, 0, .24);
   content: '';
 }
 :host.last::before{
@@ -18,13 +18,13 @@
   height: 21px;
   width: 24px;
   left: 0;
-  border-left: 1px solid rgba(0, 0, 0, .87);
-  border-bottom: 1px solid rgba(0, 0, 0, .87);
+  border-left: 1px solid rgba(0, 0, 0, .24);
+  border-bottom: 1px solid rgba(0, 0, 0, .24);
   border-bottom-left-radius: 4px;
   content: '';
 }
 :host{
-  border-left: 1px solid rgba(0, 0, 0, .87);
+  border-left: 1px solid rgba(0, 0, 0, .24);
   padding-left: 24px;
 }
 :host.last{
@@ -44,6 +44,12 @@ input[type="number"]{
 }
 .wrapper-expandButton{
   min-height: 41px;
+}
+.wrapper-machine{
+  color: rgba(0, 0, 0, .54);
+}
+.wrapper-machine:hover{
+  cursor: pointer;
 }
 .nodeName{
   margin-top: 7px;

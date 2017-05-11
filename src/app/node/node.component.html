@@ -8,17 +8,21 @@
     <img class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
       [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding"
       *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
-    <div *ngIf="node.craftingSpeed > 0 && node.category != 'unknown'" class="inline-block">
-      <div class="flex nowrap quarter-padding">
-        <md-select class="autoSize" *ngIf="node.machines.length > 0" [(ngModel)]="node.craftingSpeed" (change)="node.calculate()">
-          <md-option *ngFor="let machine of node.machines" [value]="machine.crafting_speed">
-            <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
-          </md-option>
-        </md-select>
-        <div class="self-center nowrapText">x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}</div>
+    <button *ngIf="node.craftingMachine" class="secondary" md-icon-button (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+    <div *ngIf="node.craftingMachine && node.category != 'unknown'" class="inline-block">
+      <div class="wrapper-machine quarter-padding" [mdMenuTriggerFor]="menuMachine">
+        <span class="primary">{{node.craftingMachine.name}}</span>
+        <!--<img class="clickable" [mdMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
+        <md-menu #menuMachine="mdMenu">
+          <ng-container *ngFor="let machine of node.machines">
+            <button md-menu-item (click)="node.craftingMachine = machine; node.calculate()">
+              <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+            </button>
+          </ng-container>
+        </md-menu>
+        x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
       </div>
     </div>
-    <button *ngIf="node.category != 'unknown'" md-icon-button color="accent" (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
   </div>
   <div class="info inline-block" *ngIf="node.showOptions">
     <div class="nowrapText quarter-padding">
@@ -34,7 +38,7 @@
       Crafting Time: {{node.craftingTime}}
     </div>
     <div class="nowrapText quarter-padding">
-      Crafting Speed: {{node.craftingSpeed}}
+      Crafting Speed: {{node.craftingMachine?.crafting_speed}}
     </div>
     <div class="nowrapText quarter-padding">
       Category: {{node.category}}
