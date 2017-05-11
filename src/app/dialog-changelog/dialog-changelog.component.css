@@ -4,7 +4,7 @@ md-dialog-content{
   padding: 16px 24px;
 }
 .wrapper-version{
-  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 .wrapper-version:last-child{
   padding-bottom: 0;
