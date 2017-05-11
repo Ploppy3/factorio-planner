@@ -11,6 +11,9 @@ import { Node } from "../node";
 import { DataService } from "../data.service";
 import { PlannerService } from "../planner.service";
 import { GlobalSettingsDialogComponent } from "../global-settings-dialog/global-settings-dialog.component";
+import { DialogOverviewComponent } from "../dialog-overview/dialog-overview.component";
+
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-output-node',
@@ -36,14 +39,27 @@ export class OutputNodeComponent implements OnInit {
 
   ngOnInit() {
     this.node.parent = new Node(this.dataService, this.plannerService);
-    this.control_output.valueChanges.subscribe(_ => this.node.calculate());
+    this.control_output.valueChanges.subscribe(_ => {
+      this.plannerService.resetSharedRessources();
+      this.node.calculate();
+    });
     this.$filteredRecipes = this.control_recipe.valueChanges.startWith(null).map(val => this.filterRecipes(val).slice(0, 7));
-    this.control_recipe.valueChanges.subscribe(val => { this.node.name = val; this.node.findRecipeByName(); });
-    this.plannerService.useExpensiveRecipes$.subscribe(useExpensiveRecipes => { this.node.findRecipeByName(); });
-    //this.control_recipe.setValue('science-pack-3');
+    this.control_recipe.valueChanges.subscribe(val => {
+      this.node.name = val;
+      this.plannerService.resetSharedRessources();
+      this.node.findRecipeByName();
+    });
+    this.plannerService.useExpensiveRecipes$.subscribe(useExpensiveRecipes => {
+      this.plannerService.resetSharedRessources();
+      this.node.findRecipeByName();
+    });
+    if (!environment.production) {
+      this.control_recipe.setValue('science-pack-1');
+    }
   }
 
   public fullRefresh() { // force refresh of component
+    this.plannerService.resetSharedRessources();
     this.node.findRecipeByName();
   }
 
@@ -53,9 +69,6 @@ export class OutputNodeComponent implements OnInit {
 
   public onExpensiveRecipesValueChange(value: boolean) {
     this.plannerService.useExpensiveRecipes$.next(value);
-    //this.node.findRecipeByName();
-    //this.node.calculateEverything();
-    //this.node.calculate();
   }
 
   public onTimeUnitChange() {
@@ -74,6 +87,7 @@ export class OutputNodeComponent implements OnInit {
         console.warn('unkown time factor');
         break;
     }
+    this.plannerService.resetSharedRessources();
     this.node.calculate();
   }
 
@@ -88,6 +102,17 @@ export class OutputNodeComponent implements OnInit {
         this.node.findRecipeByName();
       }
     })
+  }
+
+  public openSharedResources() {
+    let dialogRef = this.mdDialog.open(DialogOverviewComponent);
+    this.plannerService.resetSharedRessources();
+    this.node.getSharedResources();
+    let sharedResources = [];
+    for (let key in this.plannerService.sharedResources) {
+      sharedResources.push({ name: key, throughput: this.plannerService.sharedResources[key] });
+    }
+    dialogRef.componentInstance.sharedResources = sharedResources;
   }
 
 }

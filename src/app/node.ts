@@ -3,49 +3,46 @@ import { PlannerService } from "./planner.service";
 
 export class Node {  
 
-  private recipe: any; //game recipe provided by the data service
+  public recipe: any; //game recipe provided by the data service
 
-  private useExpensive: boolean = false;
+  public useExpensive: boolean = false;
   public outputRate: number = 1;
   public name: string = 'Item';
   public recipeRequest: number = 1;
   public quantityPerCraft: number = 1;
-  public craftingSpeed: number = .0;
+  //public craftingSpeed: number = .0;
+  public craftingMachine: any;
   public craftingTime: number = .5;
   public numberMachines: number = 1;
-  //public rate = 0;
 
   public parent: Node;  
   public childs: Node[] = [];
-  //public attenuation: number = 1;
   public showOptions: boolean = false;
   public category: string = 'unknown'; // crafting, crafting-with-fluid, advanced-crafting, smelting, chemistry
   public machines: any[] = [];
 
   constructor(private dataService: DataService, private plannerService: PlannerService){}
 
-  public calculate() { // small possible refresh
-    //console.log('calculate', this.name);
-    //this.attenuation = (this.recipeRequest / this.quantityPerCraft) * this.parent.attenuation;
-    //this.numberMachines = this.craftingTime * (this.recipeRequest * this.parent.attenuation) / this.craftingSpeed / this.quantityPerCraft;
+  public calculate() {
     this.outputRate = this.parent.outputRate / this.parent.quantityPerCraft * this.recipeRequest;
-    this.numberMachines = this.outputRate / this.quantityPerCraft / ((1 * this.craftingSpeed) /  this.craftingTime);
-    //this.rate = this.quantityPerCraft / this.craftingTime * this.craftingSpeed * this.numberMachines;
-    //this.rate = 0;
+    //console.log('calculate', this.name, this.outputRate);
+    if(this.craftingMachine)
+      this.numberMachines = this.outputRate / this.quantityPerCraft / (this.craftingMachine.crafting_speed /  this.craftingTime);
     this.childs.forEach(node => {
       node.calculate();
     });
   }
 
-  public refreshExpensiveRecipes(useExpensive: boolean) {
-    this.useExpensive = useExpensive;
+  public getSharedResources() {
+    //console.log('share...');
+    this.plannerService.addSharedResource(this.name, this.outputRate * this.plannerService.timeFactor$.value);
     this.childs.forEach(node => {
-      node.refreshExpensiveRecipes(useExpensive);
+      node.getSharedResources();
     });
   }
 
   public initialize() {
-    if (!this.recipe) { return; }
+    if (!this.recipe) { this.calculate(); return; }
     //console.log(this.recipe);
     let ingredients: any[] = [];
     //-------------------------------
@@ -77,10 +74,10 @@ export class Node {
     let machines = this.dataService.getAssemblingMachinesByCategory(this.category, ingredients.length);
     this.machines = machines;
     if (machines.length > 0) {
-      this.craftingSpeed = machines[0].crafting_speed;
+      this.craftingMachine = machines[0];
       //console.log('using machine:', machines[0], 'for', recipe.name);
     } else {
-      this.craftingSpeed = 0;
+      this.craftingMachine = null;
     }
     //-------------------------------
     this.calculate(); //do it here to prevent propagation of the calculate call to its children
@@ -97,17 +94,13 @@ export class Node {
   public findRecipeByName() { // starts a major refresh
     //console.log('searching recipe', this.name);
     this.childs = [];
-    for (let i = 0; i < this.dataService.recipes.length; i++) {
-      let recipe = this.dataService.recipes[i];
-      if (recipe.name == this.name) {
-        this.recipe = recipe;
-        //console.log(recipe);
-        this.initialize();
-        return;
-      }
+    if (this.dataService.recipesObject[this.name]) {
+      this.recipe = this.dataService.recipesObject[this.name];
+      this.initialize();
+      return;
     }
+    this.calculate(); //do it here to prevent propagation of the calculate call to its children
     this.category = 'unknown'; // reset for root node
-    //console.log("can't find recipe for", this.name);
   }
 
   public addChild(name: string, recipeRequest: number) {
