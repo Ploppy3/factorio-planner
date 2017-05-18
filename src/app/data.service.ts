@@ -12,7 +12,7 @@ import {
 export class DataService {
 
   public dataVersions: any[] = [
-    { name: '15.10 to 15.11', data: data_recipe_15_10 },
+    { name: '15.10 to 15.12', data: data_recipe_15_10 },
     { name: '15.8 to 15.9', data: data_recipe_15_8 },
     { name: '15.7', data: data_recipe_15_7 },
     { name: '15.5 to 15.6', data: data_recipe_15_5 },
