@@ -48,6 +48,7 @@ export class OutputNodeComponent implements OnInit {
       this.node.name = val;
       this.plannerService.resetSharedRessources();
       this.node.findRecipeByName();
+      //this.plannerService.createInMemoryTree(val);
     });
     this.plannerService.useExpensiveRecipes$.subscribe(useExpensiveRecipes => {
       this.plannerService.resetSharedRessources();
