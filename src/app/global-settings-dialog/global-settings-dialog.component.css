@@ -5,6 +5,9 @@ img{
 .wrapper-machine:not(:last-child){
   padding-right: 24px;
 }
+.img-machine{
+  margin-left: 8px;
+}
 #wrapper-content{
   padding-top: 24px;
   border-top: 1px solid rgba(0, 0, 0, .12);
