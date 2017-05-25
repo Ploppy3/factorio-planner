@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="info inline-block" *ngIf="node.showOptions">
+  <div class="info inline-block quarter-padding" *ngIf="node.showOptions">
     <div class="nowrapText quarter-padding">
       Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
     </div>
