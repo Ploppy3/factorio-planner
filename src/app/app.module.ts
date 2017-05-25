@@ -12,6 +12,8 @@ import { UrlImgPipe } from './url-img.pipe';
 import { GlobalSettingsDialogComponent } from './global-settings-dialog/global-settings-dialog.component';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
+import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
+import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { DialogOverviewComponent } from './dialog-overview/dialog-overview.compo
     UrlImgPipe,
     GlobalSettingsDialogComponent,
     DialogChangelogComponent,
-    DialogOverviewComponent
+    DialogOverviewComponent,
+    VirtualOutputNodeComponent,
+    VirtualNodeComponent
   ],
   imports: [
     MaterialModule,

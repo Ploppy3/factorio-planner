@@ -1,0 +1,54 @@
+
+<div>
+  <!--
+  <div *ngIf="node.category != 'unknown'" class="nowrap half-padding">
+    (rate) {{node.rate | number:'1.2-2' }} <img [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name"> /s
+  </div>
+  -->
+  <div class="nowrapText wrapper-nodeName">
+    <img class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
+      [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding"
+      *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
+    <button *ngIf="node.craftingMachine" class="secondary" md-icon-button (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+    <div *ngIf="node.craftingMachine && node.category != 'unknown'" class="inline-block">
+      <div class="wrapper-machine quarter-padding" [mdMenuTriggerFor]="menuMachine">
+        <span class="primary">{{node.craftingMachine.name}}</span>
+        <!--<img class="clickable" [mdMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
+        <md-menu #menuMachine="mdMenu">
+          <ng-container *ngFor="let machine of node.machines">
+            <button md-menu-item (click)="node.craftingMachine = machine; node.calculate()">
+              <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+            </button>
+          </ng-container>
+        </md-menu>
+        x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
+      </div>
+    </div>
+  </div>
+  <div class="info inline-block quarter-padding" *ngIf="node.showOptions">
+    <div class="nowrapText quarter-padding">
+      Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
+    </div>
+    <div class="nowrapText quarter-padding">
+      Recipe Request: {{node.recipeRequest}}
+    </div>
+    <div class="nowrapText quarter-padding">
+      Quantity per Craft: {{node.quantityPerCraft}}
+    </div>
+    <div class="nowrapText quarter-padding">
+      Crafting Time: {{node.craftingTime}}
+    </div>
+    <div class="nowrapText quarter-padding">
+      Crafting Speed: {{node.craftingMachine?.crafting_speed}}
+    </div>
+    <div class="nowrapText quarter-padding">
+      Category: {{node.category}}
+    </div>
+  </div>
+</div>
+<div class="wrapper-expandButton" *ngIf="node.childsIds.length > 0 && !showChilds"><button md-icon-button (click)="showChilds = true"><md-icon>add</md-icon></button></div>
+<div *ngIf="node.childsIds.length > 0 && showChilds" class="flex column">
+  <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
+    <app-virtual-node [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
+  </div>
+</div>

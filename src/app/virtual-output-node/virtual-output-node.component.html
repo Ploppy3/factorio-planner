@@ -1,0 +1,75 @@
+<div class="half-padding">
+  <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">
+    Use expensive recipes (Marathon)
+  </md-checkbox>
+</div>
+<div class="half-padding">
+  <md-input-container>
+    <input mdInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
+  </md-input-container>
+  <md-input-container floatPlaceholder="never">
+    <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
+  </md-input-container>
+  <md-autocomplete #auto="mdAutocomplete">
+    <md-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">{{recipe.name}}</md-option>
+  </md-autocomplete>
+  <md-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (change)="onTimeUnitChange()">
+    <md-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
+      {{unit}}
+    </md-option>
+  </md-select>
+  <button md-icon-button color="accent" (click)="openGlobalSettings()"><md-icon>settings</md-icon></button>
+</div>
+<div class="half-padding">
+  <button *ngIf="node.childsIds.length > 0" md-button color="accent" (click)="openSharedResources()">Resource Overview</button>
+</div>
+<ng-container *ngIf="node.category != 'unknown'">
+  <div class="flex nowrap quarter-padding">
+    <div class="quarter-padding" [hidden]="imageRecipe.hidden">
+      <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
+        (error)="imageRecipe.hidden = true" [alt]="node.name">
+    </div>
+    <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
+    <button class="secondary" md-icon-button (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
+    <div class="wrapper-machine self-center quarter-padding" *ngIf="node.machines.length > 0" [mdMenuTriggerFor]="menuMachine">
+      <span class="primary">{{node.craftingMachine.name}}</span>
+      <!--<img class="clickable" [mdMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
+      <md-menu #menuMachine="mdMenu">
+        <ng-container *ngFor="let machine of node.machines">
+          <button md-menu-item (click)="node.craftingMachine = machine; node.calculate()">
+            <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+          </button>
+        </ng-container>
+      </md-menu>
+      x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
+    </div>
+  </div>
+  <div *ngIf="node.showOptions" class="half-padding">
+    <div id="info" class="inline-block quarter-padding">
+      <div class="nowrapText quarter-padding">
+        Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
+      </div>
+      <div class="nowrapText quarter-padding">
+        Recipe Request: {{node.recipeRequest}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Quantity per Craft: {{node.quantityPerCraft}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Crafting Time: {{node.craftingTime}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Crafting Speed: {{node.craftingMachine?.crafting_speed}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Category: {{node.category}}
+      </div>
+    </div>
+  </div>
+  <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
+  <div *ngIf="node.childsIds.length > 0" class="flex column">
+    <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
+      <app-virtual-node [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
+    </div>
+  </div>
+</ng-container>

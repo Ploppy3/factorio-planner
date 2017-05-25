@@ -1,0 +1,60 @@
+:host{
+  display: inline-block;
+  will-change: contents;
+  position: relative;
+}
+:host::before{
+  display: inline-block;
+  position: absolute;
+  height: 21px;
+  width: 24px;
+  left: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .24);
+  content: '';
+}
+:host.last::before{
+  display: inline-block;
+  position: absolute;
+  height: 21px;
+  width: 24px;
+  left: 0;
+  border-left: 1px solid rgba(0, 0, 0, .24);
+  border-bottom: 1px solid rgba(0, 0, 0, .24);
+  border-bottom-left-radius: 4px;
+  content: '';
+}
+:host{
+  border-left: 1px solid rgba(0, 0, 0, .24);
+  padding-left: 24px;
+}
+:host.last{
+  border-left: none;
+}
+input[type="number"]{
+  width: 2.5em;
+}
+.info{
+  background-color: rgba(0, 0, 0, .12);
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+.wrapper-nodeName{
+  margin-left: 4px;
+  min-height: 41px;
+}
+.wrapper-expandButton{
+  min-height: 41px;
+}
+.wrapper-machine{
+  color: rgba(0, 0, 0, .54);
+}
+.wrapper-machine:hover{
+  cursor: pointer;
+}
+.nodeName{
+  margin-top: 7px;
+  margin-bottom: 8px;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .12);
+}
