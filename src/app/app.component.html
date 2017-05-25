@@ -8,11 +8,12 @@
   </div>
   <div class="flex half-padding">
     <div id="factorioVersion" class="self-center">Factorio Version:</div>
-    <md-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersionId" (change)="reloadData()">
-      <md-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="i">
+    <md-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">
+      <md-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
         {{version.name}}
       </md-option>
     </md-select>
   </div>
-  <app-output-node #outputNode></app-output-node>
+  <!--<app-output-node #outputNode></app-output-node>-->
+  <app-virtual-output-node #outputNode></app-virtual-output-node>
 </div>
