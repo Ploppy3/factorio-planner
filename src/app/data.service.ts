@@ -4,18 +4,14 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import {
   data_recipe_15_10,
   data_recipe_15_8,
-  data_recipe_15_7,
-  data_recipe_15_5,
 } from "./recipe";
 
 @Injectable()
 export class DataService {
 
   public dataVersions: any[] = [
-    { name: '15.10 to 15.14', data: data_recipe_15_10 },
-    { name: '15.8 to 15.9', data: data_recipe_15_8 },
-    { name: '15.7', data: data_recipe_15_7 },
-    { name: '15.5 to 15.6', data: data_recipe_15_5 },
+    { name: '15.15', data: data_recipe_15_10 },
+    { name: '15.8 | 15.9', data: data_recipe_15_8 },
   ];
   public recipes: any[] = [];
   public recipesObject: {} = {};
