@@ -1,4 +1,4 @@
-<div md-dialog-title cdk-focus-start>Global Settings</div>
+<div md-dialog-title cdk-focus-region-start>Global Settings</div>
 <md-dialog-content id="wrapper-content">
   <div class="inline-block wrapper-machine" *ngFor="let machine of machines">
     <md-checkbox [(ngModel)]="machine.enabled"><img class="img-machine" [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"></md-checkbox>
