@@ -21,11 +21,11 @@
   <button md-icon-button color="accent" (click)="openGlobalSettings()"><md-icon>settings</md-icon></button>
 </div>
 <div class="half-padding">
-  <button *ngIf="node.childsIds.length > 0" md-button color="accent" (click)="openSharedResources()">Resource Overview</button>
+  <button *ngIf="node.childsIds.length > 0" md-button color="accent" (click)="openSharedResources()"><md-icon>list</md-icon><span id="text-button">Resource Overview</span></button>
 </div>
 <ng-container *ngIf="node.category != 'unknown'">
   <div class="flex nowrap quarter-padding">
-    <div class="quarter-padding" [hidden]="imageRecipe.hidden">
+    <div class="quarter-padding">
       <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
         (error)="imageRecipe.hidden = true" [alt]="node.name">
     </div>

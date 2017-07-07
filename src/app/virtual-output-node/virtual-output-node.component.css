@@ -22,3 +22,6 @@ input[type="number"]{
   background-color: rgba(0, 0, 0, .12);
   border-radius: 2px;
 }
+#text-button{
+  margin-left: 8px;
+}
