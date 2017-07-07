@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
 
 import { Node } from "../node";
 import { DataService } from "../data.service";
