@@ -42,12 +42,7 @@ export class PlannerService {
     let rootNode = new VirtualNode(this, recipeName);
     let rootId = this.virtualTreePointer;
     this.processNode(rootNode);
-    for (var key in this.virtualTree) {
-      if (this.virtualTree.hasOwnProperty(key)) {
-        let node = this.virtualTree[key];
-        node.calculate();
-      }
-    }
+    this.calculateAllNodes();
     return rootId;
     /*
     this.virtualTree.forEach(node => {
@@ -55,6 +50,15 @@ export class PlannerService {
     });
     */
     //console.log(this.virtualTree);
+  }
+
+  public calculateAllNodes() {
+    for (var key in this.virtualTree) {
+      if (this.virtualTree.hasOwnProperty(key)) {
+        let node = this.virtualTree[key];
+        node.calculate();
+      }
+    }
   }
 
   private getRecipe(name: string) {

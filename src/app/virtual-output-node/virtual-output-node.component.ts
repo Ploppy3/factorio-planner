@@ -42,7 +42,8 @@ export class VirtualOutputNodeComponent implements OnInit {
   ngOnInit() {
     this.control_output.valueChanges.subscribe(_ => {
       this.plannerService.resetSharedRessources();
-      this.node.calculate();
+      this.plannerService.calculateAllNodes();
+      //this.node.calculate();
     });
     this.$filteredRecipes = this.control_recipe.valueChanges.startWith(null).map(val => this.filterRecipes(val).slice(0, 7));
     this.control_recipe.valueChanges.subscribe(val => {
