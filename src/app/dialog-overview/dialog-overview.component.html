@@ -1,11 +1,11 @@
-<div md-dialog-title cdk-focus-region-start>Resource Overview</div>
-<md-dialog-content>
+<div mat-dialog-title>Resource Overview</div>
+<mat-dialog-content>
   <div class="flex wrap">
     <div class="wrapper-item" *ngFor="let resource of sharedResources">
       <img [src]="'https://wiki.factorio.com/images/' + (resource.name | urlImg) + '.png'" [alt]="resource.name"> {{resource.throughput | number:'1.2-2'}} /s
     </div>
   </div>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button color="accent" md-dialog-close>Ok</button>
-</md-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="accent" mat-dialog-close>Ok</button>
+</mat-dialog-actions>

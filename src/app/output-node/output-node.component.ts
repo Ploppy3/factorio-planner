@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { MdDialog, MdDialogRef } from "@angular/material";
+import { MatDialog } from "@angular/material";
 
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from "rxjs/Observable";
@@ -35,7 +35,7 @@ export class OutputNodeComponent implements OnInit {
   constructor(
     public dataService: DataService,
     public plannerService: PlannerService,
-    private mdDialog: MdDialog,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -94,7 +94,7 @@ export class OutputNodeComponent implements OnInit {
   }
 
   public openGlobalSettings() {
-    let dialogRef = this.mdDialog.open(GlobalSettingsDialogComponent);
+    let dialogRef = this.dialog.open(GlobalSettingsDialogComponent);
     dialogRef.componentInstance.setMachines(this.dataService.assemblingMachinesSettings);
     dialogRef.afterClosed().subscribe(res => {
       //console.log(this.dataService.assemblingMachinesSettings);
@@ -107,7 +107,7 @@ export class OutputNodeComponent implements OnInit {
   }
 
   public openSharedResources() {
-    let dialogRef = this.mdDialog.open(DialogOverviewComponent);
+    let dialogRef = this.dialog.open(DialogOverviewComponent);
     this.plannerService.resetSharedRessources();
     this.node.getSharedResources();
     let sharedResources = [];

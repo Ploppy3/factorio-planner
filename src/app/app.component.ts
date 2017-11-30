@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MdDialog } from "@angular/material";
+import { MatDialog } from "@angular/material";
 
 import { VirtualOutputNodeComponent } from "./virtual-output-node/virtual-output-node.component";
 import { DataService } from "./data.service";
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   constructor(
     public dataService: DataService,
     private plannerService: PlannerService,
-    private mdDialog: MdDialog,
+    private dialog: MatDialog,
   ){}
 
   ngOnInit() {
@@ -37,6 +37,6 @@ export class AppComponent implements OnInit {
   }
 
   public showChangelog() {
-    this.mdDialog.open(DialogChangelogComponent);
+    this.dialog.open(DialogChangelogComponent);
   }
 }

@@ -6,12 +6,12 @@
   overflow: auto;
   will-change: transform;
 }
+mat-form-field.version{
+  max-width: 130px;
+}
 #title{
   color: mat-color($primary);
   font-weight: bold;
-}
-#factorioVersion{
-  margin-right: 8px;
 }
 #selectVersion{
   min-width: 125px;

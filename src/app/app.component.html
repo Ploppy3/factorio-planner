@@ -3,17 +3,21 @@
     <div id="title" class="half-padding">Factorio Planner</div>
     <div class="clickable secondary half-padding" (click)="showChangelog()">(<span class="underline">Version {{appVersion}}</span>)</div>
     <div>
-      <a id="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PSC6GSWSZYC76&lc=US&item_name=Factorio%20Planner&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2ffactorio%2dplanner%2efirebaseapp%2ecom%2f&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="blank"><img src="./assets/donate.gif" alt="donate image"></a>
+      <a id="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PSC6GSWSZYC76&lc=US&item_name=Factorio%20Planner&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2ffactorio%2dplanner%2efirebaseapp%2ecom%2f&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="blank">
+        <img src="./assets/donate.gif" alt="donate image">
+      </a>
     </div>
   </div>
   <div class="secondary half-padding">Something is broken? Contact me at ngnsup+factorio.planner@gmail.com</div>
-  <div class="flex half-padding">
-    <div id="factorioVersion" class="self-center">Factorio Version:</div>
-    <md-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">
-      <md-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
-        {{version.name}}
-      </md-option>
-    </md-select>
+  <div class="half-padding">
+    Factorio Version: 
+    <mat-form-field class="version">
+      <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">
+        <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
+          {{version.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <!--<app-output-node #outputNode></app-output-node>-->
   <app-virtual-output-node #outputNode></app-virtual-output-node>

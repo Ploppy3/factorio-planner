@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from "@angular/material";
+import { MatDialogRef } from "@angular/material";
 
 @Component({
   selector: 'app-global-settings-dialog',
@@ -11,7 +11,7 @@ export class GlobalSettingsDialogComponent implements OnInit {
   public machines: any[] = [];
 
   constructor(
-    public dialogRef: MdDialogRef<GlobalSettingsDialogComponent>,
+    public dialogRef: MatDialogRef<GlobalSettingsDialogComponent>,
   ) { }
 
   ngOnInit() {

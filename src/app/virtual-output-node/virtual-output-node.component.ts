@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { MdDialog, MdDialogRef } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { NgZone } from "@angular/core";
 
 import { Subscription } from 'rxjs/Subscription';
@@ -36,7 +36,7 @@ export class VirtualOutputNodeComponent implements OnInit {
   constructor(
     public dataService: DataService,
     public plannerService: PlannerService,
-    private mdDialog: MdDialog,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -54,9 +54,12 @@ export class VirtualOutputNodeComponent implements OnInit {
       console.log('expensive state changed, refreshing');
       this.getNode();
     });
+    /*
     if (!environment.production) {
       this.control_recipe.setValue('science-pack-1');
     }
+    */
+    this.control_recipe.setValue('science-pack-1');
   }
 
   private getNode() {
@@ -93,7 +96,7 @@ export class VirtualOutputNodeComponent implements OnInit {
   }
 
   public openGlobalSettings() {
-    let dialogRef = this.mdDialog.open(GlobalSettingsDialogComponent);
+    let dialogRef = this.dialog.open(GlobalSettingsDialogComponent);
     dialogRef.componentInstance.setMachines(this.dataService.assemblingMachinesSettings);
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
@@ -104,7 +107,7 @@ export class VirtualOutputNodeComponent implements OnInit {
   }
 
   public openSharedResources() {
-    let dialogRef = this.mdDialog.open(DialogOverviewComponent);
+    let dialogRef = this.dialog.open(DialogOverviewComponent);
     this.plannerService.resetSharedRessources();
     /*
     this.plannerService.virtualTree.forEach(node => {

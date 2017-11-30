@@ -1,25 +1,27 @@
 <div class="half-padding">
-  <md-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</md-checkbox>
+  <mat-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">Use expensive recipes (Marathon)</mat-checkbox>
 </div>
 <div class="half-padding">
-  <md-input-container>
-    <input mdInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
-  </md-input-container>
-  <md-input-container floatPlaceholder="never">
-    <input mdInput placeholder="Recipe" [mdAutocomplete]="auto" [formControl]="control_recipe">
-  </md-input-container>
-  <md-autocomplete #auto="mdAutocomplete">
-    <md-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">{{recipe.name}}</md-option>
-  </md-autocomplete>
-  <md-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (change)="onTimeUnitChange()">
-    <md-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
-      {{unit}}
-    </md-option>
-  </md-select>
-  <button md-icon-button color="accent" (click)="openGlobalSettings()"><md-icon>settings</md-icon></button>
+  <mat-form-field>
+    <input matInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
+  </mat-form-field>
+  <mat-form-field floatPlaceholder="never">
+    <input matInput placeholder="Recipe" [matAutocomplete]="auto" [formControl]="control_recipe">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">{{recipe.name}}</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (change)="onTimeUnitChange()">
+      <mat-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
+        {{unit}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-icon-button color="accent" (click)="openGlobalSettings()"><mat-icon>settings</mat-icon></button>
 </div>
 <div class="half-padding">
-  <button *ngIf="node.childs.length > 0" md-button color="accent" (click)="openSharedResources()">Resource Overview</button>
+  <button *ngIf="node.childs.length > 0" mat-button color="accent" (click)="openSharedResources()">Resource Overview</button>
 </div>
 <ng-container *ngIf="node.category != 'unknown'">
   <div class="flex nowrap quarter-padding">
@@ -28,17 +30,17 @@
         (error)="imageRecipe.hidden = true" [alt]="node.name">
     </div>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
-    <button class="secondary" md-icon-button (click)="node.showOptions = !node.showOptions"><md-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</md-icon></button>
-    <div class="wrapper-machine self-center quarter-padding" *ngIf="node.machines.length > 0" [mdMenuTriggerFor]="menuMachine">
+    <button class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
+    <div class="wrapper-machine self-center quarter-padding" *ngIf="node.machines.length > 0" [matMenuTriggerFor]="menuMachine">
       <span class="primary">{{node.craftingMachine.name}}</span>
-      <!--<img class="clickable" [mdMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
-      <md-menu #menuMachine="mdMenu">
+      <!--<img class="clickable" [matMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
+      <mat-menu #menuMachine="matMenu">
         <ng-container *ngFor="let machine of node.machines">
-          <button md-menu-item (click)="node.craftingMachine = machine; node.calculate()">
+          <button mat-menu-item (click)="node.craftingMachine = machine; node.calculate()">
             <img [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
           </button>
         </ng-container>
-      </md-menu>
+      </mat-menu>
       x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
     </div>
   </div>

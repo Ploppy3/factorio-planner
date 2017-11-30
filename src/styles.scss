@@ -90,40 +90,40 @@ button{
 button.mat-icon-button.secondary{
   opacity: .60;
 }
-md-select{
+/* ------------------------ */
+/* Material temporary fixes */
+/* ------------------------ */
+/*
+mat-select{
   vertical-align: middle;
 }
-md-select.timeUnit .mat-select-trigger{ //fix for select-unit in output-node.component
+mat-select.timeUnit .mat-select-trigger{ //fix for select-unit in output-node.component
   min-width: 50px;
 }
-md-select.autoSize .mat-select-value-text{
+mat-select.autoSize .mat-select-value-text{
   overflow: initial !important;
   text-overflow: initial !important;
 }
-md-select.autoSize .mat-select-value{
+mat-select.autoSize .mat-select-value{
   position: initial !important;
 }
-/* Material temporary fixes */
+*/
 button{
   text-transform: uppercase;
-}
-.mat-menu-panel{
-  background-color: #fff;
-  overflow: hidden;
 }
 div.mat-dialog-title{
   color: mat-color($primary);
 }
-md-dialog-content.mat-dialog-content{
+mat-dialog-content.mat-dialog-content{
   padding-bottom: 24px;
 }
-md-dialog-actions.mat-dialog-actions{
+mat-dialog-actions.mat-dialog-actions{
   justify-content: flex-end;
   padding: 8px 4px;
   margin-right: -24px;
   color: rgba(0, 0, 0, .87);
 }
-md-dialog-actions.mat-dialog-actions button{
+mat-dialog-actions.mat-dialog-actions button{
   margin: 0 4px;
 }
 /* ------------------------ */
