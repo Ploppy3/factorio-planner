@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
+import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-output-node.component';
 
 import {
   data_recipe_15_10,
@@ -10,17 +11,18 @@ import {
 
 @Injectable()
 export class DataService {
-
   public dataVersions: Version[] = [
-    { name: '16+', fileName: 'v16.json' },
-    { name: '16+ marathon', fileName: 'v16-marathon.json' },
-    { name: '15.10+', dataKey: data_recipe_15_10 },
-    { name: '15.8 | 15.9', dataKey: data_recipe_15_8 },
+    { name: '16', fileName: 'v16.json' },
+    { name: '16 + marathon', fileName: 'v16-marathon.json' },
+    { name: '15.10', dataKey: data_recipe_15_10 },
+    { name: '15.8', dataKey: data_recipe_15_8 },
   ];
   public recipes: any[] = [];
   public recipesObject: {} = {};
   public assemblingMachines: any[] = [];
   public assemblingMachinesSettings: any[] = [];
+
+  public outputNode: VirtualOutputNodeComponent;
 
   constructor(
     private httpClient: HttpClient
@@ -52,9 +54,12 @@ export class DataService {
               this.recipesObject[recipe.name] = recipe;
             });
             this.assemblingMachines = data['craftingMachines'];
+            this.assemblingMachinesSettings = [];
             data['craftingMachines'].forEach(craftingMachine => {
-              this.assemblingMachinesSettings.push({ name: craftingMachine.name, enabled: true });
+              if(craftingMachine.name !== 'player') // needed to filter 'player' from the crafting machines
+                this.assemblingMachinesSettings.push({ name: craftingMachine.name, enabled: true });
             });
+            this.outputNode.fullRefresh();
           }
         );
       } catch (error) {
@@ -81,6 +86,7 @@ export class DataService {
           this.assemblingMachines.push(data.prototypes['assembling-machine'][key]);
           this.assemblingMachinesSettings.push({ name: data.prototypes['assembling-machine'][key].name, enabled: true });
         }
+        this.outputNode.fullRefresh();
 
         //console.log(this.recipes);
         //console.log(this.assemblingMachines);

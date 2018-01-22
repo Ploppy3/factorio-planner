@@ -29,11 +29,12 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dataService.outputNode = this.outputNode;
   }
 
   public reloadData() {
     this.dataService.selectVersion(this.dataVersion);
-    this.outputNode.fullRefresh();
+    //this.outputNode.fullRefresh();
   }
 
   public showChangelog() {
