@@ -1,8 +1,10 @@
+<!--
 <div class="half-padding">
   <mat-checkbox #checkboxExpensive [checked]="plannerService.useExpensiveRecipes$ | async" (change)="onExpensiveRecipesValueChange(checkboxExpensive.checked)">
     Use expensive recipes (Marathon)
   </mat-checkbox>
 </div>
+-->
 <div id="form" class="half-padding">
   <mat-form-field class="small">
     <input matInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
@@ -28,7 +30,7 @@
 <ng-container *ngIf="node.category != 'unknown'">
   <div class="flex nowrap quarter-padding">
     <div class="quarter-padding">
-      <img #imageRecipe [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
+      <img #imageRecipe [matTooltip]="node.name" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
         (error)="imageRecipe.hidden = true" [alt]="node.name">
     </div>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>

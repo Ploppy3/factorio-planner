@@ -5,7 +5,7 @@
   </div>
   -->
   <div class="nowrapText wrapper-nodeName">
-    <img class="clickable" (click)="showChilds = !showChilds" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
+    <img class="clickable" (click)="showChilds = !showChilds" [matTooltip]="node.name" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
       [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding"
       *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
     <button *ngIf="node.craftingMachine" class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
