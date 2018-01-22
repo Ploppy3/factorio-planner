@@ -46,7 +46,7 @@
       x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
     </div>
   </div>
-  <div *ngIf="node.showOptions" class="half-padding">
+  <div *ngIf="node.showOptions" [@reveal] class="half-padding">
     <div id="info" class="inline-block quarter-padding">
       <div class="nowrapText quarter-padding">
         Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s

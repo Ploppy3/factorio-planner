@@ -1,4 +1,3 @@
-
 <div>
   <!--
   <div *ngIf="node.category != 'unknown'" class="nowrap half-padding">
@@ -25,24 +24,26 @@
       </div>
     </div>
   </div>
-  <div class="info inline-block quarter-padding" *ngIf="node.showOptions">
-    <div class="nowrapText quarter-padding">
-      Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
-    </div>
-    <div class="nowrapText quarter-padding">
-      Recipe Request: {{node.recipeRequest}}
-    </div>
-    <div class="nowrapText quarter-padding">
-      Quantity per Craft: {{node.quantityPerCraft}}
-    </div>
-    <div class="nowrapText quarter-padding">
-      Crafting Time: {{node.craftingTime}}
-    </div>
-    <div class="nowrapText quarter-padding">
-      Crafting Speed: {{node.craftingMachine?.crafting_speed}}
-    </div>
-    <div class="nowrapText quarter-padding">
-      Category: {{node.category}}
+  <div class="half-padding" *ngIf="node.showOptions" [@reveal]>
+    <div class="info inline-block quarter-padding">
+      <div class="nowrapText quarter-padding">
+        Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
+      </div>
+      <div class="nowrapText quarter-padding">
+        Recipe Request: {{node.recipeRequest}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Quantity per Craft: {{node.quantityPerCraft}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Crafting Time: {{node.craftingTime}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Crafting Speed: {{node.craftingMachine?.crafting_speed}}
+      </div>
+      <div class="nowrapText quarter-padding">
+        Category: {{node.category}}
+      </div>
     </div>
   </div>
 </div>
