@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataService } from "./data.service";
 import { Node } from "./node";
 import { VirtualNode } from "./virtual-node";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class PlannerService {
@@ -18,7 +19,7 @@ export class PlannerService {
   constructor(
     private dataService: DataService,
   ) {
-    console.log('constructor');
+    if(!environment.production) console.log('constructor');
     this.useExpensiveRecipes$.subscribe();
     this.timeFactor$.subscribe();
   }
@@ -37,8 +38,8 @@ export class PlannerService {
   }
 
   public createInMemoryTree(recipeName: string): number {
-    this.virtualTree = {};
     console.log('creating in memory tree for', recipeName);
+    this.virtualTree = {};
     let rootNode = new VirtualNode(this, recipeName);
     let rootId = this.virtualTreePointer;
     this.processNode(rootNode);
@@ -112,7 +113,12 @@ export class PlannerService {
   }
 
   private getQuantityPerCraft(recipe): number {
+
     let quantityPerCraft = 1;
+    if (!recipe) return quantityPerCraft;
+    if (recipe.products) return recipe.products[0].amount;
+
+    // -------------- DEPRECATED | OLD VERSION
     if (!recipe) return quantityPerCraft;
     if (recipe.result_count) quantityPerCraft = recipe.result_count;
     //console.log('-', quantityPerCraft);
@@ -128,7 +134,13 @@ export class PlannerService {
   }
 
   private getCraftingCategory(recipe): string {
+
     let category = 'unknown';
+    if (!recipe) return category;
+    if (recipe.category) category = recipe.category;
+
+    // -------------- DEPRECATED | OLD VERSION
+
     if (!recipe) return category;
     if (recipe.category) {
       category = recipe.category;
@@ -140,6 +152,11 @@ export class PlannerService {
 
   private getCraftingTime(recipe): number {
     let craftingTime = .5;
+    if (!recipe) return craftingTime;
+    if (recipe.energy) craftingTime = recipe.energy;
+
+    // -------------- DEPRECATED | OLD VERSION
+
     if (!recipe) return craftingTime;
     if (recipe.expensive && this.useExpensiveRecipes$.value) { // expensive
       if (recipe.expensive.energy_required) craftingTime = recipe.expensive.energy_required;
