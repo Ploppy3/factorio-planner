@@ -13,9 +13,11 @@ import {
 export class DataService {
   public dataVersions: Version[] = [
     { name: '16', fileName: 'v16.json' },
-    { name: '16 + marathon', fileName: 'v16-marathon.json' },
-    { name: '15.10', dataKey: data_recipe_15_10 },
-    { name: '15.8', dataKey: data_recipe_15_8 },
+    { name: '16+marathon', fileName: 'v16-marathon.json' },
+    { name: '15', fileName: 'v15.json' },
+    { name: '15+marathon', fileName: 'v15-marathon.json' },
+    //{ name: '15.10', dataKey: data_recipe_15_10 },
+    //{ name: '15.8', dataKey: data_recipe_15_8 },
   ];
   public recipes: any[] = [];
   public recipesObject: {} = {};
@@ -47,7 +49,7 @@ export class DataService {
       try {
         this.httpClient.get('/assets/factorio-data/' + this.dataVersions[index].fileName).subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.recipes = data['recipes'];
             this.recipesObject = {};
             data['recipes'].forEach(recipe => {
