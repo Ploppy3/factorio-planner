@@ -12,7 +12,7 @@ export class DialogChangelogComponent implements OnInit {
       name: 'Version 1.6.0',
       changes: [
         'Added tooltip on images',
-        'Added v16 and v16 marathon'
+        'Added Factorio v16 and v16 marathon'
       ]
     },
     {
