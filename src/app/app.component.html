@@ -1,24 +1,31 @@
-<div class="half-padding">
-  <div class="flex">
-    <div id="title" class="half-padding">Factorio Planner</div>
-    <div class="clickable secondary half-padding" (click)="showChangelog()">(<span class="underline">Version {{appVersion}}</span>)</div>
+<div class="horizontal-spacer">
+  <div class="vertical-spacer">
+    <div id="title" class="">Factorio Planner <span class="clickable secondary" (click)="showChangelog()">(Version {{appVersion}})</span></div>
     <div>
       <a id="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PSC6GSWSZYC76&lc=US&item_name=Factorio%20Planner&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2ffactorio%2dplanner%2efirebaseapp%2ecom%2f&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="blank">
         <img src="./assets/donate.gif" alt="donate image">
       </a>
     </div>
+    <div id="tips" class="secondary">
+      <div>Tips:</div>
+      <ul>
+        <li>Select at any time a factorio version which includes marathon (expensive) recipes.</li>
+        <li>Click on an assembling machine to see other assembling machines available for this recipe.</li>
+        <li>Click on a node to minize it.</li>
+      </ul>
+      <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
+    </div>
+    <div class="">
+      Factorio Version: 
+      <mat-form-field class="version">
+        <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">
+          <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
+            {{version.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!--<app-output-node #outputNode></app-output-node>-->
+    <app-virtual-output-node #outputNode></app-virtual-output-node>
   </div>
-  <div class="secondary half-padding">Something is broken? Contact me at ngnsup+factorio.planner@gmail.com</div>
-  <div class="half-padding">
-    Factorio Version: 
-    <mat-form-field class="version">
-      <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">
-        <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
-          {{version.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <!--<app-output-node #outputNode></app-output-node>-->
-  <app-virtual-output-node #outputNode></app-virtual-output-node>
 </div>
