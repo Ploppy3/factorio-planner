@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     public dataService: DataService,
     private plannerService: PlannerService,
     private dialog: MatDialog,
-  ){}
+  ) { }
 
   ngOnInit() {
   }
