@@ -14,6 +14,7 @@ import { DataService } from "../data.service";
 import { PlannerService } from "../planner.service";
 import { GlobalSettingsDialogComponent } from "../global-settings-dialog/global-settings-dialog.component";
 import { DialogOverviewComponent } from "../dialog-overview/dialog-overview.component";
+import { reveal } from "../animations";
 
 import { environment } from "../../environments/environment";
 
@@ -21,6 +22,7 @@ import { environment } from "../../environments/environment";
   selector: 'app-virtual-output-node',
   templateUrl: './virtual-output-node.component.html',
   styleUrls: ['./virtual-output-node.component.css'],
+  animations: [reveal]
 })
 export class VirtualOutputNodeComponent implements OnInit {
 
@@ -82,12 +84,12 @@ export class VirtualOutputNodeComponent implements OnInit {
         this.plannerService.timeFactor$.next(1);
         break;
       case '/m':
-        this.plannerService.timeFactor$.next(1/60);
+        this.plannerService.timeFactor$.next(1 / 60);
         break;
       case '/h':
-        this.plannerService.timeFactor$.next(1/3600);
+        this.plannerService.timeFactor$.next(1 / 3600);
         break;
-    
+
       default:
         console.warn('unkown time factor');
         break;

@@ -6,22 +6,24 @@ import { Observable } from "rxjs/Observable";
 import { VirtualNode } from "../virtual-node";
 import { DataService } from "../data.service";
 import { PlannerService } from "../planner.service";
+import { reveal } from "../animations";
 
 @Component({
   selector: 'app-virtual-node',
   templateUrl: './virtual-node.component.html',
-  styleUrls: ['./virtual-node.component.css']
+  styleUrls: ['./virtual-node.component.css'],
+  animations: [reveal],
 })
 export class VirtualNodeComponent implements OnInit {
 
   @Input() nodeId: number;
-  
+
   public showChilds: boolean = true;
   public node: VirtualNode;
 
   constructor(
     public dataService: DataService,
-    public plannerService : PlannerService,
+    public plannerService: PlannerService,
   ) {
   }
 
