@@ -9,6 +9,13 @@ export class DialogChangelogComponent implements OnInit {
 
   public versions: Version[] = [
     {
+      name: 'Version 1.6.0',
+      changes: [
+        'Added tooltip on images',
+        'Added v16 and v16 marathon'
+      ]
+    },
+    {
       name: 'Version 1.5.0',
       changes: [
         'Fixed broken images',
