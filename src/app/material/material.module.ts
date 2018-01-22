@@ -9,6 +9,7 @@ import {
   MatCheckboxModule,
   MatDialogModule,
   MatMenuModule,
+  MatTooltipModule,
 } from "@angular/material";
 
 @NgModule({
@@ -24,6 +25,7 @@ import {
     MatCheckboxModule,
     MatDialogModule,
     MatMenuModule,
+    MatTooltipModule,
   ],
   declarations: []
 })
