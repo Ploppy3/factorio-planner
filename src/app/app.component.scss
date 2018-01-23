@@ -25,4 +25,10 @@ mat-form-field.version{
   display: block;
   padding: 8px;
   border-radius: 8px;
+  position: relative;
+  button{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }

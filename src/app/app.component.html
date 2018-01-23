@@ -6,7 +6,8 @@
         <img src="./assets/donate.gif" alt="donate image">
       </a>
     </div>
-    <div id="tips" class="secondary">
+    <div id="tips" class="secondary" [@tips]="showTips ? 'visible' : 'hidden'">
+      <button mat-icon-button><mat-icon (click)="showTips = !showTips">close</mat-icon></button>
       <div>Tips:</div>
       <ul>
         <li>Select at any time a factorio version which includes marathon (expensive) recipes.</li>
