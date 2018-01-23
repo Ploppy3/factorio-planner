@@ -16,19 +16,6 @@ body{
 img{
   vertical-align: middle;
 }
-/*
-button{
-  background-color: #fff;
-  border: 1px solid #FF4081;
-  color: #FF4081;
-  font-weight: bold;
-  border-radius: 2px;
-  font-size: 1em;
-  padding: 8px;
-  cursor: pointer;
-  min-width: 36px;
-}
-*/
 .primary{
   color: mat-color($primary);
 }
@@ -110,36 +97,12 @@ button{
   position: relative;
   cursor: pointer;
 }
-/*
-.mat-select-value-text{
-  overflow: initial !important;
-  text-overflow: initial !important;
-}
-.mat-select-value{
-  position: initial !important;
-}
-*/
 button.mat-icon-button.secondary{
   opacity: .60;
 }
 /* ------------------------ */
 /* Material temporary fixes */
 /* ------------------------ */
-/*
-mat-select{
-  vertical-align: middle;
-}
-mat-select.timeUnit .mat-select-trigger{ //fix for select-unit in output-node.component
-  min-width: 50px;
-}
-mat-select.autoSize .mat-select-value-text{
-  overflow: initial !important;
-  text-overflow: initial !important;
-}
-mat-select.autoSize .mat-select-value{
-  position: initial !important;
-}
-*/
 button{
   text-transform: uppercase;
 }
