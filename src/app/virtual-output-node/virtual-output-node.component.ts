@@ -56,11 +56,6 @@ export class VirtualOutputNodeComponent implements OnInit {
       console.log('expensive state changed, refreshing');
       this.getNode();
     });
-    /*
-    if (!environment.production) {
-      this.control_recipe.setValue('science-pack-1');
-    }
-    */
     this.control_recipe.setValue('science-pack-1');
   }
 
@@ -71,7 +66,12 @@ export class VirtualOutputNodeComponent implements OnInit {
   }
 
   private filterRecipes(val: string): any[] {
-    return val ? this.dataService.recipes.filter(recipe => new RegExp(`${val}`, 'gi').test(recipe.name)) : [];
+    val = this.escapeRegExp(val);
+    return val ? this.dataService.recipes.filter(recipe => new RegExp(val, 'gi').test(recipe.name)) : [];
+  }
+
+  private escapeRegExp(str: string) {
+    return str ? str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : null;
   }
 
   public onExpensiveRecipesValueChange(value: boolean) {
