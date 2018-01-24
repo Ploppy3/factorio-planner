@@ -12,7 +12,10 @@
   <mat-form-field floatPlaceholder="never">
     <input matInput placeholder="Recipe" [matAutocomplete]="auto" [formControl]="control_recipe">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">{{recipe.name}}</mat-option>
+      <mat-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">
+        <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false" (error)="imgRecipeSearch.hidden=true" [src]="'https://wiki.factorio.com/images/' + (recipe.name | urlImg) + '.png'" [alt]="recipe.name" />
+        {{recipe.name}}
+      </mat-option>
     </mat-autocomplete>
   </mat-form-field>
   <mat-form-field class="small">
