@@ -4,20 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-output-node.component';
 
-import {
-  data_recipe_15_10,
-  data_recipe_15_8,
-} from "./recipe";
-
 @Injectable()
 export class DataService {
   public dataVersions: Version[] = [
     { name: '16', fileName: 'v16.json' },
     { name: '16+marathon', fileName: 'v16-marathon.json' },
+    { name: '16+bob', fileName: 'v16-bob.json' },
     { name: '15', fileName: 'v15.json' },
     { name: '15+marathon', fileName: 'v15-marathon.json' },
-    //{ name: '15.10', dataKey: data_recipe_15_10 },
-    //{ name: '15.8', dataKey: data_recipe_15_8 },
   ];
   public recipes: any[] = [];
   public recipesObject: {} = {};
