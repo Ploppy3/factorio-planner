@@ -1,7 +1,11 @@
 <div mat-dialog-title>Global Settings</div>
 <mat-dialog-content id="wrapper-content">
-  <div class="inline-block wrapper-machine" *ngFor="let machine of machines" [matTooltip]="machine.name">
-    <mat-checkbox [(ngModel)]="machine.enabled"><img class="img-machine" [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"></mat-checkbox>
+  <div class="inline-block wrapper-machine" *ngFor="let machine of machines" [matTooltipDisabled]="machine.error" [matTooltip]="machine.name">
+    <mat-checkbox [(ngModel)]="machine.enabled">
+      <img class="img-machine" [hidden]="machine.error" [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'"
+        (error)="machine.error = true" [alt]="machine.name">
+      <span class="node-name" *ngIf="machine.error">{{machine.name}}</span>
+    </mat-checkbox>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

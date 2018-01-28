@@ -8,6 +8,14 @@ img{
 .img-machine{
   margin-left: 8px;
 }
+.node-name{
+  margin-top: 7px;
+  margin-bottom: 8px;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .12);
+  padding: 0 4px;
+}
 #wrapper-content{
   padding-top: 24px;
   border-top: 1px solid rgba(0, 0, 0, .12);
