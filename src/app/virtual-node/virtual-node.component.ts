@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 import { Observable } from "rxjs/Observable";
 
@@ -12,7 +13,13 @@ import { reveal } from "../animations";
   selector: 'app-virtual-node',
   templateUrl: './virtual-node.component.html',
   styleUrls: ['./virtual-node.component.css'],
-  animations: [reveal],
+  animations: [
+    reveal,
+    trigger('nodeVisibility', [
+      state('visible', style({ display: '*' })),
+      state('invisible', style({ display: 'none' })),
+    ]),
+  ],
 })
 export class VirtualNodeComponent implements OnInit {
 
