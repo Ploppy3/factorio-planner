@@ -1,5 +1,5 @@
 <div mat-dialog-title>Global Settings</div>
-<mat-dialog-content id="wrapper-content">
+<mat-dialog-content>
   <div class="inline-block wrapper-machine" *ngFor="let machine of machines" [matTooltipDisabled]="machine.error" [matTooltip]="machine.name">
     <mat-checkbox [(ngModel)]="machine.enabled">
       <img class="img-machine" [hidden]="machine.error" [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'"
