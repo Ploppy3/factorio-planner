@@ -30,6 +30,7 @@ export class VirtualOutputNodeComponent implements OnInit {
   public control_output = new FormControl();
   public control_recipe = new FormControl();
   public $filteredRecipes: Observable<any[]>;
+  public showChilds = true;
 
   public timeUnits: string[] = ['/s', '/m', '/h'];
   public timeUnit: string = this.timeUnits[0]; // /s
