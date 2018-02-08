@@ -1,12 +1,16 @@
+<mat-slide-toggle id="slide-toggle" [(ngModel)]="darkTheme" (ngModelChange)="onThemeChange($event)">Dark theme</mat-slide-toggle>
 <div class="horizontal-spacer">
   <div class="vertical-spacer">
-    <div id="title" class="">Factorio Planner <span class="clickable secondary" (click)="showChangelog()">(Version {{appVersion}})</span></div>
+    <div class="primary">
+      <b>Factorio Planner</b>
+      <span class="clickable secondary" (click)="showChangelog()">(Version {{appVersion}})</span>
+    </div>
     <div>
       <a id="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PSC6GSWSZYC76&lc=US&item_name=Factorio%20Planner&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2ffactorio%2dplanner%2efirebaseapp%2ecom%2f&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted" target="blank">
         <img src="./assets/donate.gif" alt="donate image">
       </a>
     </div>
-    <div id="tips" class="secondary" [@tips]="showTips ? 'visible' : 'hidden'">
+    <div id="tips" class="container-secondary" [@tips]="showTips ? 'visible' : 'hidden'">
       <button mat-icon-button (click)="showTips = !showTips"><mat-icon>close</mat-icon></button>
       <div>Tips:</div>
       <ul>
@@ -16,7 +20,7 @@
       </ul>
       <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
     </div>
-    <div class="">
+    <div>
       Factorio Version: 
       <mat-form-field class="version">
         <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">

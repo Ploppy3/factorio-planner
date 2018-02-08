@@ -12,14 +12,10 @@ mat-form-field.small{
   border-radius: 4px;
   background-color: rgba(0, 0, 0, .12);
 }
-.wrapper-machine{
-  color: rgba(0, 0, 0, .54);
-}
 .wrapper-machine:hover{
   cursor: pointer;
 }
 #info{
-  background-color: #EEEEEE;
   border-radius: 2px;
 }
 #text-button{
@@ -29,4 +25,7 @@ mat-form-field.small{
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, .12);
   border-radius: 8px;
+}
+.dark-theme #form{
+  border: 1px solid #fff;
 }

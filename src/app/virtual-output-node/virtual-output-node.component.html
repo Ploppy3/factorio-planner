@@ -13,8 +13,8 @@
     <input matInput placeholder="Recipe" [matAutocomplete]="auto" [formControl]="control_recipe">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">
-        <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false" (error)="imgRecipeSearch.hidden=true" [src]="'https://wiki.factorio.com/images/' + (recipe.name | urlImg) + '.png'" [alt]="recipe.name" />
-        {{recipe.name}}
+        <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false" (error)="imgRecipeSearch.hidden=true"
+          [src]="'https://wiki.factorio.com/images/' + (recipe.name | urlImg) + '.png'" [alt]="recipe.name" /> {{recipe.name}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -38,7 +38,7 @@
     </div>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
     <button class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
-    <div class="wrapper-machine self-center quarter-padding" *ngIf="node.machines.length > 0" [matMenuTriggerFor]="menuMachine">
+    <div class="wrapper-machine secondary self-center quarter-padding" *ngIf="node.machines.length > 0" [matMenuTriggerFor]="menuMachine">
       <span class="primary">{{node.craftingMachine.name}}</span>
       <!--<img class="clickable" [mdMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
       <mat-menu #menuMachine="matMenu">
@@ -52,7 +52,7 @@
     </div>
   </div>
   <div *ngIf="node.showOptions" [@reveal] class="half-padding">
-    <div id="info" class="inline-block quarter-padding">
+    <div id="info" class="container-secondary inline-block quarter-padding">
       <div class="nowrapText quarter-padding">
         Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
       </div>
@@ -76,7 +76,7 @@
   <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
   <div *ngIf="node.childsIds.length > 0" class="flex column">
     <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
-      <app-virtual-node [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
+      <app-virtual-node class="tree-lines" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
     </div>
   </div>
 </ng-container>

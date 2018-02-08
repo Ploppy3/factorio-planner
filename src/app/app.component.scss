@@ -6,21 +6,20 @@
   overflow: auto;
   will-change: transform;
 }
+:host.dark-theme{
+  background-color: #546E7A;
+}
 mat-form-field.version{
   max-width: 130px;
-}
-#title{
-  color: mat-color($primary);
-  font-weight: bold;
 }
 #selectVersion{
   min-width: 125px;
 }
 #donate{
   margin-left: 8px;
+  opacity: .75;
 }
 #tips{
-  background-color: #fafafa;
   overflow: hidden;
   display: block;
   padding: 8px;
@@ -31,4 +30,9 @@ mat-form-field.version{
     top: 0;
     right: 0;
   }
+}
+#slide-toggle{
+  position: absolute;
+  top: 12px;
+  right: 12px;
 }

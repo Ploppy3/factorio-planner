@@ -16,11 +16,33 @@ body{
 img{
   vertical-align: middle;
 }
+.dark-theme{
+  color: #fff;
+
+  .primary{
+    color: mat-color($dark-primary);
+  }
+  .secondary{
+    color: rgba(255, 255, 255, .70);
+  }
+  .container-secondary{
+    color: rgba(255, 255, 255, .70);
+  }
+  .tree-lines, .tree-lines::before, .tree-lines::after, .tree-lines.last::before, .tree-lines.last::after {
+    border-color: rgba(255, 255, 255, .24);
+  }
+}
 .primary{
   color: mat-color($primary);
 }
 .secondary{
-  color: rgba(0, 0, 0, .54);
+  color: rgba(0, 0, 0, 0.54);
+}
+.container-secondary{
+  background-color: rgba(0, 0, 0, .12);
+}
+.tree-lines{
+  border-color: rgba(0, 0, 0, .24);
 }
 .underline{
   text-decoration: underline;
@@ -103,6 +125,17 @@ button.mat-icon-button.secondary{
 /* ------------------------ */
 /* Material temporary fixes */
 /* ------------------------ */
+.dark-theme{
+  div.mat-dialog-title{
+    color: mat-color($dark-primary);
+  }
+  mat-option-text{
+    color: #fff;
+  }
+  mat-dialog-content{
+    border-color: rgba(255, 255, 255, .12);
+  }
+}
 button{
   text-transform: uppercase;
 }
@@ -110,7 +143,7 @@ div.mat-dialog-title{
   color: mat-color($primary);
 }
 mat-dialog-content.mat-dialog-content{
-  padding-bottom: 24px;
+  padding: 24px;
 }
 mat-dialog-actions.mat-dialog-actions{
   justify-content: flex-end;
@@ -120,5 +153,9 @@ mat-dialog-actions.mat-dialog-actions{
 }
 mat-dialog-actions.mat-dialog-actions button{
   margin: 0 4px;
+}
+mat-dialog-content{
+  border-top: 1px solid rgba(0, 0, 0, .12);
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
 /* ------------------------ */

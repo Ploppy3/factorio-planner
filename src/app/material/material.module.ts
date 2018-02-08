@@ -10,6 +10,7 @@ import {
   MatDialogModule,
   MatMenuModule,
   MatTooltipModule,
+  MatSlideToggleModule,
 } from "@angular/material";
 
 @NgModule({
@@ -26,6 +27,7 @@ import {
     MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
+    MatSlideToggleModule,
   ],
   declarations: []
 })

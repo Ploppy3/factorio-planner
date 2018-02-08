@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/core';
 import { MatDialog } from "@angular/material";
 
@@ -6,6 +6,8 @@ import { VirtualOutputNodeComponent } from "./virtual-output-node/virtual-output
 import { DataService } from "./data.service";
 import { PlannerService } from "./planner.service";
 import { DialogChangelogComponent } from "./dialog-changelog/dialog-changelog.component";
+
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 declare var require: any;
 const { version } = require('../../package.json');
@@ -16,7 +18,7 @@ const { version } = require('../../package.json');
   styleUrls: ['./app.component.scss'],
   providers: [DataService, PlannerService],
   animations: [
-    trigger('tips',[
+    trigger('tips', [
       state('hidden', style({
         display: 'none',
       })),
@@ -34,6 +36,7 @@ const { version } = require('../../package.json');
 })
 export class AppComponent implements OnInit {
 
+  @HostBinding('class.dark-theme') darkTheme = false;
   @ViewChild('outputNode') outputNode: VirtualOutputNodeComponent;
 
   public showTips = true;
@@ -44,10 +47,19 @@ export class AppComponent implements OnInit {
     public dataService: DataService,
     private plannerService: PlannerService,
     private dialog: MatDialog,
+    private overlayContainer: OverlayContainer
   ) { }
 
   ngOnInit() {
     this.dataService.outputNode = this.outputNode;
+  }
+
+  public onThemeChange(value: boolean) {
+    if (value) {
+      this.overlayContainer.getContainerElement().classList.add('dark-theme');
+    } else {
+      this.overlayContainer.getContainerElement().classList.remove('dark-theme');
+    }
   }
 
   public reloadData() {

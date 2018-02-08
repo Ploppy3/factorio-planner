@@ -9,6 +9,13 @@ export class DialogChangelogComponent implements OnInit {
 
   public versions: Version[] = [
     {
+      name: 'Version 2.1.0',
+      changes: [
+        'Added Factorio v16+Bob version',
+        'Added Dark theme option',
+      ]
+    },
+    {
       name: 'Version 2.0.0',
       changes: [
         'Added Factorio v16 and v16 marathon',

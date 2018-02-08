@@ -5,12 +5,13 @@
   </div>
   -->
   <div class="nowrapText wrapper-nodeName">
-    <img class="clickable" (click)="showChilds = !showChilds" [matTooltip]="node.name" #imageRecipe [hidden]="imageRecipe.hidden" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
-      [alt]="node.name" (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true"><span class="nodeName clickable quarter-padding"
-      *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
+    <img class="clickable" (click)="showChilds = !showChilds" [matTooltip]="node.name" #imageRecipe [hidden]="imageRecipe.hidden"
+      [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false"
+      (error)="imageRecipe.hidden = true">
+    <span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
     <button *ngIf="node.craftingMachine" class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
     <div *ngIf="node.craftingMachine && node.category != 'unknown'" class="inline-block">
-      <div class="wrapper-machine quarter-padding" [matMenuTriggerFor]="menuMachine">
+      <div class="wrapper-machine secondary quarter-padding" [matMenuTriggerFor]="menuMachine">
         <span class="primary">{{node.craftingMachine.name}}</span>
         <!--<img class="clickable" [matMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
         <mat-menu #menuMachine="matMenu">
@@ -25,7 +26,7 @@
     </div>
   </div>
   <div class="half-padding" *ngIf="node.showOptions" [@reveal]>
-    <div class="info inline-block quarter-padding">
+    <div class="info container-secondary inline-block quarter-padding">
       <div class="nowrapText quarter-padding">
         Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
       </div>
@@ -47,9 +48,9 @@
     </div>
   </div>
 </div>
-<div class="wrapper-expandButton" *ngIf="node.childsIds.length > 0 && !showChilds"><button mat-icon-button (click)="showChilds = true"><mat-icon>add</mat-icon></button></div>
+<div class="wrapper-expandButton" *ngIf="node.childsIds.length > 0 && !showChilds"><button class="secondary" mat-icon-button (click)="showChilds = true"><mat-icon>add</mat-icon></button></div>
 <div [@nodeVisibility]="showChilds ? 'visible' : 'invisible'" *ngIf="node.childsIds.length > 0" class="flex column">
   <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
-    <app-virtual-node [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
+    <app-virtual-node class="tree-lines" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
   </div>
 </div>

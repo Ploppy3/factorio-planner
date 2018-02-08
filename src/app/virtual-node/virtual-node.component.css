@@ -34,7 +34,6 @@ input[type="number"]{
   width: 2.5em;
 }
 .info{
-  background-color: #EEEEEE;
   border-radius: 2px;
 }
 .wrapper-nodeName{
@@ -43,9 +42,6 @@ input[type="number"]{
 }
 .wrapper-expandButton{
   min-height: 41px;
-}
-.wrapper-machine{
-  color: rgba(0, 0, 0, .54);
 }
 .wrapper-machine:hover{
   cursor: pointer;
