@@ -15,6 +15,10 @@ import { DialogOverviewComponent } from './dialog-overview/dialog-overview.compo
 import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
 import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
 
+// Service Worker
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +38,7 @@ import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   entryComponents: [
     GlobalSettingsDialogComponent,
