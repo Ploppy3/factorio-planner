@@ -7,7 +7,7 @@
       </a>
     </div>
     <div id="tips" class="secondary" [@tips]="showTips ? 'visible' : 'hidden'">
-      <button mat-icon-button><mat-icon (click)="showTips = !showTips">close</mat-icon></button>
+      <button mat-icon-button (click)="showTips = !showTips"><mat-icon>close</mat-icon></button>
       <div>Tips:</div>
       <ul>
         <li>Select at any time a factorio version which includes marathon (expensive) recipes.</li>
