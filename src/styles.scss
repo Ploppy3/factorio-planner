@@ -119,9 +119,6 @@ img{
   position: relative;
   cursor: pointer;
 }
-button.mat-icon-button.secondary{
-  opacity: .60;
-}
 /* ------------------------ */
 /* Material temporary fixes */
 /* ------------------------ */
@@ -138,6 +135,9 @@ button.mat-icon-button.secondary{
 }
 button{
   text-transform: uppercase;
+}
+button.mat-icon-button.secondary{
+  opacity: .60;
 }
 div.mat-dialog-title{
   color: mat-color($primary);

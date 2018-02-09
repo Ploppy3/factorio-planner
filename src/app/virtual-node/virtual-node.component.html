@@ -9,6 +9,7 @@
       [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name" (load)="imageRecipe.hidden = false"
       (error)="imageRecipe.hidden = true">
     <span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</span>
+    <span class="secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2'}}/s</span>
     <button *ngIf="node.craftingMachine" class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
     <div *ngIf="node.craftingMachine && node.category != 'unknown'" class="inline-block">
       <div class="wrapper-machine secondary quarter-padding" [matMenuTriggerFor]="menuMachine">

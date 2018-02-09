@@ -12,6 +12,10 @@ mat-form-field.small{
   border-radius: 4px;
   background-color: rgba(0, 0, 0, .12);
 }
+.wrapper-nodeName{
+  margin-left: 4px;
+  min-height: 41px;
+}
 .wrapper-machine:hover{
   cursor: pointer;
 }
@@ -28,4 +32,7 @@ mat-form-field.small{
 }
 .dark-theme #form{
   border: 1px solid #fff;
+}
+#tree{
+  overflow-x: auto;
 }

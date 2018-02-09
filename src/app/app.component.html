@@ -1,5 +1,5 @@
 <mat-slide-toggle id="slide-toggle" [(ngModel)]="darkTheme" (ngModelChange)="onThemeChange($event)">Dark theme</mat-slide-toggle>
-<div class="horizontal-spacer">
+<div id="wrapper-page">
   <div class="vertical-spacer">
     <div class="primary">
       <b>Factorio Planner</b>
@@ -10,15 +10,18 @@
         <img src="./assets/donate.gif" alt="donate image">
       </a>
     </div>
-    <div id="tips" class="container-secondary" [@tips]="showTips ? 'visible' : 'hidden'">
-      <button mat-icon-button (click)="showTips = !showTips"><mat-icon>close</mat-icon></button>
-      <div>Tips:</div>
-      <ul>
-        <li>Select at any time a factorio version which includes marathon (expensive) recipes.</li>
-        <li>Click on an assembling machine to see other assembling machines available for this recipe.</li>
-        <li>Click on a node to minize it.</li>
-      </ul>
-      <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
+    <div id="wrapper-tips" [@tips]="showTips ? 'visible' : 'hidden'">
+      <div id="tips" class="container-secondary">
+        <button mat-icon-button (click)="showTips = !showTips"><mat-icon>close</mat-icon></button>
+        <div>Tips:</div>
+        <ul>
+          <li>Select at any time a factorio version which includes marathon (expensive) recipes.</li>
+          <li>Click on an assembling machine to see other assembling machines available for this recipe.</li>
+          <li>Click on a node to minize it.</li>
+          <li>'Resource Overview' shows the total ressources needed.</li>
+        </ul>
+        <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
+      </div>
     </div>
     <div>
       Factorio Version: 

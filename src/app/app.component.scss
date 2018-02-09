@@ -19,9 +19,11 @@ mat-form-field.version{
   margin-left: 8px;
   opacity: .75;
 }
-#tips{
+#wrapper-tips{
   overflow: hidden;
-  display: block;
+}
+#tips{
+  display: inline-block;
   padding: 8px;
   border-radius: 8px;
   position: relative;
@@ -35,4 +37,7 @@ mat-form-field.version{
   position: absolute;
   top: 12px;
   right: 12px;
+}
+#wrapper-page{
+  padding: 0 8px;
 }

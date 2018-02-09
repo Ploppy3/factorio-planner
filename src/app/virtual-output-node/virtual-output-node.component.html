@@ -30,12 +30,11 @@
 <div class="half-padding">
   <button *ngIf="node.childsIds.length > 0" mat-button color="accent" (click)="openSharedResources()"><mat-icon>list</mat-icon><span id="text-button">Resource Overview</span></button>
 </div>
-<ng-container *ngIf="node.category != 'unknown'">
-  <div class="flex nowrap quarter-padding">
-    <div class="quarter-padding">
-      <img #imageRecipe [matTooltip]="node.name" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
-        (error)="imageRecipe.hidden = true" [alt]="node.name">
-    </div>
+<div id="tree" *ngIf="node.category != 'unknown'">
+  <div class="wrapper-nodeName flex nowrap">
+    <img #imageRecipe class="self-center" [matTooltip]="node.name" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
+      (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
+    <span class="self-center secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2'}}/s</span>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
     <button class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
     <div class="wrapper-machine secondary self-center quarter-padding" *ngIf="node.machines.length > 0" [matMenuTriggerFor]="menuMachine">
@@ -79,4 +78,4 @@
       <app-virtual-node class="tree-lines" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
     </div>
   </div>
-</ng-container>
+</div>
