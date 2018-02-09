@@ -10,6 +10,7 @@ export class DataService {
     { name: '16', fileName: 'v16.json' },
     { name: '16+marathon', fileName: 'v16-marathon.json' },
     { name: '16+bob', fileName: 'v16-bob.json' },
+    { name: '16+angel', fileName: 'v16-angel.json' },
     { name: '15', fileName: 'v15.json' },
     { name: '15+marathon', fileName: 'v15-marathon.json' },
   ];
