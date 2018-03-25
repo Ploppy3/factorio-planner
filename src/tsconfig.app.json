@@ -7,7 +7,8 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": false
   },
   "exclude": [
     "test.ts",
