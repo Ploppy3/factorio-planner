@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { DataService } from "./data.service";
 import { Node } from "./node";
 import { VirtualNode } from "./virtual-node";

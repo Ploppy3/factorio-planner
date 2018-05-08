@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 import { Node } from "../node";
 import { DataService } from "../data.service";

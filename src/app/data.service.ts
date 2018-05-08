@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from "rxjs";
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-output-node.component';

@@ -1,13 +1,14 @@
+
+import {map, startWith} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material";
 import { NgZone } from "@angular/core";
 
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/map';
+import { Subscription ,  Observable } from 'rxjs';
+
+
+
 
 import { VirtualNode } from "../virtual-node";
 import { DataService } from "../data.service";
@@ -48,7 +49,7 @@ export class VirtualOutputNodeComponent implements OnInit {
       this.plannerService.calculateAllNodes();
       //this.node.calculate();
     });
-    this.$filteredRecipes = this.control_recipe.valueChanges.startWith(null).map(val => this.filterRecipes(val).slice(0, 7));
+    this.$filteredRecipes = this.control_recipe.valueChanges.pipe(startWith(null),map(val => this.filterRecipes(val).slice(0, 7)),);
     this.control_recipe.valueChanges.subscribe(val => {
       this.node.name = val;
       this.getNode();

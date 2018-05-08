@@ -9,7 +9,7 @@
   <mat-form-field class="small">
     <input matInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
   </mat-form-field>
-  <mat-form-field floatPlaceholder="never">
+  <mat-form-field floatLabel="never">
     <input matInput placeholder="Recipe" [matAutocomplete]="auto" [formControl]="control_recipe">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">
@@ -19,7 +19,7 @@
     </mat-autocomplete>
   </mat-form-field>
   <mat-form-field class="small">
-    <mat-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (change)="onTimeUnitChange()">
+    <mat-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (selectionChange)="onTimeUnitChange()">
       <mat-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
         {{unit}}
       </mat-option>

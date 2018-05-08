@@ -25,8 +25,8 @@
     </div>
     <div>
       Factorio Version: 
-      <mat-form-field class="version">
-        <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (change)="reloadData()">
+      <mat-form-field class="version" appearance="outline">
+        <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (selectionChange)="reloadData()">
           <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
             {{version.name}}
           </mat-option>

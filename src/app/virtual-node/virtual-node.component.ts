@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 //import { Node } from "../node";
 import { VirtualNode } from "../virtual-node";

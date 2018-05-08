@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog } from "@angular/material";
 
 import { VirtualOutputNodeComponent } from "./virtual-output-node/virtual-output-node.component";
