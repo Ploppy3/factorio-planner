@@ -1,6 +1,7 @@
 :host{
   display: block;
   position: relative;
+  backface-visibility: hidden;
 }
 mat-form-field.small{
   max-width: 55px;

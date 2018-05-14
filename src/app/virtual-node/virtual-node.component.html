@@ -52,6 +52,6 @@
 <div class="wrapper-expandButton" *ngIf="node.childsIds.length > 0 && !showChilds"><button class="secondary" mat-icon-button (click)="showChilds = true"><mat-icon>add</mat-icon></button></div>
 <div [@nodeVisibility]="showChilds ? 'visible' : 'invisible'" *ngIf="node.childsIds.length > 0" class="flex column">
   <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
-    <app-virtual-node class="tree-lines" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
+    <app-virtual-node class="tree-lines gpu-layer" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
   </div>
 </div>

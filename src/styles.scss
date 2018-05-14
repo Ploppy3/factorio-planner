@@ -120,7 +120,7 @@ img{
   cursor: pointer;
 }
 .gpu-layer{
-  backface-visibility: hidden;
+  will-change: transform;
 }
 /* ------------------------ */
 /* Material temporary fixes */
@@ -160,5 +160,6 @@ mat-dialog-actions.mat-dialog-actions button{
 mat-dialog-content{
   border-top: 1px solid rgba(0, 0, 0, .12);
   border-bottom: 1px solid rgba(0, 0, 0, .12);
+  will-change: transform;
 }
 /* ------------------------ */

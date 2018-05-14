@@ -1,18 +1,24 @@
 :host{
-  display: inline-block;
-  will-change: contents;
+  display: block;
   position: relative;
+  border-left: 1px solid rgba(0, 0, 0, .24);
+  padding-left: 24px;
+}
+:host.last{
+  border-left: none;
 }
 :host::before{
+  content: '';
   display: inline-block;
   position: absolute;
   height: 21px;
   width: 24px;
   left: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .24);
-  content: '';
+  will-change: transform;
 }
 :host.last::before{
+  content: '';
   display: inline-block;
   position: absolute;
   height: 21px;
@@ -21,17 +27,6 @@
   border-left: 1px solid rgba(0, 0, 0, .24);
   border-bottom: 1px solid rgba(0, 0, 0, .24);
   border-bottom-left-radius: 4px;
-  content: '';
-}
-:host{
-  border-left: 1px solid rgba(0, 0, 0, .24);
-  padding-left: 24px;
-}
-:host.last{
-  border-left: none;
-}
-input[type="number"]{
-  width: 2.5em;
 }
 .info{
   border-radius: 2px;

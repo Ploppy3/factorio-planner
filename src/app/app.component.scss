@@ -3,8 +3,6 @@
 :host{
   display: block;
   height: 100%;
-  overflow: auto;
-  will-change: transform;
 }
 :host.dark-theme{
   background-color: #546E7A;

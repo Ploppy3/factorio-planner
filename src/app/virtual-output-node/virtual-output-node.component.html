@@ -73,8 +73,8 @@
     </div>
   </div>
   <!--<div class="half-padding">Attenuation: {{ node.attenuation }}</div>-->
-  <div *ngIf="node.childsIds.length > 0" class="flex column">
-    <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
+  <div *ngIf="node.childsIds.length > 0" class="flex column gpu-layer">
+    <div class="node-padding gpu-layer" *ngFor="let nodeId of node.childsIds; let i = index;">
       <app-virtual-node class="tree-lines" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId"></app-virtual-node>
     </div>
   </div>

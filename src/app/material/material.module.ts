@@ -29,6 +29,8 @@ import {
     MatTooltipModule,
     MatSlideToggleModule,
   ],
+  providers: [
+  ],
   declarations: []
 })
 export class MaterialModule { }
