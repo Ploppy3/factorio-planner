@@ -10,7 +10,6 @@ import { DialogChangelogComponent } from "./dialog-changelog/dialog-changelog.co
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 declare var require: any;
-const { version } = require('../../package.json');
 
 @Component({
   selector: 'app-root',
@@ -40,7 +39,6 @@ export class AppComponent implements OnInit {
   @ViewChild('outputNode') outputNode: VirtualOutputNodeComponent;
 
   public showTips = true;
-  public appVersion: string = version;
   public dataVersion: string = this.dataService.dataVersions[0].name;
 
   constructor(

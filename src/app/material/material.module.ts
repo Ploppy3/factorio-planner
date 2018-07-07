@@ -11,6 +11,7 @@ import {
   MatMenuModule,
   MatTooltipModule,
   MatSlideToggleModule,
+  MatToolbarModule,
 } from "@angular/material";
 
 @NgModule({
@@ -28,6 +29,7 @@ import {
     MatMenuModule,
     MatTooltipModule,
     MatSlideToggleModule,
+    MatToolbarModule,
   ],
   providers: [
   ],
