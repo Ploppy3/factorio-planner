@@ -1,5 +1,6 @@
 <div mat-dialog-title>Changelog</div>
 <mat-dialog-content>
+  <div class="wrapper-version primary">Current version : {{appVersion}}</div>
   <div *ngFor="let version of versions" class="wrapper-version">
     <div>{{version.name}}</div>
     <ul>

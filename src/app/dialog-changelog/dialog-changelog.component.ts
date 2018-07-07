@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+const { version } = require('../../../package.json');
 
 @Component({
   selector: 'app-dialog-changelog',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogChangelogComponent implements OnInit {
 
+  public appVersion: string = version;
   public versions: Version[] = [
     {
       name: 'Version 2.2.0',
@@ -73,6 +75,7 @@ export class DialogChangelogComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
