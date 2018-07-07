@@ -22,11 +22,11 @@ export class VirtualOutputNodeComponent implements OnInit {
   public node = new VirtualNode(this.plannerService, 'test');
   public control_output = new FormControl();
   public control_recipe = new FormControl();
-  public $filteredRecipes: Observable<any[]>;
+  public filteredRecipes$: Observable<any[]>;
   public showChilds = true;
 
   public timeUnits: string[] = ['/s', '/m', '/h'];
-  public timeUnit: string = this.timeUnits[0]; // /s
+  public timeUnit: string = this.timeUnits[0]; // per seconds (/s)
   public timeFactor: number = 0;
 
   constructor(
@@ -36,12 +36,12 @@ export class VirtualOutputNodeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.control_output.valueChanges.subscribe(_ => {
+    this.control_output.valueChanges.subscribe(value => {
+      this.node.recipeRequest = value;
       this.plannerService.resetSharedRessources();
       this.plannerService.calculateAllNodes();
-      //this.node.calculate();
     });
-    this.$filteredRecipes = this.control_recipe.valueChanges.pipe(startWith(null),map(val => this.filterRecipes(val).slice(0, 7)),);
+    this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null),map(val => this.filterRecipes(val).slice(0, 7)),);
     this.control_recipe.valueChanges.subscribe(val => {
       this.node.name = val;
       this.getNode();
