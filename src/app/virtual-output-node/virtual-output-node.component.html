@@ -5,12 +5,13 @@
   </mat-checkbox>
 </div>
 -->
-<div id="form" class="half-padding">
+<div id="form" class="half-padding border">
   <mat-form-field class="small">
     <input matInput type="number" min="1" [(ngModel)]="node.recipeRequest" [formControl]="control_output">
   </mat-form-field>
   <mat-form-field floatLabel="never">
-    <input matInput placeholder="Recipe" [matAutocomplete]="auto" [formControl]="control_recipe">
+    <mat-label>Recipe</mat-label>
+    <input matInput [matAutocomplete]="auto" [formControl]="control_recipe">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of $filteredRecipes | async" [value]="recipe.name" (change)="node.calculate()">
         <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false" (error)="imgRecipeSearch.hidden=true"

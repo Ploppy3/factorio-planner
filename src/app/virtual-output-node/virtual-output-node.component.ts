@@ -3,13 +3,7 @@ import {map, startWith} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material";
-import { NgZone } from "@angular/core";
-
-import { Subscription ,  Observable } from 'rxjs';
-
-
-
-
+import { Observable } from 'rxjs';
 import { VirtualNode } from "../virtual-node";
 import { DataService } from "../data.service";
 import { PlannerService } from "../planner.service";
@@ -17,12 +11,10 @@ import { GlobalSettingsDialogComponent } from "../global-settings-dialog/global-
 import { DialogOverviewComponent } from "../dialog-overview/dialog-overview.component";
 import { reveal } from "../animations";
 
-import { environment } from "../../environments/environment";
-
 @Component({
   selector: 'app-virtual-output-node',
   templateUrl: './virtual-output-node.component.html',
-  styleUrls: ['./virtual-output-node.component.css'],
+  styleUrls: ['./virtual-output-node.component.scss'],
   animations: [reveal]
 })
 export class VirtualOutputNodeComponent implements OnInit {

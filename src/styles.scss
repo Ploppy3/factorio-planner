@@ -1,168 +1,187 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import './material.theme.scss';
-*{
+* {
   outline: 0;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
-html, body{
+html,
+body {
   height: 100%;
   user-select: none;
 }
-body{
+body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: rgba(0, 0, 0, .87);
 }
-img{
+img {
   vertical-align: middle;
 }
-.dark-theme{
+.dark-theme {
   color: #fff;
-
-  .primary{
+  .primary {
     color: mat-color($dark-primary);
   }
-  .secondary{
+  .secondary {
     color: rgba(255, 255, 255, .70);
   }
-  .container-secondary{
+  .container-secondary {
     color: rgba(255, 255, 255, .70);
   }
-  .tree-lines, .tree-lines::before, .tree-lines::after, .tree-lines.last::before, .tree-lines.last::after {
-    border-color: rgba(255, 255, 255, .24);
+  .tree-lines,
+  .tree-lines::before,
+  .tree-lines::after,
+  .tree-lines.last::before,
+  .tree-lines.last::after {
+    border-color: rgba(255, 255, 255, .3);
+  }
+  .border{
+    border-color: rgba(255, 255, 255, .3);
   }
 }
-.primary{
+.primary {
   color: mat-color($primary);
 }
-.secondary{
+.secondary {
   color: rgba(0, 0, 0, 0.54);
 }
-.container-secondary{
+.container-secondary {
   background-color: rgba(0, 0, 0, .12);
 }
-.tree-lines{
+.border{
+  border-color: rgba(0, 0, 0, .12);
+}
+.tree-lines {
   border-color: rgba(0, 0, 0, .24);
 }
-.underline{
+.underline {
   text-decoration: underline;
 }
-.flex{
+.flex {
   display: flex;
 }
-.flex.column{
+.flex.column {
   flex-direction: column;
 }
-.flex-grow{
+.flex-grow {
   flex-grow: 1;
 }
-.flex.wrap{
+.flex.wrap {
   flex-wrap: wrap;
 }
-.flex.nowrap{
+.flex.nowrap {
   flex-wrap: nowrap;
 }
-.self-center{
+.self-center {
   align-self: center;
 }
-.nowrapText{
+.nowrapText {
   white-space: nowrap;
 }
-.padding{
+.padding {
   padding: 16px;
 }
-.half-padding{
+.half-padding {
   padding: 8px;
 }
-.quarter-padding{
+.quarter-padding {
   padding: 4px;
 }
-.node-padding{
+.node-padding {
   margin-left: 20px;
 }
-.self-center{
+.self-center {
   align-self: center;
 }
-.flex-grow{
+.flex-grow {
   flex-grow: 1;
 }
-.horizontal-spacer{
+.horizontal-spacer {
   display: flex;
 }
-.horizontal-spacer > *:first-child{
+.horizontal-spacer>*:first-child {
   margin-left: 8px;
 }
-.horizontal-spacer > *:last-child{
+.horizontal-spacer>*:last-child {
   margin-right: 8px;
 }
-.horizontal-spacer > *{
+.horizontal-spacer>* {
   margin: 0 4px;
 }
-.vertical-spacer{
+.vertical-spacer {
   display: flex;
   flex-direction: column;
 }
-.vertical-spacer > *{
+.vertical-spacer>* {
   margin: 4px 0;
 }
-.vertical-spacer > *:first-child{
+.vertical-spacer>*:first-child {
   margin-top: 8px;
 }
-.vertical-spacer > *:last-child{
+.vertical-spacer>*:last-child {
   margin-bottom: 8px;
 }
-.inline-block{
+.inline-block {
   display: inline-block;
   vertical-align: middle;
 }
-.clickable{
+.clickable {
   position: relative;
   cursor: pointer;
 }
-.gpu-layer{
+.gpu-layer {
   will-change: transform;
 }
 /* ------------------------ */
+
 /* Material temporary fixes */
+
 /* ------------------------ */
-.dark-theme{
-  div.mat-dialog-title{
+
+.dark-theme {
+  div.mat-dialog-title {
     color: mat-color($dark-primary);
   }
-  mat-option-text{
+  mat-option-text {
     color: #fff;
   }
-  mat-dialog-content{
-    border-color: rgba(255, 255, 255, .12);
+  mat-dialog-content {
+    border-color: rgba(255, 255, 255, .3);
   }
 }
-button{
+button {
   text-transform: uppercase;
 }
-button.mat-icon-button.secondary{
+button.mat-icon-button.secondary {
   opacity: .60;
 }
-div.mat-dialog-title{
+div.mat-dialog-title {
   color: mat-color($primary);
 }
-mat-dialog-content.mat-dialog-content{
+mat-dialog-content.mat-dialog-content {
   padding: 24px;
 }
-mat-dialog-actions.mat-dialog-actions{
+mat-dialog-actions.mat-dialog-actions {
   justify-content: flex-end;
   padding: 8px 4px;
   margin-right: -24px;
   color: rgba(0, 0, 0, .87);
 }
-mat-dialog-actions.mat-dialog-actions button{
+mat-dialog-actions.mat-dialog-actions button {
   margin: 0 4px;
 }
-mat-dialog-content{
+mat-dialog-content {
   border-top: 1px solid rgba(0, 0, 0, .12);
   border-bottom: 1px solid rgba(0, 0, 0, .12);
   will-change: transform;
 }
-.mat-form-field-wrapper{
+.mat-form-field-wrapper {
   padding-bottom: 0;
+}
+.dark-theme{
+  .mat-option{
+    //color: white !important;
+  }
 }
 /* ------------------------ */

@@ -1,39 +1,37 @@
-:host{
+:host {
   display: block;
   position: relative;
   backface-visibility: hidden;
 }
-mat-form-field.small{
+mat-form-field.small {
   max-width: 55px;
 }
-.nodeName{
+.nodeName {
   margin-top: 7px;
   margin-bottom: 8px;
   display: inline-block;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, .12);
 }
-.wrapper-nodeName{
+.wrapper-nodeName {
   margin-left: 4px;
   min-height: 41px;
 }
-.wrapper-machine:hover{
+.wrapper-machine:hover {
   cursor: pointer;
 }
-#info{
+#info {
   border-radius: 2px;
 }
-#text-button{
+#text-button {
   margin-left: 8px;
 }
-#form{
+#form {
   display: inline-block;
-  border: 1px solid rgba(0, 0, 0, .12);
+  border-width: 1px;
+  border-style: solid;
   border-radius: 8px;
 }
-.dark-theme #form{
-  border: 1px solid #fff;
-}
-#tree{
+#tree {
   overflow-x: auto;
 }
