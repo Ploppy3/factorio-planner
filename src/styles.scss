@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import './material.theme.scss';
+@include mat-core();
+@include angular-material-theme($app-theme);
+.dark-theme{
+  @include angular-material-theme($dark-theme);
+}
+
 * {
   outline: 0;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
