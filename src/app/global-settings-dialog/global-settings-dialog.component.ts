@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from "@angular/material";
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-global-settings-dialog',
   templateUrl: './global-settings-dialog.component.html',
-  styleUrls: ['./global-settings-dialog.component.css']
+  styleUrls: ['./global-settings-dialog.component.scss']
 })
 export class GlobalSettingsDialogComponent implements OnInit {
 
@@ -19,14 +19,14 @@ export class GlobalSettingsDialogComponent implements OnInit {
   }
 
   public setMachines(machines: any[]) {
-    //*
+    // *
     machines.forEach(machine => {
       this.machines.push(Object.create(machine));
     });
-    //*/
+    // */
   }
 
-  public saveAndClose(){
+  public saveAndClose() {
     this.dialogRef.close(this.machines);
   }
 

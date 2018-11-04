@@ -1,14 +1,17 @@
-img{
+img {
   width: 32px;
   height: 32px;
+  &.disabled {
+    filter: grayscale(100%);
+  }
 }
-.wrapper-machine:not(:last-child){
+.wrapper-machine:not(:last-child) {
   padding-right: 24px;
 }
-.img-machine{
+.img-machine {
   margin-left: 8px;
 }
-.node-name{
+.node-name {
   margin-top: 7px;
   margin-bottom: 8px;
   display: inline-block;
