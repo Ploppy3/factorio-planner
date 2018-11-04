@@ -1,34 +1,32 @@
-@import 'src/material.theme.scss';
-
-:host{
+:host {
   display: block;
   height: 100%;
   overflow: auto;
+  &.dark-theme {
+    background-color: #546E7A;
+  }
 }
-:host.dark-theme{
-  background-color: #546E7A;
-}
-#selectVersion{
+#selectVersion {
   min-width: 125px;
 }
-#donate{
+#donate {
   margin-left: 8px;
   opacity: .75;
 }
-#wrapper-tips{
+#wrapper-tips {
   overflow: hidden;
 }
-#tips{
+#tips {
   display: inline-block;
   padding: 8px;
   border-radius: 8px;
   position: relative;
-  button{
+  button {
     position: absolute;
     top: 0;
     right: 0;
   }
 }
-#wrapper-page{
+#wrapper-page {
   padding: 0 8px;
 }
