@@ -15,7 +15,8 @@
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of filteredRecipes$ | async" [value]="recipe.name" (change)="node.calculate()">
         <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false" (error)="imgRecipeSearch.hidden=true"
-          [src]="'https://wiki.factorio.com/images/' + (recipe.name | urlImg) + '.png'" [alt]="recipe.name" /> {{recipe.name}}
+          [src]="'https://wiki.factorio.com/images/' + (recipe.name | urlImg) + '.png'" [alt]="recipe.name" />
+        {{recipe.name}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -26,25 +27,35 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-icon-button color="accent" (click)="openGlobalSettings()"><mat-icon>settings</mat-icon></button>
+  <button mat-icon-button color="accent" (click)="openGlobalSettings()">
+    <mat-icon>settings</mat-icon>
+  </button>
 </div>
 <div class="half-padding">
-  <button *ngIf="node.childsIds.length > 0" mat-button color="accent" (click)="openSharedResources()"><mat-icon>list</mat-icon><span id="text-button">Resource Overview</span></button>
+  <button *ngIf="node.childsIds.length > 0" (click)="openSharedResources()" color="accent" mat-button>
+    <mat-icon>list</mat-icon>
+    <span id="text-button">Resource Overview</span>
+  </button>
 </div>
 <div id="tree" class="gpu-layer" *ngIf="node.category != 'unknown'">
   <div class="wrapper-nodeName flex nowrap">
     <img #imageRecipe class="self-center" [matTooltip]="node.name" [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'"
       (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" [alt]="node.name">
-    <span class="self-center secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2'}}/s</span>
+    <span class="self-center secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) |
+      number:'1.2-2'}}/s</span>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
-    <button class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions"><mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon></button>
-    <div class="wrapper-machine secondary self-center quarter-padding" *ngIf="node.machines.length > 0" [matMenuTriggerFor]="menuMachine">
+    <button class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions">
+      <mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon>
+    </button>
+    <div class="wrapper-machine secondary self-center quarter-padding" *ngIf="node.machines.length > 0"
+      [matMenuTriggerFor]="menuMachine">
       <span class="primary">{{node.craftingMachine.name}}</span>
       <!--<img class="clickable" [mdMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
       <mat-menu #menuMachine="matMenu">
         <ng-container *ngFor="let machine of node.machines">
           <button mat-menu-item (click)="node.craftingMachine = machine; node.calculate()">
-            <img #imageMachine (error)="imageMachine.notFound = true" [hidden]="imageMachine.notFound" [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"> {{machine.name}}
+            <img #imageMachine (error)="imageMachine.notFound = true" [hidden]="imageMachine.notFound" [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'"
+              [alt]="machine.name"> {{machine.name}}
           </button>
         </ng-container>
       </mat-menu>

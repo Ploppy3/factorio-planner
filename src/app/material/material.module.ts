@@ -12,7 +12,7 @@ import {
   MatTooltipModule,
   MatSlideToggleModule,
   MatToolbarModule,
-} from "@angular/material";
+} from '@angular/material';
 
 @NgModule({
   imports: [

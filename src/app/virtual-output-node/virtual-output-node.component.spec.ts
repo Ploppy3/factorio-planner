@@ -8,9 +8,9 @@ describe('VirtualOutputNodeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VirtualOutputNodeComponent ]
+      declarations: [VirtualOutputNodeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
