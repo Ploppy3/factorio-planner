@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatDialog } from "@angular/material";
+import { MatDialog } from '@angular/material';
 
-import { VirtualOutputNodeComponent } from "./virtual-output-node/virtual-output-node.component";
-import { DataService } from "./data.service";
-import { PlannerService } from "./planner.service";
-import { DialogChangelogComponent } from "./dialog-changelog/dialog-changelog.component";
+import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
+import { DataService } from './data.service';
+import { PlannerService } from './planner.service';
+import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { SettingsService, Settings } from 'app/settings-service.service';
 
 declare var require: any;
 
@@ -43,17 +44,25 @@ export class AppComponent implements OnInit {
 
   constructor(
     public dataService: DataService,
-    private plannerService: PlannerService,
     private dialog: MatDialog,
-    private overlayContainer: OverlayContainer
-  ) { }
+    private overlayContainer: OverlayContainer,
+    private settingsService: SettingsService,
+  ) {
+    this.darkTheme = settingsService.getBoolean(Settings.DARK_THEME, false);
+    this.setThemeToOverlay();
+  }
 
   ngOnInit() {
     this.dataService.outputNode = this.outputNode;
   }
 
-  public onThemeChange(value: boolean) {
-    if (value) {
+  public onThemeChange(darkTheme: boolean) {
+    this.settingsService.setValue(Settings.DARK_THEME, darkTheme);
+    this.setThemeToOverlay();
+  }
+
+  private setThemeToOverlay() {
+    if (this.darkTheme) {
       this.overlayContainer.getContainerElement().classList.add('dark-theme');
     } else {
       this.overlayContainer.getContainerElement().classList.remove('dark-theme');
@@ -62,7 +71,6 @@ export class AppComponent implements OnInit {
 
   public reloadData() {
     this.dataService.selectVersion(this.dataVersion);
-    //this.outputNode.fullRefresh();
   }
 
   public showChangelog() {
