@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 const { version } = require('../../../package.json');
 
 @Component({
@@ -8,6 +8,7 @@ const { version } = require('../../../package.json');
 })
 export class DialogChangelogComponent implements OnInit {
 
+  public angularVersion = VERSION.full;
   public appVersion: string = version;
   public versions: Version[] = [
     {
