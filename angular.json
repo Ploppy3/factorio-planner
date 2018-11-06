@@ -83,8 +83,7 @@
             ],
             "assets": [
               "src/assets",
-              "src/manifest.webmanifest",
-              "src/worker-basic.min.js"
+              "src/manifest.json"
             ]
           }
         },

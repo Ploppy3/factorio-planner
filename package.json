@@ -22,8 +22,9 @@
     "@angular/material": "^7.0.2",
     "@angular/platform-browser": "7.0.2",
     "@angular/platform-browser-dynamic": "7.0.2",
+    "@angular/pwa": "^0.10.4",
     "@angular/router": "7.0.2",
-    "@angular/service-worker": "7.0.2",
+    "@angular/service-worker": "^7.0.2",
     "core-js": "^2.4.1",
     "rxjs": "6.3.3",
     "zone.js": "0.8.26"
