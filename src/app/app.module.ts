@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MaterialModule } from "./material/material.module";
+import { MaterialModule } from './material/material.module';
 import { AppComponent } from './app.component';
 import { NodeComponent } from './node/node.component';
 import { OutputNodeComponent } from './output-node/output-node.component';
@@ -20,7 +20,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 // Overlay Theming
-//import {OverlayContainer} from '@angular/cdk/overlay';
+// import {OverlayContainer} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
