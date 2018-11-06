@@ -8,8 +8,11 @@
   "orientation": "any",
   "scope": "/",
   "start_url": "/",
-  "icons": [{
-    "src": "assets/ic_launcher.png", 
-    "sizes": "192x192"
-  }]
+  "icons": [
+    {
+      "src": "assets/ic_launcher.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
 }
