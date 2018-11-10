@@ -1,10 +1,20 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   overflow: auto;
   &.dark-theme {
     background-color: #546E7A;
   }
+}
+mat-toolbar {
+  flex-shrink: 0;
+}
+#wrapper-page {
+  flex-grow: 1;
+  padding: 0 8px;
+  overflow: auto;
+  will-change: transform;
 }
 #selectVersion {
   min-width: 125px;
@@ -26,7 +36,4 @@
     top: 0;
     right: 0;
   }
-}
-#wrapper-page {
-  padding: 0 8px;
 }
