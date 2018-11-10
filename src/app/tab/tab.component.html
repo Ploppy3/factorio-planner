@@ -1,0 +1,12 @@
+<div class="gpu-layer">
+  <mat-form-field class="version" appearance="outline">
+    <mat-label>Factorio Version</mat-label>
+    <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (selectionChange)="reloadData()">
+      <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
+        {{version.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<!--<app-output-node #outputNode></app-output-node>-->
+<app-virtual-output-node #outputNode></app-virtual-output-node>

@@ -3,7 +3,7 @@
 @import './material.theme.scss';
 @include mat-core();
 @include angular-material-theme($app-theme);
-.dark-theme{
+.dark-theme {
   @include angular-material-theme($dark-theme);
 }
 
@@ -42,7 +42,7 @@ img {
   .tree-lines.last::after {
     border-color: rgba(255, 255, 255, .3);
   }
-  .border{
+  .border {
     border-color: rgba(255, 255, 255, .3);
   }
 }
@@ -55,7 +55,7 @@ img {
 .container-secondary {
   background-color: rgba(0, 0, 0, .12);
 }
-.border{
+.border {
   border-color: rgba(0, 0, 0, .12);
 }
 .tree-lines {
@@ -184,8 +184,8 @@ mat-dialog-content {
 .mat-form-field-wrapper {
   padding-bottom: 0;
 }
-.dark-theme{
-  .mat-option{
+.dark-theme {
+  .mat-option {
     //color: white !important;
   }
 }

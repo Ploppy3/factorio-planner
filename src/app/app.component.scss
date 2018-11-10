@@ -10,6 +10,29 @@
 mat-toolbar {
   flex-shrink: 0;
 }
+mat-toolbar-row {
+  overflow: auto;
+}
+.tab {
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  padding: 0 8px 0 0;
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  span {
+    padding: 0 8px;
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+  &.selected {
+    background-color: rgba(0, 0, 0, .12)
+  }
+}
 #wrapper-page {
   flex-grow: 1;
   padding: 0 8px;

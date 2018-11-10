@@ -19,6 +19,7 @@ import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppInstallComponent } from './app-install/app-install.component';
+import { TabComponent } from './tab/tab.component';
 
 // Overlay Theming
 // import {OverlayContainer} from '@angular/cdk/overlay';
@@ -34,7 +35,8 @@ import { AppInstallComponent } from './app-install/app-install.component';
     DialogOverviewComponent,
     VirtualOutputNodeComponent,
     VirtualNodeComponent,
-    AppInstallComponent
+    AppInstallComponent,
+    TabComponent
   ],
   imports: [
     MaterialModule,

@@ -1,10 +1,6 @@
-import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatDialog, MatSnackBarModule, MatSnackBar } from '@angular/material';
-
-import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
-import { DataService } from './data.service';
-import { PlannerService } from './planner.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -15,7 +11,6 @@ import { AppInstallComponent } from 'app/app-install/app-install.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [DataService, PlannerService],
   animations: [
     trigger('tips', [
       state('hidden', style({
@@ -36,13 +31,12 @@ import { AppInstallComponent } from 'app/app-install/app-install.component';
 export class AppComponent implements OnInit {
 
   @HostBinding('class.dark-theme') darkTheme = false;
-  @ViewChild('outputNode') outputNode: VirtualOutputNodeComponent;
 
   public showTips = true;
-  public dataVersion: string = this.dataService.dataVersions[0].name;
+  public tabs: string[] = [];
+  public activeTabId = 0;
 
   constructor(
-    public dataService: DataService,
     private dialog: MatDialog,
     private overlayContainer: OverlayContainer,
     private settingsService: SettingsService,
@@ -53,12 +47,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.outputNode = this.outputNode;
     window.addEventListener('beforeinstallprompt', (event) => {
       console.log('beforeinstallprompt fired')
       event.preventDefault();
       this.matSnackbar.openFromComponent(AppInstallComponent, { data: event });
     });
+    this.tabs.push('tab');
   }
 
   public onThemeChange(darkTheme: boolean) {
@@ -74,11 +68,23 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public reloadData() {
-    this.dataService.selectVersion(this.dataVersion);
-  }
-
   public showChangelog() {
     this.dialog.open(DialogChangelogComponent);
+  }
+
+  public selectPreviousTab() {
+    for (let i = this.activeTabId; i >= 0; i--) {
+      if (this.tabs[i] != null) {
+        this.activeTabId = i;
+        return;
+      }
+    }
+    for (let i = this.activeTabId + 1; i < this.tabs.length; i++) {
+      if (this.tabs[i] != null) {
+        this.activeTabId = i;
+        return;
+      }
+    }
+    this.activeTabId = -1;
   }
 }

@@ -7,6 +7,17 @@
       <mat-icon>help_outline</mat-icon>
     </button>
   </mat-toolbar-row>
+  <mat-toolbar-row>
+    <ng-container *ngFor="let tab of tabs; let i = index">
+      <span class="tab" [class.selected]="i == activeTabId" *ngIf="tab != null">
+        <span class="clickable" (click)="activeTabId = i">tab-{{i}}</span>
+        <mat-icon class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</mat-icon>
+      </span>
+    </ng-container>
+    <button (click)="tabs.push('tab'); activeTabId = tabs.length - 1" mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>
 <div id="wrapper-page">
   <div class="vertical-spacer">
@@ -18,6 +29,7 @@
         <img src="./assets/donate.gif" alt="donate image">
       </a>
     </div>
+
     <div id="wrapper-tips" class="gpu-layer" [@tips]="showTips ? 'visible' : 'hidden'">
       <div id="tips" class="container-secondary">
         <button mat-icon-button (click)="showTips = !showTips">
@@ -33,17 +45,8 @@
         <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
       </div>
     </div>
-    <div class="gpu-layer">
-      <mat-form-field class="version" appearance="outline">
-        <mat-label>Factorio Version</mat-label>
-        <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (selectionChange)="reloadData()">
-          <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
-            {{version.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <!--<app-output-node #outputNode></app-output-node>-->
-    <app-virtual-output-node #outputNode></app-virtual-output-node>
+    <ng-container *ngFor="let tab of tabs; let i = index">
+      <app-tab *ngIf="tab != null" [hidden]="activeTabId !== i"></app-tab>
+    </ng-container>
   </div>
 </div>
