@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBarModule, MatSnackBar } from '@angular/material';
 
 import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
 import { DataService } from './data.service';
@@ -9,6 +9,7 @@ import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.co
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SettingsService, Settings } from 'app/settings-service.service';
+import { AppInstallComponent } from 'app/app-install/app-install.component';
 
 declare var require: any;
 
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
     private dialog: MatDialog,
     private overlayContainer: OverlayContainer,
     private settingsService: SettingsService,
+    private matSnackbar: MatSnackBar,
   ) {
     this.darkTheme = settingsService.getBoolean(Settings.DARK_THEME, false);
     this.setThemeToOverlay();
@@ -54,6 +56,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.outputNode = this.outputNode;
+    window.addEventListener('beforeinstallprompt', (event) => {
+      console.log('beforeinstallprompt fired')
+      event.preventDefault();
+      this.matSnackbar.openFromComponent(AppInstallComponent, { data: event });
+    });
   }
 
   public onThemeChange(darkTheme: boolean) {

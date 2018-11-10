@@ -18,6 +18,7 @@ import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
 // Service Worker
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AppInstallComponent } from './app-install/app-install.component';
 
 // Overlay Theming
 // import {OverlayContainer} from '@angular/cdk/overlay';
@@ -32,7 +33,8 @@ import { environment } from '../environments/environment';
     DialogChangelogComponent,
     DialogOverviewComponent,
     VirtualOutputNodeComponent,
-    VirtualNodeComponent
+    VirtualNodeComponent,
+    AppInstallComponent
   ],
   imports: [
     MaterialModule,
@@ -46,7 +48,8 @@ import { environment } from '../environments/environment';
   entryComponents: [
     GlobalSettingsDialogComponent,
     DialogChangelogComponent,
-    DialogOverviewComponent
+    DialogOverviewComponent,
+    AppInstallComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
