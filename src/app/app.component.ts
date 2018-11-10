@@ -11,8 +11,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { SettingsService, Settings } from 'app/settings-service.service';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
 
-declare var require: any;
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

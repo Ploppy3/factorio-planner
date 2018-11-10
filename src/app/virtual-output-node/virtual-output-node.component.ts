@@ -1,15 +1,15 @@
 
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from "@angular/forms";
-import { MatDialog } from "@angular/material";
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { VirtualNode } from "../virtual-node";
-import { DataService } from "../data.service";
-import { PlannerService } from "../planner.service";
-import { GlobalSettingsDialogComponent } from "../global-settings-dialog/global-settings-dialog.component";
-import { DialogOverviewComponent } from "../dialog-overview/dialog-overview.component";
-import { reveal } from "../animations";
+import { VirtualNode } from '../virtual-node';
+import { DataService } from '../data.service';
+import { PlannerService } from '../planner.service';
+import { GlobalSettingsDialogComponent } from '../global-settings-dialog/global-settings-dialog.component';
+import { DialogOverviewComponent } from '../dialog-overview/dialog-overview.component';
+import { reveal } from '../animations';
 
 @Component({
   selector: 'app-virtual-output-node',
@@ -27,7 +27,7 @@ export class VirtualOutputNodeComponent implements OnInit {
 
   public timeUnits: string[] = ['/s', '/m', '/h'];
   public timeUnit: string = this.timeUnits[0]; // per seconds (/s)
-  public timeFactor: number = 0;
+  public timeFactor = 0;
 
   constructor(
     public dataService: DataService,
@@ -41,7 +41,7 @@ export class VirtualOutputNodeComponent implements OnInit {
       this.plannerService.resetSharedRessources();
       this.plannerService.calculateAllNodes();
     });
-    this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null),map(val => this.filterRecipes(val).slice(0, 7)),);
+    this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null), map(val => this.filterRecipes(val).slice(0, 7)));
     this.control_recipe.valueChanges.subscribe(val => {
       this.node.name = val;
       this.getNode();
@@ -55,7 +55,7 @@ export class VirtualOutputNodeComponent implements OnInit {
 
   private getNode() {
     this.plannerService.resetSharedRessources();
-    let id = this.plannerService.createInMemoryTree(this.control_recipe.value);
+    const id = this.plannerService.createInMemoryTree(this.control_recipe.value);
     this.node = this.plannerService.virtualTree[id];
   }
 
@@ -92,7 +92,7 @@ export class VirtualOutputNodeComponent implements OnInit {
   }
 
   public openGlobalSettings() {
-    let dialogRef = this.dialog.open(GlobalSettingsDialogComponent);
+    const dialogRef = this.dialog.open(GlobalSettingsDialogComponent);
     dialogRef.componentInstance.setMachines(this.dataService.assemblingMachinesSettings);
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
@@ -103,21 +103,23 @@ export class VirtualOutputNodeComponent implements OnInit {
   }
 
   public openSharedResources() {
-    let dialogRef = this.dialog.open(DialogOverviewComponent);
+    const dialogRef = this.dialog.open(DialogOverviewComponent);
     this.plannerService.resetSharedRessources();
     /*
     this.plannerService.virtualTree.forEach(node => {
       node.getSharedResources();
     });
     */
-    for (var key in this.plannerService.virtualTree) {
+    for (const key in this.plannerService.virtualTree) {
       if (this.plannerService.virtualTree.hasOwnProperty(key)) {
         this.plannerService.virtualTree[key].getSharedResources();
       }
     }
-    let sharedResources = [];
-    for (let key in this.plannerService.sharedResources) {
-      sharedResources.push({ name: key, throughput: this.plannerService.sharedResources[key] });
+    const sharedResources = [];
+    for (const key in this.plannerService.sharedResources) {
+      if (this.plannerService.sharedResources.hasOwnProperty(key)) {
+        sharedResources.push({ name: key, throughput: this.plannerService.sharedResources[key] });
+      }
     }
     dialogRef.componentInstance.sharedResources = sharedResources;
   }

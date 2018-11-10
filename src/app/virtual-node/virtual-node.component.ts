@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
-//import { Node } from "../node";
-import { VirtualNode } from "../virtual-node";
-import { DataService } from "../data.service";
-import { PlannerService } from "../planner.service";
-import { reveal } from "../animations";
+// import { Node } from "../node";
+import { VirtualNode } from '../virtual-node';
+import { DataService } from '../data.service';
+import { PlannerService } from '../planner.service';
+import { reveal } from '../animations';
 
 @Component({
   selector: 'app-virtual-node',
@@ -25,7 +25,7 @@ export class VirtualNodeComponent implements OnInit {
 
   @Input() nodeId: number;
 
-  public showChilds: boolean = true;
+  public showChilds = true;
   public node: VirtualNode;
 
   constructor(
@@ -35,10 +35,10 @@ export class VirtualNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.node.findRecipeByName();
-    //this.findRecipeByName(this.node.name);
+    // this.node.findRecipeByName();
+    // this.findRecipeByName(this.node.name);
     if (!this.plannerService.virtualTree[this.nodeId]) {
-      console.log("can't find node with id", this.nodeId);
+      console.log('can\'t find node with id', this.nodeId);
     }
     this.node = this.plannerService.virtualTree[this.nodeId];
   }
