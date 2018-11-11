@@ -12,6 +12,12 @@ export class DialogChangelogComponent implements OnInit {
   public appVersion: string = version;
   public versions: Version[] = [
     {
+      name: 'Version 2.4.0',
+      changes: [
+        'Added tabs',
+      ]
+    },
+    {
       name: 'Version 2.3.0',
       changes: [
         'Updated Factorio v16 version',
