@@ -23,9 +23,35 @@ import { AppInstallComponent } from 'app/app-install/app-install.component';
           paddingTop: 0,
           paddingBottom: 0,
           opacity: 0,
-        }))
-      ])
-    ])
+        })),
+      ]),
+    ]),
+    trigger('tabButton', [
+      transition(':enter', [
+        style({
+          width: 0,
+          overflow: 'hidden',
+          margin: 0,
+          paddingRight: 0,
+        }),
+        animate('.5s ease-in-out', style({
+          width: '*',
+          margin: '*',
+          paddingRight: '*',
+        })),
+      ]),
+      transition(':leave', [
+        style({
+          overflow: 'hidden',
+        }),
+        animate('.5s ease-in-out', style({
+          width: 0,
+          overflow: 'hidden',
+          margin: 0,
+          paddingRight: 0,
+        })),
+      ]),
+    ]),
   ],
 })
 export class AppComponent implements OnInit {
@@ -70,6 +96,10 @@ export class AppComponent implements OnInit {
 
   public showChangelog() {
     this.dialog.open(DialogChangelogComponent);
+  }
+
+  public trackByTabButton(id: number, item) {
+    return id;
   }
 
   public selectPreviousTab() {

@@ -8,8 +8,8 @@
     </button>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <ng-container *ngFor="let tab of tabs; let i = index">
-      <span class="tab" [class.selected]="i == activeTabId" *ngIf="tab != null">
+    <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
+      <span class="tab" [class.selected]="i == activeTabId" *ngIf="tab != null" @tabButton>
         <span class="clickable" (click)="activeTabId = i">tab-{{i}}</span>
         <mat-icon class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</mat-icon>
       </span>
@@ -43,7 +43,7 @@
         <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
       </div>
     </div>
-    <ng-container *ngFor="let tab of tabs; let i = index">
+    <ng-container *ngFor="let tab of tabs; index as i">
       <app-tab *ngIf="tab != null" [hidden]="activeTabId !== i"></app-tab>
     </ng-container>
   </div>
