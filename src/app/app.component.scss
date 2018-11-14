@@ -40,8 +40,7 @@ mat-toolbar-row {
 #wrapper-page {
   flex-grow: 1;
   padding: 0 8px;
-  overflow: auto;
-  will-change: transform;
+  overflow-y: scroll;
 }
 #selectVersion {
   min-width: 125px;
