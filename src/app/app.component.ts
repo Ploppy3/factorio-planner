@@ -30,25 +30,21 @@ import { AppInstallComponent } from 'app/app-install/app-install.component';
       transition(':enter', [
         style({
           width: 0,
-          overflow: 'hidden',
-          margin: 0,
-          paddingRight: 0,
+          opacity: 0,
         }),
-        animate('.5s ease-in-out', style({
+        animate('.25s ease-in-out', style({
           width: '*',
-          margin: '*',
-          paddingRight: '*',
+        })),
+        animate('.25s ease-in-out', style({
+          opacity: 1,
         })),
       ]),
       transition(':leave', [
-        style({
-          overflow: 'hidden',
-        }),
-        animate('.5s ease-in-out', style({
+        animate('.25s ease-in-out', style({
+          opacity: 0,
+        })),
+        animate('.25s ease-in-out', style({
           width: 0,
-          overflow: 'hidden',
-          margin: 0,
-          paddingRight: 0,
         })),
       ]),
     ]),

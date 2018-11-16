@@ -13,6 +13,7 @@ import {
   MatSlideToggleModule,
   MatToolbarModule,
   MatSnackBarModule,
+  MatRippleModule,
 } from '@angular/material';
 
 @NgModule({
@@ -32,6 +33,7 @@ import {
     MatSlideToggleModule,
     MatToolbarModule,
     MatSnackBarModule,
+    MatRippleModule,
   ],
   providers: [
   ],

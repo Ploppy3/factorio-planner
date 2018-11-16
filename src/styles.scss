@@ -15,6 +15,7 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: rgba(0, 0, 0, .87);
+  user-select: none;
 }
 img {
   vertical-align: middle;
@@ -40,6 +41,9 @@ img {
   .border {
     border-color: rgba(255, 255, 255, .3);
   }
+  .inverted-border {
+    border-color: rgba(0, 0, 0, .12);
+  }
 }
 .primary {
   color: mat-color($primary);
@@ -52,6 +56,9 @@ img {
 }
 .border {
   border-color: rgba(0, 0, 0, .12);
+}
+.inverted-border {
+  border-color: rgba(255, 255, 255, 0.24);
 }
 .tree-lines {
   border-color: rgba(0, 0, 0, .24);
