@@ -45,7 +45,7 @@
         <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
       </div>
     </div>
-    <ng-container *ngFor="let tab of tabs; index as i">
+    <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
       <app-tab *ngIf="tab != null" [hidden]="activeTabId !== i"></app-tab>
     </ng-container>
   </div>
