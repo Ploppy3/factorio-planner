@@ -6,6 +6,7 @@ import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.co
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SettingsService, Settings } from 'app/settings-service.service';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
+import { TabsService } from 'app/tabs.service';
 
 @Component({
   selector: 'app-root',
@@ -63,18 +64,23 @@ export class AppComponent implements OnInit {
     private overlayContainer: OverlayContainer,
     private settingsService: SettingsService,
     private matSnackbar: MatSnackBar,
+    private tabsService: TabsService,
   ) {
     this.darkTheme = settingsService.getBoolean(Settings.DARK_THEME, false);
     this.setThemeToOverlay();
   }
 
   ngOnInit() {
+    this.tabsService.tabName$.subscribe(change => {
+      this.tabs[change.index] = change.name;
+    });
     window.addEventListener('beforeinstallprompt', (event) => {
       console.log('beforeinstallprompt fired')
       event.preventDefault();
       this.matSnackbar.openFromComponent(AppInstallComponent, { data: event });
     });
-    this.tabs.push('tab');
+    this.tabs.push('science-pack-1');
+    this.tabsService.setTabs(this.tabs);
   }
 
   public onThemeChange(darkTheme: boolean) {
@@ -96,6 +102,12 @@ export class AppComponent implements OnInit {
 
   public trackByTabButton(id: number, item) {
     return id;
+  }
+
+  public onClick_addTabButton() {
+    this.tabs.push('science-pack-1');
+    this.tabsService.setTabs(this.tabs);
+    this.activeTabId = this.tabs.length - 1
   }
 
   public selectPreviousTab() {

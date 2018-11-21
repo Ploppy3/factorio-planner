@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'app/data.service';
 import { PlannerService } from 'app/planner.service';
 import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-output-node.component';

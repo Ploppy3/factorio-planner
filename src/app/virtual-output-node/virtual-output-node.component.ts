@@ -1,6 +1,6 @@
 
 import { map, startWith } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
@@ -10,14 +10,15 @@ import { PlannerService } from '../planner.service';
 import { GlobalSettingsDialogComponent } from '../global-settings-dialog/global-settings-dialog.component';
 import { DialogOverviewComponent } from '../dialog-overview/dialog-overview.component';
 import { reveal } from '../animations';
+import { TabsService } from 'app/tabs.service';
 
 @Component({
   selector: 'app-virtual-output-node',
   templateUrl: './virtual-output-node.component.html',
   styleUrls: ['./virtual-output-node.component.scss'],
-  animations: [reveal]
+  animations: [reveal],
 })
-export class VirtualOutputNodeComponent implements OnInit {
+export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
 
   public node = new VirtualNode(this.plannerService, 'test');
   public control_output = new FormControl();
@@ -29,13 +30,17 @@ export class VirtualOutputNodeComponent implements OnInit {
   public timeUnit: string = this.timeUnits[0]; // per seconds (/s)
   public timeFactor = 0;
 
+  private tabId = -1;
+
   constructor(
     public dataService: DataService,
     public plannerService: PlannerService,
+    public tabsService: TabsService,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
+    this.tabId = this.tabsService.getLastTabId();
     this.control_output.valueChanges.subscribe(value => {
       this.node.recipeRequest = value;
       this.plannerService.resetSharedRessources();
@@ -51,6 +56,12 @@ export class VirtualOutputNodeComponent implements OnInit {
       this.getNode();
     });
     this.control_recipe.setValue('science-pack-1');
+  }
+
+  ngAfterViewInit(): void {
+    this.control_recipe.valueChanges.subscribe(val => {
+      this.tabsService.tabName$.next({ index: this.tabId, name: val });
+    });
   }
 
   private getNode() {
