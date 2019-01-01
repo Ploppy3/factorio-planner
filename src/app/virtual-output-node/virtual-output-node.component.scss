@@ -26,12 +26,18 @@ mat-form-field.small {
 #text-button {
   margin-left: 8px;
 }
-#form {
-  display: inline-block;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 8px;
-}
 #tree {
   overflow-x: auto;
+}
+#form {
+  >*:first-child {
+    margin-right: 4px;
+  }
+  >*:not(:first-child):not(:last-child) {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  >*:last-child {
+    margin-left: 4px;
+  }
 }
