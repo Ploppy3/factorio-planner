@@ -20,6 +20,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppInstallComponent } from './app-install/app-install.component';
 import { TabComponent } from './tab/tab.component';
+import { DialogSupportComponent } from './dialog-support/dialog-support.component';
 
 // Overlay Theming
 // import {OverlayContainer} from '@angular/cdk/overlay';
@@ -36,7 +37,8 @@ import { TabComponent } from './tab/tab.component';
     VirtualOutputNodeComponent,
     VirtualNodeComponent,
     AppInstallComponent,
-    TabComponent
+    TabComponent,
+    DialogSupportComponent
   ],
   imports: [
     MaterialModule,
@@ -51,7 +53,8 @@ import { TabComponent } from './tab/tab.component';
     GlobalSettingsDialogComponent,
     DialogChangelogComponent,
     DialogOverviewComponent,
-    AppInstallComponent
+    AppInstallComponent,
+    DialogSupportComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

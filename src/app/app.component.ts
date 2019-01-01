@@ -7,6 +7,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { SettingsService, Settings } from 'app/settings-service.service';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
 import { TabsService } from 'app/tabs.service';
+import { DialogSupportComponent } from 'app/dialog-support/dialog-support.component';
 
 @Component({
   selector: 'app-root',
@@ -94,6 +95,10 @@ export class AppComponent implements OnInit {
     } else {
       this.overlayContainer.getContainerElement().classList.remove('dark-theme');
     }
+  }
+
+  public openDialogSupport() {
+    this.dialog.open(DialogSupportComponent);
   }
 
   public showChangelog() {

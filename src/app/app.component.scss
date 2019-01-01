@@ -60,3 +60,15 @@ mat-toolbar-row {
     right: 0;
   }
 }
+#button-support {
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: .87;
+}
+#toolbar-main {
+  height: auto;
+}
+#toolbar-tabs {
+  height: auto;
+  padding: 4px 8px;
+}
