@@ -1,8 +1,13 @@
+// Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+// Service Worker
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { MaterialModule } from './material/material.module';
 import { AppComponent } from './app.component';
@@ -12,16 +17,10 @@ import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.co
 import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
 import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
 import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
-
-// Service Worker
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { AppInstallComponent } from './app-install/app-install.component';
 import { TabComponent } from './tab/tab.component';
 import { DialogSupportComponent } from './dialog-support/dialog-support.component';
-
-// Overlay Theming
-// import {OverlayContainer} from '@angular/cdk/overlay';
+import { IconsModule } from 'app/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +42,7 @@ import { DialogSupportComponent } from './dialog-support/dialog-support.componen
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    IconsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [
