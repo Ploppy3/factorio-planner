@@ -28,12 +28,12 @@
     </mat-select>
   </mat-form-field>
   <button mat-icon-button color="accent" (click)="openGlobalSettings()">
-    <mat-icon>settings</mat-icon>
+    <i-settings></i-settings>
   </button>
 </div>
 <div class="half-padding">
   <button *ngIf="node.childsIds.length > 0" (click)="openSharedResources()" color="accent" mat-button>
-    <mat-icon>list</mat-icon>
+    <i-list></i-list>
     <span id="text-button">Resource Overview</span>
   </button>
 </div>
@@ -44,8 +44,13 @@
     <span class="self-center secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) |
       number:'1.2-2'}}/s</span>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}</div>
-    <button class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions">
-      <mat-icon>{{node.showOptions ? 'expand_less' : 'info_outline'}}</mat-icon>
+    <button *ngIf="node.craftingMachine" class="secondary" mat-icon-button (click)="node.showOptions = !node.showOptions">
+      <ng-container *ngIf="node.showOptions">
+        <i-chevron-up></i-chevron-up>
+      </ng-container>
+      <ng-container *ngIf="!node.showOptions">
+        <i-info></i-info>
+      </ng-container>
     </button>
     <div class="wrapper-machine secondary self-center quarter-padding" *ngIf="node.machines.length > 0"
       [matMenuTriggerFor]="menuMachine">

@@ -84,11 +84,6 @@ export class AppComponent implements OnInit {
     this.tabsService.setTabs(this.tabs);
   }
 
-  public onThemeChange(darkTheme: boolean) {
-    this.settingsService.setValue(Settings.DARK_THEME, darkTheme);
-    this.setThemeToOverlay();
-  }
-
   private setThemeToOverlay() {
     if (this.darkTheme) {
       this.overlayContainer.getContainerElement().classList.add('dark-theme');
@@ -113,6 +108,12 @@ export class AppComponent implements OnInit {
     this.tabs.push('science-pack-1');
     this.tabsService.setTabs(this.tabs);
     this.activeTabId = this.tabs.length - 1
+  }
+
+  public switchTheme() {
+    this.darkTheme = !this.darkTheme;
+    this.settingsService.setValue(Settings.DARK_THEME, this.darkTheme);
+    this.setThemeToOverlay();
   }
 
   public selectPreviousTab() {

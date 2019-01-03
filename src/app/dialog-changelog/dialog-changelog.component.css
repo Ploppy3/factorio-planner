@@ -1,11 +1,14 @@
-md-dialog-content{
+md-dialog-content {
   border-bottom: 1px solid rgba(0, 0, 0, .12);
   border-top: 1px solid rgba(0, 0, 0, .12);
   padding: 16px 24px;
 }
-.wrapper-version{
+.wrapper-version {
   margin-bottom: 16px;
 }
-.wrapper-version:last-child{
+.wrapper-version:last-child {
   padding-bottom: 0;
+}
+img {
+  height: 47px;
 }

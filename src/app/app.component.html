@@ -2,9 +2,12 @@
   <mat-toolbar-row id="toolbar-main">
     <b>Factorio Planner</b>
     <span class="flex-grow"></span>
-    <mat-slide-toggle id="slide-toggle" [(ngModel)]="darkTheme" (ngModelChange)="onThemeChange($event)">Dark theme</mat-slide-toggle>
+    <button (click)="switchTheme()" matTooltip="Toggle dark mode" mat-icon-button>
+      <i-moon *ngIf="!darkTheme"></i-moon>
+      <i-sun *ngIf="darkTheme"></i-sun>
+    </button>
     <button (click)="showChangelog()" mat-icon-button>
-      <mat-icon>help_outline</mat-icon>
+      <i-info matTooltip="About"></i-info>
     </button>
   </mat-toolbar-row>
   <mat-toolbar-row id="toolbar-tabs">
@@ -12,12 +15,12 @@
       <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
         <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple matRippleColor="rgba(0,0,0,.12)">
           <span class="clickable" (click)="activeTabId = i">{{tabs[i]}}</span>
-          <mat-icon class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</mat-icon>
+          <i-x-circle class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</i-x-circle>
         </span>
       </span>
     </ng-container>
     <button (click)="onClick_addTabButton()" mat-icon-button>
-      <mat-icon>add</mat-icon>
+      <i-plus></i-plus>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -40,7 +43,7 @@
     <div id="wrapper-tips" class="gpu-layer" [@tips]="showTips ? 'visible' : 'hidden'">
       <div id="tips" class="container-secondary">
         <button mat-icon-button (click)="showTips = !showTips">
-          <mat-icon>close</mat-icon>
+          <i-x-circle>close</i-x-circle>
         </button>
         <div>Tips:</div>
         <ul>
