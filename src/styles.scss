@@ -201,3 +201,9 @@ mat-dialog-content {
   padding-bottom: 0;
 }
 /* ------------------------ */
+
+/* Fix Feather Icons */
+
+button.mat-icon-button>span>* {
+  margin-bottom: 4px !important;
+}
