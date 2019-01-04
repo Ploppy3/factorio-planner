@@ -5,10 +5,12 @@
   </mat-checkbox>
 </div>
 -->
-<div id="form" class="flex row inner-spacer center-items">
+<div id="form" class="flex row wrap inner-spacer center-items">
+
   <mat-form-field class="small" appearance="outline">
     <input matInput type="number" min="1" [value]="node.recipeRequest" [formControl]="control_output">
   </mat-form-field>
+
   <mat-form-field floatLabel="never" appearance="outline">
     <mat-label>Recipe</mat-label>
     <input matInput [matAutocomplete]="auto" [formControl]="control_recipe">
@@ -20,6 +22,7 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+
   <mat-form-field class="small" appearance="outline">
     <mat-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (selectionChange)="onTimeUnitChange()">
       <mat-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
@@ -27,9 +30,11 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+
   <button mat-icon-button color="accent" (click)="openGlobalSettings()">
     <i-settings></i-settings>
   </button>
+
 </div>
 <div class="half-padding">
   <button *ngIf="node.childsIds.length > 0" (click)="openSharedResources()" color="accent" mat-button>
