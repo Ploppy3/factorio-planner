@@ -14,10 +14,10 @@ export class DataService {
     { name: '15', fileName: 'v15.json' },
     { name: '15+marathon', fileName: 'v15-marathon.json' },
   ];
-  public recipes: any[] = [];
-  public recipesObject: {} = {};
-  public assemblingMachines: any[] = [];
-  public assemblingMachinesSettings: any[] = [];
+  public recipes = [];
+  public recipesObject = {};
+  public assemblingMachines = [];
+  public assemblingMachinesSettings = [];
 
   public outputNode: VirtualOutputNodeComponent;
 
