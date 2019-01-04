@@ -63,8 +63,10 @@ mat-toolbar-row {
 }
 #toolbar-main {
   height: auto;
+  padding-right: 8px;
 }
 #toolbar-tabs {
+  overflow: auto;
   height: auto;
   padding: 4px 8px;
 }
