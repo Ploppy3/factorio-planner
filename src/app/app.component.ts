@@ -8,12 +8,14 @@ import { SettingsService, Settings } from 'app/settings-service.service';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
 import { TabsService } from 'app/tabs.service';
 import { DialogSupportComponent } from 'app/dialog-support/dialog-support.component';
+import { fadeInOut } from 'app/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
+    fadeInOut,
     trigger('tips', [
       state('hidden', style({
         display: 'none',
@@ -59,6 +61,7 @@ export class AppComponent implements OnInit {
   public showTips = true;
   public tabs: string[] = [];
   public activeTabId = 0;
+  public noTabs = false;
 
   constructor(
     private dialog: MatDialog,
@@ -104,7 +107,8 @@ export class AppComponent implements OnInit {
     return id;
   }
 
-  public onClick_addTabButton() {
+  public addTab() {
+    this.noTabs = false;
     this.tabs.push('science-pack-1');
     this.tabsService.setTabs(this.tabs);
     this.activeTabId = this.tabs.length - 1
@@ -130,5 +134,6 @@ export class AppComponent implements OnInit {
       }
     }
     this.activeTabId = -1;
+    this.noTabs = true;
   }
 }

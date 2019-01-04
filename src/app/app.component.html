@@ -1,4 +1,5 @@
 <mat-toolbar class="mat-elevation-z1" color="primary">
+
   <mat-toolbar-row id="toolbar-main">
     <b>Factorio Planner</b>
     <span class="flex-grow"></span>
@@ -10,20 +11,26 @@
       <i-info matTooltip="About"></i-info>
     </button>
   </mat-toolbar-row>
+
   <mat-toolbar-row id="toolbar-tabs">
-    <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
-      <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
-        <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple matRippleColor="rgba(0,0,0,.12)">
-          <span class="clickable" (click)="activeTabId = i">{{tabs[i]}}</span>
-          <i-x-circle class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</i-x-circle>
+    <div>
+      <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
+        <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
+          <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple matRippleColor="rgba(0,0,0,.12)">
+            <span class="clickable" (click)="activeTabId = i">{{tabs[i]}}</span>
+            <i-x-circle class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</i-x-circle>
+          </span>
         </span>
-      </span>
-    </ng-container>
-    <button (click)="onClick_addTabButton()" mat-icon-button>
-      <i-plus></i-plus>
-    </button>
+      </ng-container>
+      <button (click)="addTab()" mat-icon-button>
+        <i-plus></i-plus>
+      </button>
+      <button *ngIf="noTabs" (click)="addTab()" @fadeInOut mat-raised-button>add tab</button>
+    </div>
   </mat-toolbar-row>
+
 </mat-toolbar>
+
 <div id="wrapper-page" class="gpu-layer">
   <div class="vertical-spacer">
 
