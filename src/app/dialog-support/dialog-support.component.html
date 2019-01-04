@@ -4,7 +4,8 @@
 <mat-dialog-content>
   <a id="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PSC6GSWSZYC76&lc=US&item_name=Factorio%20Planner&no_note=1&no_shipping=1&rm=1&return=https%3a%2f%2ffactorio%2dplanner%2efirebaseapp%2ecom%2f&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"
     target="blank">
-    <img src="./assets/donate.gif" alt="donate image">
+    <img src="./assets/donate.gif" (load)="imageLoaded = true" [@revealImage]="imageLoaded ? 'loaded' : 'notLoaded'"
+      alt="donate image">
   </a>
 </mat-dialog-content>
 <mat-dialog-actions>
