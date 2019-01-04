@@ -2,13 +2,14 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
-
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SettingsService, Settings } from 'app/settings-service.service';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
 import { TabsService } from 'app/tabs.service';
 import { DialogSupportComponent } from 'app/dialog-support/dialog-support.component';
 import { fadeInOut } from 'app/animations';
+import { SwUpdate } from '@angular/service-worker';
+import { UpdateComponent } from 'app/update/update.component';
 
 @Component({
   selector: 'app-root',
@@ -63,15 +64,27 @@ export class AppComponent implements OnInit {
   public activeTabId = 0;
   public noTabs = false;
 
+  private test = 2;
+
   constructor(
     private dialog: MatDialog,
     private overlayContainer: OverlayContainer,
     private settingsService: SettingsService,
-    private matSnackbar: MatSnackBar,
+    private snackbarService: MatSnackBar,
     private tabsService: TabsService,
+    update: SwUpdate,
   ) {
     this.darkTheme = settingsService.getBoolean(Settings.DARK_THEME, false);
     this.setThemeToOverlay();
+
+    // --- Update check
+    update.available.subscribe(event => {
+      console.log('available', event.available, 'current', event.current);
+      this.snackbarService.openFromComponent(UpdateComponent);
+    });
+    update.activated.subscribe(event => {
+      console.log('current', event.current, 'previous', event.previous);
+    });
   }
 
   ngOnInit() {
@@ -81,7 +94,7 @@ export class AppComponent implements OnInit {
     window.addEventListener('beforeinstallprompt', (event) => {
       console.log('beforeinstallprompt fired')
       event.preventDefault();
-      this.matSnackbar.openFromComponent(AppInstallComponent, { data: event });
+      this.snackbarService.openFromComponent(AppInstallComponent, { data: event });
     });
     this.tabs.push('science-pack-1');
     this.tabsService.setTabs(this.tabs);
@@ -137,3 +150,20 @@ export class AppComponent implements OnInit {
     this.noTabs = true;
   }
 }
+
+/*
+@Component({
+  selector: 'app-update',
+  template: `<div>Update available
+  <button class="uppercase" (click)="restart()" mat-flat-button>
+  <span>Restart</span>
+  </button>
+  </div>`,
+  styles: ['button{ margin-left: 8px; }'],
+})
+export class UpdateComponent {
+  public restart() {
+    window.location.reload();
+  }
+}
+*/

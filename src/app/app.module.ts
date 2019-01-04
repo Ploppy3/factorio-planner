@@ -21,6 +21,7 @@ import { AppInstallComponent } from './app-install/app-install.component';
 import { TabComponent } from './tab/tab.component';
 import { DialogSupportComponent } from './dialog-support/dialog-support.component';
 import { IconsModule } from 'app/icons/icons.module';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { IconsModule } from 'app/icons/icons.module';
     VirtualNodeComponent,
     AppInstallComponent,
     TabComponent,
-    DialogSupportComponent
+    DialogSupportComponent,
+    UpdateComponent,
   ],
   imports: [
     MaterialModule,
@@ -50,7 +52,8 @@ import { IconsModule } from 'app/icons/icons.module';
     DialogChangelogComponent,
     DialogOverviewComponent,
     AppInstallComponent,
-    DialogSupportComponent
+    DialogSupportComponent,
+    UpdateComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
