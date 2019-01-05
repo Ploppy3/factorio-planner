@@ -13,7 +13,7 @@ export class TabComponent implements OnInit {
 
   @ViewChild('outputNode') outputNode: VirtualOutputNodeComponent;
 
-  public dataVersion: string = this.dataService.dataVersions[0].name;
+  public dataVersion = this.dataService.dataVersions[0].name;
 
   constructor(
     public dataService: DataService,
