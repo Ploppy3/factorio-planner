@@ -64,8 +64,6 @@ export class AppComponent implements OnInit {
   public activeTabId = 0;
   public noTabs = false;
 
-  private test = 2;
-
   constructor(
     private dialog: MatDialog,
     private overlayContainer: OverlayContainer,
