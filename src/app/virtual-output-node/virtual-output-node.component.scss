@@ -31,13 +31,9 @@ mat-form-field.small {
 }
 #form {
   >*:first-child {
-    margin-right: 4px;
+    margin-right: 8px;
   }
   >*:not(:first-child):not(:last-child) {
-    margin-left: 4px;
-    margin-right: 4px;
-  }
-  >*:last-child {
-    margin-left: 4px;
+    margin-right: 8px;
   }
 }
