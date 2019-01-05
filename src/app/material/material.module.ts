@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
-  MatIconModule,
   MatAutocompleteModule,
   MatInputModule,
   MatSelectModule,
@@ -21,7 +20,6 @@ import {
   ],
   exports: [
     MatButtonModule,
-    MatIconModule,
     MatAutocompleteModule,
     MatInputModule,
     MatSelectModule,
