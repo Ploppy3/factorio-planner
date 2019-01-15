@@ -123,41 +123,7 @@ export class DataService {
             }
           }
         }
-        /*
-        machine.categories.forEach(_category => {
-          let ingredient_count = machine.ingredient_count || Infinity;
-          let enabledInSettings: boolean = false;
-          this.assemblingMachinesSettings.forEach(machineInSettings => {
-            if (machine.name == machineInSettings.name) {
-              if (machineInSettings.enabled) enabledInSettings = true;
-            }
-          });
-          if (_category == category && ingredient_count >= recipeIngredients && enabledInSettings) {
-            let _machine = {name: machine.name, crafting_speed: machine.crafting_speed}
-            response.push(_machine);
-          }
-        });
-        */
       }
-
-      // -------------- DEPRECATED | OLD VERSION
-
-      if (machine.crafting_categories) {
-        machine.crafting_categories.forEach(_category => {
-          const ingredient_count = machine.ingredient_count || Infinity;
-          let enabledInSettings = false;
-          this.assemblingMachinesSettings.forEach(machineInSettings => {
-            if (machine.name === machineInSettings.name) {
-              if (machineInSettings.enabled) { enabledInSettings = true; }
-            }
-          });
-          if (_category === category && ingredient_count >= recipeIngredients && enabledInSettings) {
-            const _machine = { name: machine.name, crafting_speed: machine.crafting_speed }
-            response.push(_machine);
-          }
-        });
-      }
-
     });
     return response;
   }
