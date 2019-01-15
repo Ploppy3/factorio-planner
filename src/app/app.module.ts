@@ -22,6 +22,7 @@ import { TabComponent } from './tab/tab.component';
 import { DialogSupportComponent } from './dialog-support/dialog-support.component';
 import { IconsModule } from 'app/icons/icons.module';
 import { UpdateComponent } from './update/update.component';
+import { DiagramComponent } from './diagram/diagram.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UpdateComponent } from './update/update.component';
     TabComponent,
     DialogSupportComponent,
     UpdateComponent,
+    DiagramComponent,
   ],
   imports: [
     MaterialModule,
