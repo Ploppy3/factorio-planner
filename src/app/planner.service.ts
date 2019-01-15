@@ -12,6 +12,7 @@ export class PlannerService {
   public sharedResources: {} = {};
 
   public virtualTree = {};
+  public virtualTreeRootId = 0;
   private virtualTreePointer = 0;
 
   constructor(
@@ -33,14 +34,16 @@ export class PlannerService {
   }
 
   public resetSharedRessources() {
+    console.log('resetSharedRessources')
     this.sharedResources = [];
   }
 
-  public createInMemoryTree(recipeName: string): number {
+  public createInMemoryTree(recipeName: string) {
+    this.resetSharedRessources();
     console.log('creating in memory tree for', recipeName);
     this.virtualTree = {};
     const rootNode = new VirtualNode(this, recipeName);
-    const rootId = this.virtualTreePointer;
+    this.virtualTreeRootId = this.virtualTreePointer;
     this.processNode(rootNode);
     this.calculateAllNodes();
   }

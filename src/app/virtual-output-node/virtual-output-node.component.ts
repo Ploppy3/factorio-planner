@@ -42,12 +42,14 @@ export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.tabId = this.tabsService.getLastTabId();
     this.control_output.valueChanges.subscribe(value => {
+      console.log('control_output.valueChanges')
       this.node.recipeRequest = value;
       this.plannerService.resetSharedRessources();
       this.plannerService.calculateAllNodes();
     });
     this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null), map(val => this.filterRecipes(val).slice(0, 7)));
     this.control_recipe.valueChanges.subscribe(val => {
+      console.log('control_recipe.valueChanges')
       this.node.name = val;
       this.getNode();
     });
@@ -65,9 +67,8 @@ export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
   }
 
   private getNode() {
-    this.plannerService.resetSharedRessources();
-    const id = this.plannerService.createInMemoryTree(this.control_recipe.value);
-    this.node = this.plannerService.virtualTree[id];
+    this.plannerService.createInMemoryTree(this.control_recipe.value);
+    this.node = this.plannerService.virtualTree[this.plannerService.virtualTreeRootId];
   }
 
   private filterRecipes(val: string): any[] {
