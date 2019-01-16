@@ -44,7 +44,7 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
     this.control_output.valueChanges.subscribe(value => {
       console.log('control_output.valueChanges')
       this.node.recipeRequest = value;
-      this.plannerService.calculateVirtualTreeNodes();
+      this.plannerService.calculateTreeNodes();
     });
     this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null), map(val => this.filterRecipes(val).slice(0, 7)));
     this.control_recipe.valueChanges.subscribe(val => {
@@ -66,7 +66,7 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
   }
 
   private getNode() {
-    this.plannerService.generateVirtualTree(this.control_recipe.value);
+    this.plannerService.generateTree(this.control_recipe.value);
     this.node = this.plannerService.virtualTree[0];
   }
 

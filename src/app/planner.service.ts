@@ -21,7 +21,7 @@ export class PlannerService {
     if (!environment.production) { console.log('constructor'); }
     this.useExpensiveRecipes$.subscribe();
     this.timeFactor$.subscribe(() => {
-      this.calculateVirtualTreeNodes();
+      this.calculateTreeNodes();
     });
   }
 
@@ -50,17 +50,17 @@ export class PlannerService {
     // console.log(this.sharedResources);
   }
 
-  public generateVirtualTree(recipeName: string) {
+  public generateTree(recipeName: string) {
     console.log('creating in memory tree for', recipeName);
     this.virtualTree = {};
     this.virtualTreePointer = 0;
     const rootNode = new TreeNode(this, recipeName);
-    this.processVirtualTreeNode(rootNode);
-    this.calculateVirtualTreeNodes();
+    this.processTreeNode(rootNode);
+    this.calculateTreeNodes();
     this.virtualDiagram.next();
   }
 
-  public calculateVirtualTreeNodes() {
+  public calculateTreeNodes() {
     for (const key in this.virtualTree) {
       if (this.virtualTree.hasOwnProperty(key)) {
         const node = this.virtualTree[key];
@@ -74,7 +74,7 @@ export class PlannerService {
     return this.dataService.recipesObject[name] ? this.dataService.recipesObject[name] : null;
   }
 
-  private processVirtualTreeNode(node: TreeNode, parentId?: number): number {
+  private processTreeNode(node: TreeNode, parentId?: number): number {
     node.recipe = this.getRecipe(node.name);
     node.quantityPerCraft = this.getQuantityPerCraft(node.recipe);
     node.category = this.getCraftingCategory(node.recipe);
@@ -95,7 +95,7 @@ export class PlannerService {
         childNode.recipeRequest = ingredient.amount;
       }
       childNode.idParent = nodeId;
-      node.childsIds.push(this.processVirtualTreeNode(childNode));
+      node.childsIds.push(this.processTreeNode(childNode));
     });
     node.machines = this.getCraftingMachines(node.category, ingredients.length);
     node.craftingMachine = node.machines[0] || null;
