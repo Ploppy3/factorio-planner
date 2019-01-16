@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'app/data.service';
 import { PlannerService } from 'app/planner.service';
-import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-output-node.component';
+import { OutputTreeNodeComponent } from 'app/output-tree-node/output-tree-node.component';
 
 @Component({
   selector: 'app-tab',
@@ -11,7 +11,7 @@ import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-outp
 })
 export class TabComponent implements OnInit {
 
-  @ViewChild('outputNode') outputNode: VirtualOutputNodeComponent;
+  @ViewChild('outputNode') outputNode: OutputTreeNodeComponent;
 
   public dataVersion = this.dataService.dataVersions[0].name;
 

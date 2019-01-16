@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { VirtualOutputNodeComponent } from 'app/virtual-output-node/virtual-output-node.component';
+import { OutputTreeNodeComponent } from 'app/output-tree-node/output-tree-node.component';
 
 @Injectable()
 export class DataService {
@@ -19,7 +19,7 @@ export class DataService {
   public assemblingMachines = [];
   public assemblingMachinesSettings = [];
 
-  public outputNode: VirtualOutputNodeComponent;
+  public outputNode: OutputTreeNodeComponent;
 
   constructor(
     private httpClient: HttpClient

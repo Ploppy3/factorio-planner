@@ -1,6 +1,6 @@
 import { PlannerService } from './planner.service';
 
-export class VirtualNode {
+export class TreeNode {
 
   public recipe: any;
   public childsIds: number[] = [];
@@ -31,7 +31,6 @@ export class VirtualNode {
   }
 
   public getSharedResources() {
-    // console.log('share...');
     this.plannerService.addSharedResource(this.name, this.outputRate * this.plannerService.timeFactor$.value);
   }
 

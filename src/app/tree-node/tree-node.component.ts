@@ -1,18 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-
-import { Observable } from 'rxjs';
+import { trigger, state, style } from '@angular/animations';
 
 // import { Node } from "../node";
-import { VirtualNode } from '../virtual-node';
+import { TreeNode } from '../tree-node';
 import { DataService } from '../data.service';
 import { PlannerService } from '../planner.service';
 import { reveal } from '../animations';
 
 @Component({
-  selector: 'app-virtual-node',
-  templateUrl: './virtual-node.component.html',
-  styleUrls: ['./virtual-node.component.css'],
+  selector: 'app-tree-node',
+  templateUrl: './tree-node.component.html',
+  styleUrls: ['./tree-node.component.css'],
   animations: [
     reveal,
     trigger('nodeVisibility', [
@@ -21,12 +19,12 @@ import { reveal } from '../animations';
     ]),
   ],
 })
-export class VirtualNodeComponent implements OnInit {
+export class TreeNodeComponent implements OnInit {
 
   @Input() nodeId: number;
 
   public showChilds = true;
-  public node: VirtualNode;
+  public node: TreeNode;
 
   constructor(
     public dataService: DataService,

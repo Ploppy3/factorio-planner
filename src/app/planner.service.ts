@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { DataService } from './data.service';
-import { VirtualNode } from './virtual-node';
+import { TreeNode } from './tree-node';
 import { environment } from 'environments/environment';
 
 @Injectable()
@@ -9,18 +9,35 @@ export class PlannerService {
 
   public useExpensiveRecipes$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public timeFactor$: BehaviorSubject<number> = new BehaviorSubject(1); // 1 || 1/60 || 1/3600 (set set by output node)
-  public sharedResources: {} = {};
+  public sharedResources = [];
 
+  public virtualDiagram = new Subject<void>();
   public virtualTree = {};
-  public virtualTreeRootId = 0;
-  private virtualTreePointer = 0;
+  private virtualTreePointer: number
 
   constructor(
     private dataService: DataService,
   ) {
     if (!environment.production) { console.log('constructor'); }
     this.useExpensiveRecipes$.subscribe();
-    this.timeFactor$.subscribe();
+    this.timeFactor$.subscribe(() => {
+      this.calculateVirtualTreeNodes();
+    });
+  }
+
+  private computeSharedResources() {
+    console.log('computeSharedResources');
+    this.sharedResources = [];
+    for (const key in this.virtualTree) {
+      if (this.virtualTree.hasOwnProperty(key)) {
+        this.virtualTree[key].getSharedResources();
+      }
+    }
+    for (const key in this.sharedResources) {
+      if (this.sharedResources.hasOwnProperty(key)) {
+        this.sharedResources.push({ name: key, throughput: this.sharedResources[key] });
+      }
+    }
   }
 
   public addSharedResource(name: string, throughput: number) {
@@ -33,35 +50,31 @@ export class PlannerService {
     // console.log(this.sharedResources);
   }
 
-  public resetSharedRessources() {
-    console.log('resetSharedRessources')
-    this.sharedResources = [];
-  }
-
-  public createInMemoryTree(recipeName: string) {
-    this.resetSharedRessources();
+  public generateVirtualTree(recipeName: string) {
     console.log('creating in memory tree for', recipeName);
     this.virtualTree = {};
-    const rootNode = new VirtualNode(this, recipeName);
-    this.virtualTreeRootId = this.virtualTreePointer;
-    this.processNode(rootNode);
-    this.calculateAllNodes();
+    this.virtualTreePointer = 0;
+    const rootNode = new TreeNode(this, recipeName);
+    this.processVirtualTreeNode(rootNode);
+    this.calculateVirtualTreeNodes();
+    this.virtualDiagram.next();
   }
 
-  public calculateAllNodes() {
+  public calculateVirtualTreeNodes() {
     for (const key in this.virtualTree) {
       if (this.virtualTree.hasOwnProperty(key)) {
         const node = this.virtualTree[key];
         node.calculate();
       }
     }
+    this.computeSharedResources();
   }
 
   private getRecipe(name: string) {
     return this.dataService.recipesObject[name] ? this.dataService.recipesObject[name] : null;
   }
 
-  private processNode(node: VirtualNode, parentId?: number): number {
+  private processVirtualTreeNode(node: TreeNode, parentId?: number): number {
     node.recipe = this.getRecipe(node.name);
     node.quantityPerCraft = this.getQuantityPerCraft(node.recipe);
     node.category = this.getCraftingCategory(node.recipe);
@@ -73,23 +86,23 @@ export class PlannerService {
     const ingredients = this.getIngredients(node);
     // console.log('ingredients', ingredients);
     ingredients.forEach(ingredient => {
-      let childNode: VirtualNode;
+      let childNode: TreeNode;
       if (Array.isArray(ingredient)) { // type 1 - array
-        childNode = new VirtualNode(this, ingredient[0]); // [0]:name, [1]:amount
+        childNode = new TreeNode(this, ingredient[0]); // [0]:name, [1]:amount
         childNode.recipeRequest = ingredient[1];
       } else { // type 2 - object
-        childNode = new VirtualNode(this, ingredient.name); // name, amount
+        childNode = new TreeNode(this, ingredient.name); // name, amount
         childNode.recipeRequest = ingredient.amount;
       }
       childNode.idParent = nodeId;
-      node.childsIds.push(this.processNode(childNode));
+      node.childsIds.push(this.processVirtualTreeNode(childNode));
     });
     node.machines = this.getCraftingMachines(node.category, ingredients.length);
     node.craftingMachine = node.machines[0] || null;
     return nodeId;
   }
 
-  private getIngredients(node: VirtualNode): any[] {
+  private getIngredients(node: TreeNode): any[] {
     if (!node.recipe) { return []; }
     let ingredients: any[] = [];
     if (node.recipe.expensive && this.useExpensiveRecipes$.value) { // expensive

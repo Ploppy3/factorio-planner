@@ -4,7 +4,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { VirtualNode } from '../virtual-node';
+import { TreeNode } from '../tree-node';
 import { DataService } from '../data.service';
 import { PlannerService } from '../planner.service';
 import { GlobalSettingsDialogComponent } from '../global-settings-dialog/global-settings-dialog.component';
@@ -13,14 +13,14 @@ import { reveal } from '../animations';
 import { TabsService } from 'app/tabs.service';
 
 @Component({
-  selector: 'app-virtual-output-node',
-  templateUrl: './virtual-output-node.component.html',
-  styleUrls: ['./virtual-output-node.component.scss'],
+  selector: 'app-output-tree-node',
+  templateUrl: './output-tree-node.component.html',
+  styleUrls: ['./output-tree-node.component.scss'],
   animations: [reveal],
 })
-export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
+export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
 
-  public node = new VirtualNode(this.plannerService, 'test');
+  public node = new TreeNode(this.plannerService, 'test');
   public control_output = new FormControl();
   public control_recipe = new FormControl();
   public filteredRecipes$: Observable<any[]>;
@@ -44,8 +44,7 @@ export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
     this.control_output.valueChanges.subscribe(value => {
       console.log('control_output.valueChanges')
       this.node.recipeRequest = value;
-      this.plannerService.resetSharedRessources();
-      this.plannerService.calculateAllNodes();
+      this.plannerService.calculateVirtualTreeNodes();
     });
     this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null), map(val => this.filterRecipes(val).slice(0, 7)));
     this.control_recipe.valueChanges.subscribe(val => {
@@ -67,8 +66,8 @@ export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
   }
 
   private getNode() {
-    this.plannerService.createInMemoryTree(this.control_recipe.value);
-    this.node = this.plannerService.virtualTree[this.plannerService.virtualTreeRootId];
+    this.plannerService.generateVirtualTree(this.control_recipe.value);
+    this.node = this.plannerService.virtualTree[0];
   }
 
   private filterRecipes(val: string): any[] {
@@ -100,7 +99,6 @@ export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
         console.warn('unkown time factor');
         break;
     }
-    this.plannerService.resetSharedRessources();
   }
 
   public openGlobalSettings() {
@@ -116,24 +114,7 @@ export class VirtualOutputNodeComponent implements OnInit, AfterViewInit {
 
   public openSharedResources() {
     const dialogRef = this.dialog.open(DialogOverviewComponent);
-    this.plannerService.resetSharedRessources();
-    /*
-    this.plannerService.virtualTree.forEach(node => {
-      node.getSharedResources();
-    });
-    */
-    for (const key in this.plannerService.virtualTree) {
-      if (this.plannerService.virtualTree.hasOwnProperty(key)) {
-        this.plannerService.virtualTree[key].getSharedResources();
-      }
-    }
-    const sharedResources = [];
-    for (const key in this.plannerService.sharedResources) {
-      if (this.plannerService.sharedResources.hasOwnProperty(key)) {
-        sharedResources.push({ name: key, throughput: this.plannerService.sharedResources[key] });
-      }
-    }
-    dialogRef.componentInstance.sharedResources = sharedResources;
+    dialogRef.componentInstance.sharedResources = this.plannerService.sharedResources;
   }
 
   public fullRefresh() {

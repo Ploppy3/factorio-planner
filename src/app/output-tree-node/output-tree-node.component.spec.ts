@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VirtualOutputNodeComponent } from './virtual-output-node.component';
+import { OutputTreeNodeComponent } from './output-tree-node.component';
 
 describe('VirtualOutputNodeComponent', () => {
-  let component: VirtualOutputNodeComponent;
-  let fixture: ComponentFixture<VirtualOutputNodeComponent>;
+  let component: OutputTreeNodeComponent;
+  let fixture: ComponentFixture<OutputTreeNodeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VirtualOutputNodeComponent]
+      declarations: [OutputTreeNodeComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VirtualOutputNodeComponent);
+    fixture = TestBed.createComponent(OutputTreeNodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -15,8 +15,8 @@ import { UrlImgPipe } from './url-img.pipe';
 import { GlobalSettingsDialogComponent } from './global-settings-dialog/global-settings-dialog.component';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
-import { VirtualOutputNodeComponent } from './virtual-output-node/virtual-output-node.component';
-import { VirtualNodeComponent } from './virtual-node/virtual-node.component';
+import { OutputTreeNodeComponent } from './output-tree-node/output-tree-node.component';
+import { TreeNodeComponent } from './tree-node/tree-node.component';
 import { AppInstallComponent } from './app-install/app-install.component';
 import { TabComponent } from './tab/tab.component';
 import { DialogSupportComponent } from './dialog-support/dialog-support.component';
@@ -31,8 +31,8 @@ import { DiagramComponent } from './diagram/diagram.component';
     GlobalSettingsDialogComponent,
     DialogChangelogComponent,
     DialogOverviewComponent,
-    VirtualOutputNodeComponent,
-    VirtualNodeComponent,
+    OutputTreeNodeComponent,
+    TreeNodeComponent,
     AppInstallComponent,
     TabComponent,
     DialogSupportComponent,
