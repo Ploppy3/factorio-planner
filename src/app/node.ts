@@ -81,7 +81,7 @@ export class Node {
       this.craftingMachine = null;
     }
     // -------------------------------
-    this.calculate(); // do it here to prevent propagation of the calculate call to its children
+    this.calculate();
     // -------------------------------
     ingredients.forEach(ingredient => {
       if (Array.isArray(ingredient)) { // type 1 - array
@@ -100,7 +100,7 @@ export class Node {
       this.initialize();
       return;
     }
-    this.calculate(); // do it here to prevent propagation of the calculate call to its children
+    this.calculate();
     this.category = 'unknown'; // reset for root node
   }
 

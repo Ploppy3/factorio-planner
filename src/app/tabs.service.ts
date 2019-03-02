@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class TabsService {
 
-  public tabName$ = new Subject<{ index: number, name: string }>();
+  public tabName$ = new Subject<{ tabId: number, name: string }>();
 
   private tabs: string[] = [];
 
@@ -18,7 +18,6 @@ export class TabsService {
     this.tabs = tabs;
   }
 
-  /**Returns the id of the last tab */
   public getLastTabId(): number {
     return this.tabs.length - 1;
   }

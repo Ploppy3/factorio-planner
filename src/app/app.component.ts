@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.tabsService.tabName$.subscribe(change => {
-      this.tabs[change.index] = change.name;
+      this.tabs[change.tabId] = change.name;
     });
     window.addEventListener('beforeinstallprompt', (event) => {
       console.log('beforeinstallprompt fired')

@@ -56,12 +56,12 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
       console.log('expensive state changed, refreshing');
       this.getNode();
     });
-    this.control_recipe.setValue('science-pack-1');
+    this.control_recipe.setValue('automation-science-pack');
   }
 
   ngAfterViewInit(): void {
     this.control_recipe.valueChanges.subscribe(val => {
-      this.tabsService.tabName$.next({ index: this.tabId, name: val });
+      this.tabsService.tabName$.next({ tabId: this.tabId, name: val });
     });
   }
 
