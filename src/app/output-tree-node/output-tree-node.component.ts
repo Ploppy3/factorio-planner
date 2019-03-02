@@ -49,13 +49,16 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
     this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null), map(val => this.filterRecipes(val).slice(0, 7)));
     this.control_recipe.valueChanges.subscribe(val => {
       console.log('control_recipe.valueChanges')
-      this.node.name = val;
+      // this.node.name = val;
       this.getNode();
     });
-    this.plannerService.useExpensiveRecipes$.subscribe(useExpensiveRecipes => {
-      console.log('expensive state changed, refreshing');
-      this.getNode();
-    });
+
+    // -- Probably unused ???
+    // this.plannerService.useExpensiveRecipes$.subscribe(useExpensiveRecipes => {
+    //   console.log('expensive state changed, refreshing');
+    //   this.getNode();
+    // });
+
     this.control_recipe.setValue('automation-science-pack');
   }
 
@@ -65,9 +68,12 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private getNode() {
+  public getNode() {
     this.plannerService.generateTree(this.control_recipe.value);
-    this.node = this.plannerService.virtualTree[0];
+    this.node = new TreeNode(this.plannerService, '');
+    setTimeout(() => {
+      this.node = this.plannerService.virtualTree[0];
+    }, 0);
   }
 
   private filterRecipes(val: string): any[] {

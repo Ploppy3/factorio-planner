@@ -57,7 +57,7 @@ export class PlannerService {
     const rootNode = new TreeNode(this, recipeName);
     this.processTreeNode(rootNode);
     this.calculateTreeNodes();
-    this.virtualDiagram.next();
+    // this.virtualDiagram.next();
   }
 
   public calculateTreeNodes() {
@@ -141,6 +141,7 @@ export class PlannerService {
 
   private getCraftingMachines(craftingCategory: string, numIngredients): any[] {
     const machines = this.dataService.getAssemblingMachinesByCategory(craftingCategory, numIngredients);
+    console.log('getCraftingMachines', machines);
     return machines;
   }
 

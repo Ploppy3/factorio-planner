@@ -18,6 +18,7 @@ export class TreeNode {
   constructor(private plannerService: PlannerService, public name: string) { }
 
   public calculate() {
+    // console.log('calculating treenode');
     const parent = this.plannerService.virtualTree[this.idParent] || null;
     if (parent) {
       this.outputRate = parent.outputRate / parent.quantityPerCraft * this.recipeRequest;

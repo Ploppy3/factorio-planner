@@ -26,6 +26,7 @@ export class TabComponent implements OnInit {
   public reloadData() {
     console.log('control_version.changes')
     this.dataService.selectVersion(this.dataVersion);
+    // this.outputNode.getNode();
   }
 
 }

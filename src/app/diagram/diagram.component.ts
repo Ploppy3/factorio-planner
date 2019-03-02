@@ -17,9 +17,9 @@ export class DiagramComponent implements OnInit {
 
   ngOnInit() {
     this.plannerService.virtualDiagram.subscribe(() => {
-      this.virtualTree = this.plannerService.virtualTree;
-      console.log(this.virtualTree);
-      this.computeDiagram();
+      // this.virtualTree = this.plannerService.virtualTree;
+      // console.log(this.virtualTree);
+      // this.computeDiagram();
     });
   }
 
