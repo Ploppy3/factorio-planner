@@ -2,7 +2,7 @@
 import { map, startWith } from 'rxjs/operators';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { TreeNode } from '../tree-node';
 import { DataService } from '../data.service';

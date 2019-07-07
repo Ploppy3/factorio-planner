@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SettingsService, Settings } from 'app/settings-service.service';
