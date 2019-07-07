@@ -11,7 +11,7 @@ import { OutputTreeNodeComponent } from 'app/output-tree-node/output-tree-node.c
 })
 export class TabComponent implements OnInit {
 
-  @ViewChild('outputNode') outputNode: OutputTreeNodeComponent;
+  @ViewChild('outputNode', { static: true }) outputNode: OutputTreeNodeComponent;
 
   public dataVersion = this.dataService.dataVersions[0].name;
 
