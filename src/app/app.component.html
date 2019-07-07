@@ -16,7 +16,8 @@
     <div>
       <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
         <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
-          <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple matRippleColor="rgba(0,0,0,.12)">
+          <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple
+            matRippleColor="rgba(0,0,0,.12)">
             <span class="clickable" (click)="activeTabId = i">{{tabs[i]}}</span>
             <i-x-circle class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</i-x-circle>
           </span>
