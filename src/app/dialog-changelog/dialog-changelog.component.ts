@@ -12,6 +12,12 @@ export class DialogChangelogComponent implements OnInit {
   public appVersion: string = version;
   public versions: Version[] = [
     {
+      name: 'Version X.X.X',
+      changes: [
+        'Fixed size of icons',
+      ]
+    },
+    {
       name: 'Version 2.4.0',
       changes: [
         'Added tabs',
