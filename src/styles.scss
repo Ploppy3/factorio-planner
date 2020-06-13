@@ -168,7 +168,7 @@ img {
     color: #fff;
   }
   mat-dialog-content {
-    border-color: rgba(255, 255, 255, .3);
+    // border-color: rgba(255, 255, 255, .3);
   }
 }
 button {
@@ -193,8 +193,8 @@ mat-dialog-actions.mat-dialog-actions button {
   margin: 0 4px;
 }
 mat-dialog-content {
-  border-top: 1px solid rgba(0, 0, 0, .12);
-  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  // border-top: 1px solid rgba(0, 0, 0, .12);
+  // border-bottom: 1px solid rgba(0, 0, 0, .12);
   will-change: transform;
 }
 .mat-form-field-wrapper {

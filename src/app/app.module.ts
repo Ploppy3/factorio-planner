@@ -23,6 +23,7 @@ import { DialogSupportComponent } from './dialog-support/dialog-support.componen
 import { IconsModule } from 'app/icons/icons.module';
 import { UpdateComponent } from './update/update.component';
 import { DiagramComponent } from './diagram/diagram.component';
+import { ScrollShadowDirective } from './directives/scroll-shadow.directive';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DiagramComponent } from './diagram/diagram.component';
     DialogSupportComponent,
     UpdateComponent,
     DiagramComponent,
+    ScrollShadowDirective,
   ],
   imports: [
     MaterialModule,
