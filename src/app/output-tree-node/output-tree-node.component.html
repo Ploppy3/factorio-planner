@@ -47,7 +47,7 @@
   <div class="wrapper-nodeName flex nowrap">
     <img #imageRecipe class="self-center" [matTooltip]="node.name"
       [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" (load)="imageRecipe.hidden = false"
-      (error)="imageRecipe.hidden = true" [alt]="node.name">
+      (error)="imageRecipe.hidden = true" [alt]="node.name" width="32">
     <span class="self-center secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) |
       number:'1.2-2'}}/s</span>
     <div class="nodeName quarter-padding" *ngIf="imageRecipe.hidden" (click)="showChilds = !showChilds">{{node.name}}
