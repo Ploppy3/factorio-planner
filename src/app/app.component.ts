@@ -121,7 +121,7 @@ export class AppComponent implements OnInit {
 
   public addTab() {
     this.noTabs = false;
-    this.tabs.push('science-pack-1');
+    this.tabs.push('automation-science-pack');
     this.tabsService.setTabs(this.tabs);
     this.activeTabId = this.tabs.length - 1
   }
