@@ -14,7 +14,7 @@
 
   <mat-form-field floatLabel="never" appearance="outline">
     <mat-label>Recipe</mat-label>
-    <input matInput [matAutocomplete]="auto" [formControl]="control_recipe">
+    <input #inputRecipe [matAutocomplete]="auto" [formControl]="control_recipe" matInput>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of filteredRecipes$ | async" [value]="recipe.name" (change)="node.calculate()">
         <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false"

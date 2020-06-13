@@ -1,6 +1,6 @@
 
-import { map, startWith } from 'rxjs/operators';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { map, startWith, take } from 'rxjs/operators';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -20,6 +20,7 @@ import { TabsService } from 'app/tabs.service';
 })
 export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('inputRecipe') inputRecipe: ElementRef<HTMLInputElement>;
   public node = new TreeNode(this.plannerService, 'test');
   public control_output = new FormControl();
   public control_recipe = new FormControl();
@@ -37,6 +38,7 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
     public plannerService: PlannerService,
     public tabsService: TabsService,
     private dialog: MatDialog,
+    private zone: NgZone,
   ) { }
 
   ngOnInit() {
@@ -61,6 +63,9 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
     // });
 
     this.control_recipe.setValue('automation-science-pack');
+    this.zone.onStable.pipe(take(1)).subscribe(() => {
+      this.inputRecipe.nativeElement.select()
+    });
   }
 
   ngAfterViewInit(): void {
