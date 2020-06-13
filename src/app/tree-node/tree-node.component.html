@@ -30,7 +30,8 @@
           <ng-container *ngFor="let machine of node.machines">
             <button mat-menu-item (click)="node.craftingMachine = machine; node.calculate()">
               <img #imageMachine (error)="imageMachine.notFound = true" [hidden]="imageMachine.notFound"
-                [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name">
+                [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"
+                width="32">
               {{machine.name}}
             </button>
           </ng-container>

@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
       event.preventDefault();
       this.snackbarService.openFromComponent(AppInstallComponent, { data: event });
     });
-    this.tabs.push('science-pack-1');
+    this.tabs.push('automation-science-pack');
     this.tabsService.setTabs(this.tabs);
   }
 

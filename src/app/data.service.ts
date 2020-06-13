@@ -6,6 +6,8 @@ import { OutputTreeNodeComponent } from 'app/output-tree-node/output-tree-node.c
 @Injectable()
 export class DataService {
   public dataVersions: Version[] = [
+    { name: '18', fileName: 'v18.json' },
+    { name: '18+marathon', fileName: 'v18-marathon.json' },
     { name: '17', fileName: 'v17.json' },
     { name: '17+marathon', fileName: 'v17-marathon.json' },
     { name: '16', fileName: 'v16.json' },

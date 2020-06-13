@@ -41,6 +41,7 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.tabId = this.tabsService.getLastTabId();
+    this.control_output.setValue(this.node.recipeRequest);
     this.control_output.valueChanges.subscribe(value => {
       console.log('control_output.valueChanges')
       this.node.recipeRequest = value;
