@@ -116,7 +116,6 @@ export class PlannerService {
   }
 
   private getQuantityPerCraft(recipe): number {
-
     const quantityPerCraft = 1;
     if (!recipe) { return quantityPerCraft; }
     if (recipe.products) { return recipe.products[0].amount; }
@@ -124,7 +123,6 @@ export class PlannerService {
   }
 
   private getCraftingCategory(recipe): string {
-
     let category = 'unknown';
     if (!recipe) { return category; }
     if (recipe.category) { category = recipe.category; }

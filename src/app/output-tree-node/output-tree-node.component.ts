@@ -70,6 +70,7 @@ export class OutputTreeNodeComponent implements OnInit, AfterViewInit {
   public getNode() {
     this.plannerService.createInMemoryTree(this.control_recipe.value, this.control_output.value);
     // this.node = new TreeNode(this.plannerService, '', this.control_recipe.value);
+    this.node = new TreeNode(this.plannerService, '');
     setTimeout(() => {
       this.node = this.plannerService.virtualTree[0];
     }, 0);

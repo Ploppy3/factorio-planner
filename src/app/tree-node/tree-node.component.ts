@@ -29,15 +29,13 @@ export class TreeNodeComponent implements OnInit {
   constructor(
     public dataService: DataService,
     public plannerService: PlannerService,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
-    // this.node.findRecipeByName();
-    // this.findRecipeByName(this.node.name);
     if (!this.plannerService.virtualTree[this.nodeId]) {
       console.log('can\'t find node with id', this.nodeId);
+    } else {
+      this.node = this.plannerService.virtualTree[this.nodeId];
     }
-    this.node = this.plannerService.virtualTree[this.nodeId];
   }
 }
