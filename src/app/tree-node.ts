@@ -5,7 +5,6 @@ export class TreeNode {
   public recipe: any;
   public childsIds: number[] = [];
   public idParent: number;
-  public recipeRequest = 1;
   public outputRate = 1;
   public quantityPerCraft = 1;
   public craftingTime = .5;
@@ -15,7 +14,11 @@ export class TreeNode {
   public machines = [];
   public showOptions = false;
 
-  constructor(private plannerService: PlannerService, public name: string) { }
+  constructor(
+    private plannerService: PlannerService,
+    public name: string,
+    public recipeRequest = 1,
+  ) { }
 
   public calculate() {
     // console.log('calculating treenode');

@@ -50,14 +50,13 @@ export class PlannerService {
     // console.log(this.sharedResources);
   }
 
-  public generateTree(recipeName: string) {
-    console.log('creating in memory tree for', recipeName);
+  public createInMemoryTree(recipeName: string, recipeRequest: number = 1) {
+    console.log('creating in-memory tree for', recipeName, recipeRequest);
     this.virtualTree = {};
     this.virtualTreePointer = 0;
-    const rootNode = new TreeNode(this, recipeName);
+    const rootNode = new TreeNode(this, recipeName, recipeRequest);
     this.processTreeNode(rootNode);
     this.calculateTreeNodes();
-    // this.virtualDiagram.next();
   }
 
   public calculateTreeNodes() {
