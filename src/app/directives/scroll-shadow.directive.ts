@@ -80,7 +80,6 @@ export class ScrollShadowDirective implements OnInit, AfterViewInit {
         default:
           break;
       }
-      style += 'transition: box-shadow .5s ease;'
       this.zone.run(() => {
         this.customStyle = this.sanitizer.bypassSecurityTrustStyle(style);
       })
