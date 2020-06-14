@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -65,13 +65,21 @@ export class AppComponent implements OnInit {
   public activeTabId = 0;
   public noTabs = false;
 
+  @HostListener('window:focus', ['$event'])
+  onFocus(event: any): void {
+    if (this.update.isEnabled) {
+      console.log('checking for update');
+      this.update.checkForUpdate();
+    }
+  }
+
   constructor(
     private dialog: MatDialog,
     private overlayContainer: OverlayContainer,
     private settingsService: SettingsService,
     private snackbarService: MatSnackBar,
     private tabsService: TabsService,
-    update: SwUpdate,
+    private update: SwUpdate,
   ) {
     this.darkTheme = settingsService.getBoolean(Settings.DARK_THEME, false);
     this.setThemeToOverlay();
