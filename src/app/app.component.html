@@ -18,7 +18,7 @@
         <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
           <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple
             matRippleColor="rgba(0,0,0,.12)">
-            <span class="clickable" (click)="activeTabId = i">{{tabs[i]}}</span>
+            <span class="clickable" (click)="activeTabId = i">{{tabs[i] || '-'}}</span>
             <i-x-circle class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</i-x-circle>
           </span>
         </span>
