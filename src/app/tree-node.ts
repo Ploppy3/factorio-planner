@@ -21,14 +21,13 @@ export class TreeNode {
   ) { }
 
   public calculate() {
-    // console.log('calculating treenode');
+    // console.log('calculate');
     const parent = this.plannerService.virtualTree[this.idParent] || null;
     if (parent) {
       this.outputRate = parent.outputRate / parent.quantityPerCraft * this.recipeRequest;
     } else {
       this.outputRate = 1 / 1 * this.recipeRequest;
     }
-    // console.log('calculate', this.name, this.outputRate);
     if (this.craftingMachine) {
       this.numberMachines = this.outputRate / this.quantityPerCraft / (this.craftingMachine.crafting_speed / this.craftingTime);
     }

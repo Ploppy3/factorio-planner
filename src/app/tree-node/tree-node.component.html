@@ -1,75 +1,53 @@
-<div>
-  <!--
-  <div *ngIf="node.category != 'unknown'" class="nowrap half-padding">
-    (rate) {{node.rate | number:'1.2-2' }} <img [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name"> /s
-  </div>
-  -->
-  <div class="nowrapText wrapper-nodeName">
-    <img [class.clickable]="node.craftingMachine" (click)="showChilds = !showChilds" [matTooltip]="node.name"
-      #imageRecipe [hidden]="imageRecipe.hidden"
-      [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name"
-      (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" width="32">
-    <span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden"
-      (click)="showChilds = !showChilds">{{node.name}}</span>
-    <span class="secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) |
-      number:'1.2-2'}}/s</span>
-    <button *ngIf="node.craftingMachine" class="secondary" mat-icon-button
-      (click)="node.showOptions = !node.showOptions">
-      <ng-container *ngIf="node.showOptions">
-        <i-chevron-up></i-chevron-up>
-      </ng-container>
-      <ng-container *ngIf="!node.showOptions">
-        <i-info></i-info>
-      </ng-container>
-    </button>
-    <div *ngIf="node.craftingMachine && node.category != 'unknown'" class="inline-block">
-      <div class="wrapper-machine secondary quarter-padding" [matMenuTriggerFor]="menuMachine">
-        <span class="primary">{{node.craftingMachine.name}}</span>
-        <!--<img class="clickable" [matMenuTriggerFor]="menuMachine" [src]="'https://wiki.factorio.com/images/' + (node.craftingMachine.name | urlImg) + '.png'">-->
-        <mat-menu #menuMachine="matMenu">
-          <ng-container *ngFor="let machine of node.machines">
-            <button mat-menu-item (click)="node.craftingMachine = machine; node.calculate()">
-              <img #imageMachine (error)="imageMachine.notFound = true" [hidden]="imageMachine.notFound"
-                [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"
-                width="32">
-              {{machine.name}}
-            </button>
-          </ng-container>
-        </mat-menu>
-        x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
+<ng-container *ngIf="node; else warningNoNode">
+  <div>
+    <div class="nowrapText wrapper-nodeName">
+      <img [class.clickable]="node.craftingMachine" (click)="showChilds = !showChilds" [matTooltip]="node.name"
+        #imageRecipe [hidden]="imageRecipe.hidden"
+        [src]="'https://wiki.factorio.com/images/' + (node.name | urlImg) + '.png'" [alt]="node.name"
+        (load)="imageRecipe.hidden = false" (error)="imageRecipe.hidden = true" width="32">
+      <span class="nodeName clickable quarter-padding" *ngIf="imageRecipe.hidden"
+        (click)="showChilds = !showChilds">{{node.name}}</span>
+      <span class="secondary quarter-padding">{{node.outputRate * (plannerService.timeFactor$ | async) |
+        number:'1.2-2'}}/s</span>
+      <button *ngIf="node.craftingMachine" class="secondary" mat-icon-button
+        (click)="node.showOptions = !node.showOptions">
+        <ng-container *ngIf="node.showOptions">
+          <i-chevron-up></i-chevron-up>
+        </ng-container>
+        <ng-container *ngIf="!node.showOptions">
+          <i-info></i-info>
+        </ng-container>
+      </button>
+      <div *ngIf="node.craftingMachine && node.category != 'unknown'" class="inline-block">
+        <div class="wrapper-machine secondary quarter-padding" [matMenuTriggerFor]="menuMachine">
+          <span class="primary">{{node.craftingMachine.name}}</span>
+          <mat-menu #menuMachine="matMenu">
+            <ng-container *ngFor="let machine of node.machines">
+              <button mat-menu-item (click)="node.craftingMachine = machine; node.calculate()">
+                <img #imageMachine (error)="imageMachine.notFound = true" [hidden]="imageMachine.notFound"
+                  [src]="'https://wiki.factorio.com/images/' + (machine.name | urlImg) + '.png'" [alt]="machine.name"
+                  width="32">
+                {{machine.name}}
+              </button>
+            </ng-container>
+          </mat-menu>
+          x {{ node.numberMachines * (plannerService.timeFactor$ | async) | number:'1.2-2' }}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="half-padding" *ngIf="node.showOptions" [@reveal]>
-    <div class="info container-secondary inline-block quarter-padding">
-      <div class="nowrapText quarter-padding">
-        Throughput: {{node.outputRate * (plannerService.timeFactor$ | async) | number:'1.2-2' }} /s
-      </div>
-      <div class="nowrapText quarter-padding">
-        Recipe Request: {{node.recipeRequest}}
-      </div>
-      <div class="nowrapText quarter-padding">
-        Quantity per Craft: {{node.quantityPerCraft}}
-      </div>
-      <div class="nowrapText quarter-padding">
-        Crafting Time: {{node.craftingTime}}
-      </div>
-      <div class="nowrapText quarter-padding">
-        Crafting Speed: {{node.craftingMachine?.crafting_speed}}
-      </div>
-      <div class="nowrapText quarter-padding">
-        Category: {{node.category}}
-      </div>
+    <div class="half-padding" *ngIf="node.showOptions" [@reveal]>
+      <app-info-panel [node]="node"></app-info-panel>
     </div>
   </div>
-</div>
-<div class="wrapper-expandButton" *ngIf="node.childsIds.length > 0 && !showChilds"><button class="secondary"
-    mat-icon-button (click)="showChilds = true">
-    <i-plus></i-plus>
-  </button></div>
-<div [@nodeVisibility]="showChilds ? 'visible' : 'invisible'" *ngIf="node.childsIds.length > 0" class="flex column">
-  <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
-    <app-tree-node class="tree-lines gpu-layer" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId">
-    </app-tree-node>
+  <div class="wrapper-expandButton" *ngIf="node.childsIds.length > 0 && !showChilds"><button class="secondary"
+      mat-icon-button (click)="showChilds = true">
+      <i-plus></i-plus>
+    </button></div>
+  <div [@nodeVisibility]="showChilds ? 'visible' : 'invisible'" *ngIf="node.childsIds.length > 0" class="flex column">
+    <div class="node-padding" *ngFor="let nodeId of node.childsIds; let i = index;">
+      <app-tree-node class="tree-lines gpu-layer" [class.last]="i == node.childsIds.length - 1" [nodeId]="nodeId">
+      </app-tree-node>
+    </div>
   </div>
-</div>
+</ng-container>
+<ng-template #warningNoNode>no node set</ng-template>

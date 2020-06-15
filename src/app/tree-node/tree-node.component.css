@@ -1,13 +1,15 @@
 :host{
   display: block;
   position: relative;
+}
+:host:not(.root){
   border-left: 1px solid rgba(0, 0, 0, .24);
   padding-left: 24px;
 }
 :host.last{
   border-left: none;
 }
-:host::before{
+:host:not(.root)::before{
   content: '';
   display: inline-block;
   position: absolute;
@@ -27,9 +29,6 @@
   border-left: 1px solid rgba(0, 0, 0, .24);
   border-bottom: 1px solid rgba(0, 0, 0, .24);
   border-bottom-left-radius: 4px;
-}
-.info{
-  border-radius: 2px;
 }
 .wrapper-nodeName{
   margin-left: 4px;

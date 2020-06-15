@@ -157,20 +157,3 @@ export class AppComponent implements OnInit {
     this.noTabs = true;
   }
 }
-
-/*
-@Component({
-  selector: 'app-update',
-  template: `<div>Update available
-  <button class="uppercase" (click)="restart()" mat-flat-button>
-  <span>Restart</span>
-  </button>
-  </div>`,
-  styles: ['button{ margin-left: 8px; }'],
-})
-export class UpdateComponent {
-  public restart() {
-    window.location.reload();
-  }
-}
-*/

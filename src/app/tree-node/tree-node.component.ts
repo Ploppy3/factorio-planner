@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { trigger, state, style } from '@angular/animations';
 
 // import { Node } from "../node";
@@ -19,23 +19,31 @@ import { reveal } from '../animations';
     ]),
   ],
 })
-export class TreeNodeComponent implements OnInit {
+export class TreeNodeComponent implements OnInit, OnChanges {
 
-  @Input() nodeId: number;
+  @Input() nodeId: number = -1;
 
   public showChilds = true;
   public node: TreeNode;
 
   constructor(
-    public dataService: DataService,
     public plannerService: PlannerService,
   ) { }
 
   ngOnInit() {
+    this.init();
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    this.init();
+  }
+
+  public init(){
     if (!this.plannerService.virtualTree[this.nodeId]) {
       console.log('can\'t find node with id', this.nodeId);
     } else {
       this.node = this.plannerService.virtualTree[this.nodeId];
+      this.node.calculate();
     }
   }
 }

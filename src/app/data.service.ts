@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { OutputTreeNodeComponent } from 'app/output-tree-node/output-tree-node.component';
+import { TreeNode } from './tree-node';
 
 @Injectable()
 export class DataService {
@@ -22,8 +22,8 @@ export class DataService {
   public recipesObject = {};
   public assemblingMachines = [];
   public assemblingMachinesSettings = [];
-
-  public outputNode: OutputTreeNodeComponent;
+  public outputNode: TreeNode;
+  public onVersionChange$ = new EventEmitter<void>();
 
   constructor(
     private httpClient: HttpClient
@@ -32,6 +32,11 @@ export class DataService {
       console.log('constructor');
     }
     this.loadData(0);
+  }
+
+  public logInfo(){
+    console.log('recipes', this.recipes);
+    console.log('assemblingMachines', this.assemblingMachines);
   }
 
   public selectVersion(name: string) {
@@ -63,7 +68,7 @@ export class DataService {
                 this.assemblingMachinesSettings.push({ name: craftingMachine.name, enabled: true });
               }
             });
-            this.outputNode.fullRefresh();
+            this.onVersionChange$.next();
           }
         );
       } catch (error) {
@@ -96,11 +101,6 @@ export class DataService {
             this.assemblingMachinesSettings.push({ name: data.prototypes['assembling-machine'][key].name, enabled: true });
           }
         }
-        this.outputNode.fullRefresh();
-
-        // console.log(this.recipes);
-        // console.log(this.assemblingMachines);
-        // console.log(this.assemblingMachinesSettings);
       } catch (error) {
         console.error(error);
       }

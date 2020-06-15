@@ -13,7 +13,7 @@ export class PlannerService {
 
   public virtualDiagram = new Subject<void>();
   public virtualTree = {};
-  private virtualTreePointer: number
+  private virtualTreePointer = 0
 
   constructor(
     private dataService: DataService,
@@ -25,8 +25,12 @@ export class PlannerService {
     });
   }
 
+  public logInfo(){
+    console.log(this.virtualTree);
+  }
+
   private computeSharedResources() {
-    console.log('computeSharedResources');
+    console.log('computing shared resources');
     this.sharedResources = [];
     for (const key in this.virtualTree) {
       if (this.virtualTree.hasOwnProperty(key)) {
@@ -47,16 +51,17 @@ export class PlannerService {
     } else {
       this.sharedResources[name] = throughput;
     }
-    // console.log(this.sharedResources);
   }
 
   public createInMemoryTree(recipeName: string, recipeRequest: number = 1) {
     console.log('creating in-memory tree for', recipeName, recipeRequest);
     this.virtualTree = {};
-    this.virtualTreePointer = 0;
+    this.virtualTreePointer++;
+    const idRootNode = this.virtualTreePointer;
     const rootNode = new TreeNode(this, recipeName, recipeRequest);
     this.processTreeNode(rootNode);
     this.calculateTreeNodes();
+    return idRootNode;
   }
 
   public calculateTreeNodes() {
@@ -74,6 +79,7 @@ export class PlannerService {
   }
 
   private processTreeNode(node: TreeNode, parentId?: number): number {
+    // console.log('processing tree node', node);
     node.recipe = this.getRecipe(node.name);
     node.quantityPerCraft = this.getQuantityPerCraft(node.recipe);
     node.category = this.getCraftingCategory(node.recipe);
@@ -138,7 +144,6 @@ export class PlannerService {
 
   private getCraftingMachines(craftingCategory: string, numIngredients): any[] {
     const machines = this.dataService.getAssemblingMachinesByCategory(craftingCategory, numIngredients);
-    console.log('getCraftingMachines', machines);
     return machines;
   }
 

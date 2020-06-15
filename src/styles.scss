@@ -34,7 +34,7 @@ img {
   .tree-lines::after,
   .tree-lines.last::before,
   .tree-lines.last::after {
-    border-color: rgba(255, 255, 255, .3);
+    border-color: rgba(255, 255, 255, .3) !important;
   }
   .border {
     border-color: rgba(255, 255, 255, .3);

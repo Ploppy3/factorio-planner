@@ -1,3 +1,7 @@
+<!-- <button (click)="dataService.logInfo()">log dataService info</button>
+<button (click)="plannerService.logInfo()">log plannerService info</button>
+<button (click)="init()">init</button> -->
+
 <div class="gpu-layer">
   <mat-form-field class="version" appearance="outline">
     <mat-label>Factorio Version</mat-label>
@@ -8,6 +12,43 @@
     </mat-select>
   </mat-form-field>
 </div>
-<!--<app-output-node #outputNode></app-output-node>-->
-<app-diagram></app-diagram>
-<app-output-tree-node #outputNode></app-output-tree-node>
+
+<div id="form" class="flex wrap center-items">
+  <mat-form-field class="small" appearance="outline">
+    <mat-label>Quantity</mat-label>
+    <input matInput type="number" min="1" [formControl]="control_output">
+  </mat-form-field>
+  <mat-form-field floatLabel="never" appearance="outline">
+    <mat-label>Recipe</mat-label>
+    <input #inputRecipe [matAutocomplete]="auto" [formControl]="control_recipe" matInput>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let recipe of filteredRecipes$ | async" [value]="recipe.name">
+        <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false"
+          (error)="imgRecipeSearch.hidden=true"
+          [src]="'https://wiki.factorio.com/images/' + (recipe.name | urlImg) + '.png'" [alt]="recipe.name"
+          width="32" />
+        {{recipe.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field class="small" appearance="outline">
+    <mat-label>Unit</mat-label>
+    <mat-select class="timeUnit" floatPlaceholder="never" [(ngModel)]="timeUnit" (selectionChange)="onTimeUnitChange()">
+      <mat-option *ngFor="let unit of timeUnits; let i = index;" [value]="unit">
+        {{unit}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-icon-button color="accent" (click)="openGlobalSettings()">
+    <i-settings></i-settings>
+  </button>
+</div>
+<div>
+  <button (click)="openSharedResources()" color="accent" mat-button>
+    <i-list></i-list>
+    <span id="text-button">Resource Overview</span>
+  </button>
+</div>
+
+<app-tree-node class="root" *ngIf="idRootNode" [nodeId]="idRootNode" #rootNode></app-tree-node>

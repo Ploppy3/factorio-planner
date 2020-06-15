@@ -15,7 +15,6 @@ import { UrlImgPipe } from './url-img.pipe';
 import { GlobalSettingsDialogComponent } from './global-settings-dialog/global-settings-dialog.component';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 import { DialogOverviewComponent } from './dialog-overview/dialog-overview.component';
-import { OutputTreeNodeComponent } from './output-tree-node/output-tree-node.component';
 import { TreeNodeComponent } from './tree-node/tree-node.component';
 import { AppInstallComponent } from './app-install/app-install.component';
 import { TabComponent } from './tab/tab.component';
@@ -24,6 +23,7 @@ import { IconsModule } from 'app/icons/icons.module';
 import { UpdateComponent } from './update/update.component';
 import { DiagramComponent } from './diagram/diagram.component';
 import { ScrollShadowDirective } from './directives/scroll-shadow.directive';
+import { InfoPanelComponent } from './info-panel/info-panel.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { ScrollShadowDirective } from './directives/scroll-shadow.directive';
     GlobalSettingsDialogComponent,
     DialogChangelogComponent,
     DialogOverviewComponent,
-    OutputTreeNodeComponent,
     TreeNodeComponent,
     AppInstallComponent,
     TabComponent,
@@ -40,6 +39,7 @@ import { ScrollShadowDirective } from './directives/scroll-shadow.directive';
     UpdateComponent,
     DiagramComponent,
     ScrollShadowDirective,
+    InfoPanelComponent,
   ],
   imports: [
     MaterialModule,
