@@ -2,7 +2,6 @@ import { Directive, OnInit, HostBinding, ElementRef, NgZone, AfterViewInit } fro
 import { DomSanitizer } from '@angular/platform-browser';
 
 enum ScrollState {
-  UNKNOWN,
   TOP,
   BOTTOM,
   BOTH,
@@ -15,7 +14,7 @@ export class ScrollShadowDirective implements OnInit, AfterViewInit {
 
   @HostBinding('style') customStyle = this.sanitizer.bypassSecurityTrustStyle('box-shadow: none');
 
-  private state: ScrollState = ScrollState.UNKNOWN;
+  private state: ScrollState;
 
   private check = 0;
   private readonly CHECKLIMIT = 3;
@@ -49,11 +48,11 @@ export class ScrollShadowDirective implements OnInit, AfterViewInit {
 
   public onScroll() {
     const scrollHeight = this.elementRef.nativeElement.scrollHeight;
-    const scrollTop = this.elementRef.nativeElement.scrollTop;
+    const scrollTop = Math.round(this.elementRef.nativeElement.scrollTop);
     const clientHeight = this.elementRef.nativeElement.clientHeight;
-    let futureState: ScrollState = ScrollState.UNKNOWN;
+    let futureState: ScrollState;
 
-    // console.log(scrollHeight, scrollTop, clientHeight);
+    console.log(scrollHeight, scrollTop, clientHeight);
 
     if (scrollTop < scrollHeight - clientHeight && scrollTop > 0) {
       futureState = ScrollState.BOTH;
