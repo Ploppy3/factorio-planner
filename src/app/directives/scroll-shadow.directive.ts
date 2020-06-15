@@ -52,7 +52,7 @@ export class ScrollShadowDirective implements OnInit, AfterViewInit {
     const clientHeight = this.elementRef.nativeElement.clientHeight;
     let futureState: ScrollState;
 
-    console.log(scrollHeight, scrollTop, clientHeight);
+    // console.log(scrollHeight, scrollTop, clientHeight);
 
     if (scrollTop < scrollHeight - clientHeight && scrollTop > 0) {
       futureState = ScrollState.BOTH;
