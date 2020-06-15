@@ -40,7 +40,7 @@ export class TabComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.tabId = this.tabsService.getLastTabId();
     this.dataService.onVersionChange$.subscribe({
-      next: ()=>{
+      next: () => {
         this.init();
       }
     });
@@ -63,14 +63,8 @@ export class TabComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public init(){
-    this.idRootNode = this.plannerService.createInMemoryTree(this.control_recipe.value);
-  }
-
-  public reloadData() {
-    console.log('factorio version changes')
-    this.dataService.selectVersion(this.dataVersion);
-    // this.init();
+  public init() {
+    this.idRootNode = this.plannerService.createInMemoryTree(this.control_recipe.value, this.control_output.value);
   }
 
   public onTimeUnitChange() {
