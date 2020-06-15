@@ -24,6 +24,7 @@ export function isNullOrUndefined(obj: any) {
 }
 
 export function downloadUrl(url: string, fileName: string) {
+  // console.log('downloading', fileName);
   const a: any = document.createElement('a');
   a.href = url;
   a.download = fileName;
@@ -33,6 +34,25 @@ export function downloadUrl(url: string, fileName: string) {
   a.remove();
 }
 
-export function copyToClipboard(value: string): Promise<void> {
-  return navigator['clipboard'].writeText(value);
+export function openUrl(url: string, reuseTab: boolean) {
+  const a: any = document.createElement('a');
+  a.href = url;
+  a.target = reuseTab ? 'blank' : '_blanc';
+  document.body.appendChild(a);
+  a.style = 'display: none';
+  a.click();
+  a.remove();
+}
+/** @deprecated
+ * Use [cdkCopyToClipboard] instead
+ */
+export function copyToClipboard(value: string) {
+  const ta = document.createElement('textarea');
+  ta.value = value;
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  // const clipboardKey = 'clipboard';
+  // return navigator[clipboardKey].writeText(value);
 }

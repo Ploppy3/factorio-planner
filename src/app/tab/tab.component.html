@@ -5,7 +5,8 @@
 <div class="gpu-layer">
   <mat-form-field class="version" appearance="outline">
     <mat-label>Factorio Version</mat-label>
-    <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion" (selectionChange)="this.dataService.selectVersion(this.dataVersion)">
+    <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion"
+      (selectionChange)="this.dataService.selectVersion(this.dataVersion)">
       <mat-option *ngFor="let version of dataService.dataVersions; let i = index" [value]="version.name">
         {{version.name}}
       </mat-option>
@@ -21,6 +22,7 @@
   <mat-form-field floatLabel="never" appearance="outline">
     <mat-label>Recipe</mat-label>
     <input #inputRecipe [matAutocomplete]="auto" [formControl]="control_recipe" matInput>
+    <i-x class="clickable" (click)="control_recipe.setValue('')" matSuffix></i-x>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let recipe of filteredRecipes$ | async" [value]="recipe.name">
         <img #imgRecipeSearch [hidden]="imgRecipeSearch.hidden" (load)="imgRecipeSearch.hidden = false"
@@ -44,11 +46,15 @@
     <i-settings></i-settings>
   </button>
 </div>
-<div>
-  <button (click)="openSharedResources()" color="accent" mat-button>
-    <i-list></i-list>
-    <span id="text-button">Resource Overview</span>
-  </button>
-</div>
 
-<app-tree-node class="root" *ngIf="idRootNode" [nodeId]="idRootNode" #rootNode></app-tree-node>
+<ng-container *ngIf="idRootNode && control_recipe.value.length > 0">
+  <div>
+    <button (click)="openSharedResources()" color="accent" mat-button>
+      <i-list></i-list>
+      <span>Resource Overview</span>
+    </button>
+  </div>
+
+  <app-tree-node class="root" [nodeId]="idRootNode" #rootNode>
+  </app-tree-node>
+</ng-container>

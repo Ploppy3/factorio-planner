@@ -4,13 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { SettingsService, Settings } from 'app/settings-service.service';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
 import { TabsService } from 'app/tabs.service';
 import { DialogSupportComponent } from 'app/dialog-support/dialog-support.component';
 import { fadeInOut } from 'app/animations';
 import { SwUpdate } from '@angular/service-worker';
 import { UpdateComponent } from 'app/update/update.component';
+import { SettingsService, Settings } from 'app/services/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -61,9 +61,6 @@ export class AppComponent implements OnInit {
   @HostBinding('class.dark-theme') darkTheme = false;
 
   public showTips = true;
-  public tabs: string[] = [];
-  public activeTabId = 0;
-  public noTabs = false;
 
   @HostListener('window:focus', ['$event'])
   onFocus(event: any): void {
@@ -78,7 +75,7 @@ export class AppComponent implements OnInit {
     private overlayContainer: OverlayContainer,
     private settingsService: SettingsService,
     private snackbarService: MatSnackBar,
-    private tabsService: TabsService,
+    public tabsService: TabsService,
     private update: SwUpdate,
   ) {
     this.darkTheme = settingsService.getBoolean(Settings.DARK_THEME, false);
@@ -95,16 +92,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tabsService.tabName$.subscribe(change => {
-      this.tabs[change.tabId] = change.name;
-    });
     window.addEventListener('beforeinstallprompt', (event) => {
       console.log('beforeinstallprompt fired')
       event.preventDefault();
       this.snackbarService.openFromComponent(AppInstallComponent, { data: event });
     });
-    this.tabs.push('automation-science-pack');
-    this.tabsService.setTabs(this.tabs);
   }
 
   private setThemeToOverlay() {
@@ -128,10 +120,7 @@ export class AppComponent implements OnInit {
   }
 
   public addTab() {
-    this.noTabs = false;
-    this.tabs.push('automation-science-pack');
-    this.tabsService.setTabs(this.tabs);
-    this.activeTabId = this.tabs.length - 1
+    this.tabsService.addTab('automation-science-pack');
   }
 
   public switchTheme() {
@@ -140,20 +129,20 @@ export class AppComponent implements OnInit {
     this.setThemeToOverlay();
   }
 
-  public selectPreviousTab() {
-    for (let i = this.activeTabId; i >= 0; i--) {
-      if (this.tabs[i] != null) {
-        this.activeTabId = i;
-        return;
-      }
-    }
-    for (let i = this.activeTabId + 1; i < this.tabs.length; i++) {
-      if (this.tabs[i] != null) {
-        this.activeTabId = i;
-        return;
-      }
-    }
-    this.activeTabId = -1;
-    this.noTabs = true;
-  }
+  // public selectPreviousTab() {
+  //   for (let i = this.activeTabId; i >= 0; i--) {
+  //     if (this.tabs[i] != null) {
+  //       this.activeTabId = i;
+  //       return;
+  //     }
+  //   }
+  //   for (let i = this.activeTabId + 1; i < this.tabs.length; i++) {
+  //     if (this.tabs[i] != null) {
+  //       this.activeTabId = i;
+  //       return;
+  //     }
+  //   }
+  //   this.activeTabId = -1;
+  //   this.noTabs = true;
+  // }
 }

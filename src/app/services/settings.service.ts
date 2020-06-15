@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { isNumber, isNullOrUndefined, isBoolean } from 'app/utils';
+import { environment } from 'environments/environment';
+import { isNullOrUndefined, isNumber, isBoolean } from 'app/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,20 @@ export class SettingsService {
   */
 
   constructor() {
-    console.log('constructor');
+    if (!environment.production) {
+      console.log('constructor');
+    }
+  }
+
+  public reset() {
+    localStorage.clear();
   }
 
   public setValue(key: string, value: any) {
+
+    if (!environment.production) {
+      console.log(`set ${key} -> ${value}`);
+    }
     const jsonValue = JSON.stringify(value);
     localStorage.setItem(key, jsonValue);
   }
@@ -35,12 +46,16 @@ export class SettingsService {
     return isBoolean(value) ? value : defaultValue;
   }
 
+  public removeValue(key: string) {
+    localStorage.removeItem(key);
+  }
+
   /** gets the parsed json value from localStorage or return null */
   private getRaw(key: string) {
     try {
-      const json_value = localStorage.getItem(key);
+      const jsonValue = localStorage.getItem(key);
       // console.log('searched for', key, 'found', JSON.parse(json_value));
-      return JSON.parse(json_value)
+      return JSON.parse(jsonValue);
     } catch (error) {
       console.error(error);
       return null;
@@ -50,4 +65,5 @@ export class SettingsService {
 
 export enum Settings {
   DARK_THEME = 'fp_dark_theme',
+  TABS = 'fp_tabs',
 }

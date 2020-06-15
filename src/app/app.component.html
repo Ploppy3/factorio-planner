@@ -14,19 +14,19 @@
 
   <mat-toolbar-row id="toolbar-tabs">
     <div>
-      <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
+      <ng-container *ngFor="let tab of tabsService.tabs$ | async; index as i; trackBy:trackByTabButton">
         <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
-          <span class="tab inverted-border" [class.selected]="i == activeTabId" matRipple
-            matRippleColor="rgba(0,0,0,.12)">
-            <span class="clickable" (click)="activeTabId = i">{{tabs[i] || '-'}}</span>
-            <i-x-circle class="clickable" (click)="tabs[i] = null; selectPreviousTab()">close</i-x-circle>
+          <span class="tab inverted-border clickable" [class.selected]="i == (tabsService.idActiveTab$ | async)"
+            matRipple matRippleColor="rgba(0,0,0,.12)">
+            <span (click)="tabsService.selectTab(i)">{{(tabsService.tabs$ | async)[i] || '-'}}</span>
+            <i-x-circle (click)="tabsService.removeTab(i)">close</i-x-circle>
           </span>
         </span>
       </ng-container>
-      <button (click)="addTab()" mat-icon-button>
+      <button (click)="addTab()" @fadeInOut mat-flat-button>
         <i-plus></i-plus>
+        <span>add tab</span>
       </button>
-      <button *ngIf="noTabs" (click)="addTab()" @fadeInOut mat-raised-button>add tab</button>
     </div>
   </mat-toolbar-row>
 
@@ -56,8 +56,10 @@
         <div>Report bugs at ngnsup+factorio.planner@gmail.com</div>
       </div>
     </div>
-    <ng-container *ngFor="let tab of tabs; index as i; trackBy:trackByTabButton">
-      <app-tab *ngIf="tab != null" [hidden]="activeTabId !== i"></app-tab>
+
+    <ng-container *ngFor="let tab of tabsService.tabs$ | async; index as i; trackBy:trackByTabButton">
+      <app-tab *ngIf="tab != null" [idTab]="i" [hidden]="(tabsService.idActiveTab$ | async) !== i"></app-tab>
     </ng-container>
+
   </div>
 </div>

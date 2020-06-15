@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { DataService } from 'app/data.service';
 import { PlannerService } from 'app/planner.service';
 import { TreeNodeComponent } from 'app/tree-node/tree-node.component';
@@ -22,13 +22,15 @@ export class TabComponent implements OnInit, AfterViewInit {
 
   public dataVersion = this.dataService.dataVersions[0].name;
   public control_output = new FormControl(1);
-  public control_recipe = new FormControl('automation-science-pack');
+  public control_recipe = new FormControl('');
   public timeUnits: string[] = ['/s', '/m', '/h'];
   public timeUnit: string = this.timeUnits[0]; // per seconds (/s)
   public filteredRecipes$: Observable<any[]>;
   public idRootNode: number;
 
   private tabId = -1;
+
+  @Input() idTab: number;
 
   constructor(
     public dataService: DataService,
@@ -39,27 +41,25 @@ export class TabComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.tabId = this.tabsService.getLastTabId();
+    this.control_recipe.setValue(this.tabsService.tabs$.value[this.idTab]);
     this.dataService.onVersionChange$.subscribe({
       next: () => {
         this.init();
       }
     });
     this.control_output.valueChanges.subscribe(value => {
-      console.log('control_output.valueChanges');
-      console.log(this.rootNode);
       this.rootNode.node.recipeRequest = value;
       this.plannerService.calculateTreeNodes();
     });
     this.filteredRecipes$ = this.control_recipe.valueChanges.pipe(startWith(null), map(val => this.filterRecipes(val).slice(0, 7)));
     this.control_recipe.valueChanges.subscribe(val => {
-      console.log('control_recipe.valueChanges')
       this.init();
     });
   }
 
   ngAfterViewInit(): void {
     this.control_recipe.valueChanges.subscribe(val => {
-      this.tabsService.tabName$.next({ tabId: this.tabId, name: val });
+      this.tabsService.renameTab(this.tabId, val);
     });
   }
 
