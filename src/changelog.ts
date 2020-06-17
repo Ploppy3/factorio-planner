@@ -7,7 +7,7 @@ export interface Version {
 
 export const Versions: Version[] = [
     {
-        name: 'Version 2.6.0 - 2020/06/17',
+        name: 'Version 2.7.0 - 2020/06/17',
         changes: [
             'Import custom game version',
         ]
