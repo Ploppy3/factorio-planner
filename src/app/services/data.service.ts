@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { TreeNode } from './tree-node';
+import { TreeNode } from '../tree-node';
 
 @Injectable()
 export class DataService {
@@ -34,7 +34,7 @@ export class DataService {
     this.loadData(0);
   }
 
-  public logInfo(){
+  public logInfo() {
     console.log('recipes', this.recipes);
     console.log('assemblingMachines', this.assemblingMachines);
   }

@@ -1,0 +1,172 @@
+/// Padding related to .row & .col rules
+$spacer-padding: 16px;
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+}
+/// Quick flex display row
+.row {
+    display: flex;
+    &.reverse {
+        flex-direction: row-reverse;
+    }
+    &.spacer {
+        padding-left: $spacer-padding / 2;
+        padding-right: $spacer-padding / 2;
+        >* {
+            margin-left: $spacer-padding / 2;
+            margin-right: $spacer-padding / 2;
+        }
+    }
+    &.inner-spacer {
+        >* {
+            margin-left: $spacer-padding/2;
+            margin-right: $spacer-padding/2;
+        }
+        >*:first-child {
+            margin-left: 0;
+            margin-right: $spacer-padding/2;
+        }
+        >*:last-child {
+            margin-left: $spacer-padding/2;
+            margin-right: 0;
+        }
+        >*:only-child {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+}
+/// Quick flex display column
+.col {
+    display: flex;
+    flex-direction: column;
+    // overflow: auto;
+    &.reverse {
+        flex-direction: column-reverse;
+    }
+    &.spacer {
+        padding-top: $spacer-padding / 2;
+        padding-bottom: $spacer-padding / 2;
+        >* {
+            margin-top: $spacer-padding / 2;
+            margin-bottom: $spacer-padding / 2;
+        }
+    }
+    &.inner-spacer {
+        >* {
+            margin-top: $spacer-padding / 2;
+            margin-bottom: $spacer-padding / 2
+        }
+        >*:first-child {
+            margin-top: 0;
+            margin-bottom: $spacer-padding / 2;
+        }
+        >*:last-child {
+            margin-top: $spacer-padding / 2;
+            margin-bottom: 0;
+        }
+        >*:only-child {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+}
+.row,
+.col {
+    &.baseline {
+        align-items: baseline;
+    }
+    &.center-items {
+        align-items: center;
+    }
+    &.stretch-items {
+        align-items: stretch;
+    }
+    &.wrap {
+        flex-wrap: wrap;
+    }
+    &.justify-center {
+        justify-content: center;
+    }
+    &.justify-end {
+        justify-content: flex-end;
+    }
+    >.grow {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+    >.no-shrink {
+        flex-shrink: 0;
+    }
+    >.self-center {
+        align-self: center;
+    }
+}
+/// Elevate element using z-index
+.z1 {
+    z-index: 1;
+}
+/// Elevate element using z-index
+.z2 {
+    z-index: 2;
+}
+/// Transform text to uppercase
+.uppercase {
+    text-transform: uppercase;
+}
+.underline {
+    text-decoration: underline;
+}
+/// Centers the text of the element
+.center-text {
+    text-align: center;
+}
+/// Align text to the right
+.text-right {
+    text-align: right;
+}
+/// Shows cursor on element
+.clickable {
+    cursor: pointer;
+}
+/// Sets the element to 100% width
+.max-width,
+.fill-width {
+    width: 100%;
+}
+/// Sets the element to 100% height
+.max-height,
+.fill-height {
+    height: 100%;
+}
+/// Pushes element to a unique GPU layer.
+.gpu-layer {
+    will-change: transform;
+}
+/// Prevent content overflow,overflowing content will be accessible via scroll-bars
+.overflow-auto {
+    overflow: auto;
+}
+/// Prevent content overflow, overflow is hidden
+.no-overflow,
+.overflow-hidden {
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .desktop-only {
+        display: none;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .mobile-only {
+        display: none;
+    }
+}

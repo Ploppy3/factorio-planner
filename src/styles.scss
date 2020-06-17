@@ -1,4 +1,5 @@
 @import './material.theme.scss';
+@import './framework.scss';
 
 * {
     box-sizing: border-box;
@@ -164,9 +165,6 @@ img {
     }
     mat-option-text {
         color: #fff;
-    }
-    mat-dialog-content {
-        // border-color: rgba(255, 255, 255, .3);
     }
 }
 button {

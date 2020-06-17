@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogChangelogComponent } from './dialog-changelog/dialog-changelog.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
-import { TabsService } from 'app/tabs.service';
+import { TabsService } from 'app/services/tabs.service';
 import { DialogSupportComponent } from 'app/dialog-support/dialog-support.component';
 import { fadeInOut } from 'app/animations';
 import { SwUpdate } from '@angular/service-worker';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlannerService } from 'app/planner.service';
+import { PlannerService } from 'app/services/planner.service';
 
 @Component({
   selector: 'app-diagram',

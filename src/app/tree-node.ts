@@ -1,4 +1,4 @@
-import { PlannerService } from './planner.service';
+import { PlannerService } from './services/planner.service';
 
 export class TreeNode {
 

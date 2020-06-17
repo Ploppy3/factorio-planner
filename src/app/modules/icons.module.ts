@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconMoon, IconSun, IconInfo, IconXCircle, IconPlus, IconSettings, IconList, IconChevronUp, IconX } from 'angular-feather';
+import { IconMoon, IconSun, IconInfo, IconXCircle, IconPlus, IconSettings, IconList, IconChevronUp, IconX, IconPlusCircle } from 'angular-feather';
 
 @NgModule({
   declarations: [],
@@ -17,6 +17,7 @@ import { IconMoon, IconSun, IconInfo, IconXCircle, IconPlus, IconSettings, IconL
     IconList,
     IconChevronUp,
     IconX,
+    IconPlusCircle,
   ]
 })
 export class IconsModule { }

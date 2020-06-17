@@ -3,8 +3,8 @@ import { trigger, state, style } from '@angular/animations';
 
 // import { Node } from "../node";
 import { TreeNode } from '../tree-node';
-import { DataService } from '../data.service';
-import { PlannerService } from '../planner.service';
+import { DataService } from '../services/data.service';
+import { PlannerService } from '../services/planner.service';
 import { reveal } from '../animations';
 
 @Component({
@@ -21,7 +21,7 @@ import { reveal } from '../animations';
 })
 export class TreeNodeComponent implements OnInit, OnChanges {
 
-  @Input() nodeId: number = -1;
+  @Input() nodeId = -1;
 
   public showChilds = true;
   public node: TreeNode;
@@ -33,12 +33,12 @@ export class TreeNodeComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.init();
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     this.init();
   }
 
-  public init(){
+  public init() {
     if (!this.plannerService.virtualTree[this.nodeId]) {
       console.log('can\'t find node with id', this.nodeId);
     } else {

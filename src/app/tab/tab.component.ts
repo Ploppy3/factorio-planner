@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { DataService } from 'app/data.service';
-import { PlannerService } from 'app/planner.service';
+import { DataService } from 'app/services/data.service';
+import { PlannerService } from 'app/services/planner.service';
 import { TreeNodeComponent } from 'app/tree-node/tree-node.component';
 import { MatDialog } from '@angular/material/dialog';
 import { GlobalSettingsDialogComponent } from 'app/global-settings-dialog/global-settings-dialog.component';
@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { DialogOverviewComponent } from 'app/dialog-overview/dialog-overview.component';
-import { TabsService } from 'app/tabs.service';
+import { TabsService } from 'app/services/tabs.service';
 
 @Component({
   selector: 'app-tab',

@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './modules/material.module';
 import { AppComponent } from './app.component';
 import { UrlImgPipe } from './url-img.pipe';
 import { GlobalSettingsDialogComponent } from './global-settings-dialog/global-settings-dialog.component';
@@ -19,7 +19,7 @@ import { TreeNodeComponent } from './tree-node/tree-node.component';
 import { AppInstallComponent } from './app-install/app-install.component';
 import { TabComponent } from './tab/tab.component';
 import { DialogSupportComponent } from './dialog-support/dialog-support.component';
-import { IconsModule } from 'app/icons/icons.module';
+import { IconsModule } from 'app/modules/icons.module';
 import { UpdateComponent } from './update/update.component';
 import { DiagramComponent } from './diagram/diagram.component';
 import { ScrollShadowDirective } from './directives/scroll-shadow.directive';

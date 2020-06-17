@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode } from 'app/tree-node';
-import { PlannerService } from 'app/planner.service';
+import { PlannerService } from 'app/services/planner.service';
 
 @Component({
   selector: 'app-info-panel',

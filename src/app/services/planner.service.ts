@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { DataService } from './data.service';
-import { TreeNode } from './tree-node';
 import { environment } from 'environments/environment';
+import { DataService } from 'app/services/data.service';
+import { TreeNode } from 'app/tree-node';
 
 @Injectable()
 export class PlannerService {
@@ -25,7 +25,7 @@ export class PlannerService {
     });
   }
 
-  public logInfo(){
+  public logInfo() {
     console.log(this.virtualTree);
   }
 
