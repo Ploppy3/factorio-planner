@@ -2,7 +2,7 @@
 <button (click)="plannerService.logInfo()">log plannerService info</button>
 <button (click)="init()">init</button> -->
 
-<div class="gpu-layer row inner-spacer center-items">
+<div class="gpu-layer row center-items">
   <mat-form-field class="version" appearance="outline">
     <mat-label>Factorio Version</mat-label>
     <mat-select id="selectVersion" flex="true" floatPlaceholder="never" [(ngModel)]="dataVersion"
@@ -12,7 +12,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-icon-button>
+  <button (click)="addVersion()" matTooltip="Add a factorio version" mat-icon-button>
     <i-plus-circle></i-plus-circle>
   </button>
 </div>

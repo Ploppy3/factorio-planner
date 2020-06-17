@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { TreeNode } from '../tree-node';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DataService {
@@ -26,7 +27,7 @@ export class DataService {
   public onVersionChange$ = new EventEmitter<void>();
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
   ) {
     if (!environment.production) {
       console.log('constructor');
@@ -37,6 +38,15 @@ export class DataService {
   public logInfo() {
     console.log('recipes', this.recipes);
     console.log('assemblingMachines', this.assemblingMachines);
+  }
+
+  public addVersion(name: string, data: any) {
+    this.dataVersions.unshift({
+      name,
+      isCustom: true,
+      customData: data,
+    })
+    this.onVersionChange$.next();
   }
 
   public selectVersion(name: string) {
@@ -51,24 +61,13 @@ export class DataService {
 
   public loadData(index: number) {
     console.log('loading data at index:' + index);
-    if (this.dataVersions[index].fileName) { // if new version
+    if (this.dataVersions[index].isCustom) {
+      this.processModernData(this.dataVersions[index].customData)
+    } else if (this.dataVersions[index].fileName) { // if new version
       try {
         this.httpClient.get('/assets/factorio-data/' + this.dataVersions[index].fileName).subscribe(
           data => {
-            // console.log(data);
-            this.recipes = data['recipes'];
-            this.recipesObject = {};
-            data['recipes'].forEach(recipe => {
-              this.recipesObject[recipe.name] = recipe;
-            });
-            this.assemblingMachines = data['craftingMachines'];
-            this.assemblingMachinesSettings = [];
-            data['craftingMachines'].forEach(craftingMachine => {
-              if (craftingMachine.name !== 'player') { // needed to filter 'player' from the crafting machines
-                this.assemblingMachinesSettings.push({ name: craftingMachine.name, enabled: true });
-              }
-            });
-            this.onVersionChange$.next();
+            this.processModernData(data)
           }
         );
       } catch (error) {
@@ -107,6 +106,23 @@ export class DataService {
     }
   }
 
+  private processModernData(data: any) {
+    // console.log(data);
+    this.recipes = data['recipes'];
+    this.recipesObject = {};
+    data['recipes'].forEach(recipe => {
+      this.recipesObject[recipe.name] = recipe;
+    });
+    this.assemblingMachines = data['craftingMachines'];
+    this.assemblingMachinesSettings = [];
+    data['craftingMachines'].forEach(craftingMachine => {
+      if (craftingMachine.name !== 'player') { // needed to filter 'player' from the crafting machines
+        this.assemblingMachinesSettings.push({ name: craftingMachine.name, enabled: true });
+      }
+    });
+    this.onVersionChange$.next();
+  }
+
   public getAssemblingMachinesByCategory(category: string, recipeIngredients: number): any[] {
     const response = [];
     this.assemblingMachines.forEach(machine => {
@@ -140,4 +156,6 @@ interface Version {
   dataKey?: string;
   /** The name of file, if store in /assets/factorio-data/ as a .json file  */
   fileName?: string;
+  isCustom?: true;
+  customData?: any;
 }

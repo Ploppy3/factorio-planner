@@ -1,0 +1,10 @@
+<div class="col inner-spacer">
+  <div>Add a custom version of factorio by loading a file containing recipes</div>
+  <div>
+    <input #inputFile [formControl]="controlFile" type="file" accept="application/JSON">
+  </div>
+</div>
+<mat-dialog-actions>
+  <button mat-dialog-close mat-button>Cancel</button>
+  <button [disabled]="!inputFile.value" color="accent" mat-button>Import</button>
+</mat-dialog-actions>

@@ -24,6 +24,7 @@ import { UpdateComponent } from './update/update.component';
 import { DiagramComponent } from './diagram/diagram.component';
 import { ScrollShadowDirective } from './directives/scroll-shadow.directive';
 import { InfoPanelComponent } from './info-panel/info-panel.component';
+import { AddVersionComponent } from './components/add-version/add-version.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { InfoPanelComponent } from './info-panel/info-panel.component';
     DiagramComponent,
     ScrollShadowDirective,
     InfoPanelComponent,
+    AddVersionComponent,
   ],
   imports: [
     MaterialModule,

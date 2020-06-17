@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { DialogOverviewComponent } from 'app/dialog-overview/dialog-overview.component';
 import { TabsService } from 'app/services/tabs.service';
+import { AddVersionComponent } from 'app/components/add-version/add-version.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tab',
@@ -37,6 +39,7 @@ export class TabComponent implements OnInit, AfterViewInit {
     public plannerService: PlannerService,
     private tabsService: TabsService,
     private dialogService: MatDialog,
+    private snackBarService: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -99,6 +102,16 @@ export class TabComponent implements OnInit, AfterViewInit {
   public openSharedResources() {
     const dialogRef = this.dialogService.open(DialogOverviewComponent);
     dialogRef.componentInstance.sharedResources = this.plannerService.sharedResources;
+  }
+
+  public addVersion() {
+    this.dialogService.open(AddVersionComponent).afterClosed().subscribe(dataJson => {
+      if (dataJson) {
+        const name = 'Custom'
+        this.dataService.addVersion(name, dataJson);
+        this.snackBarService.open('Custom version loaded an available', null, { duration: 3000 })
+      }
+    })
   }
 
   private filterRecipes(val: string): any[] {

@@ -35,10 +35,12 @@
 <div id="wrapper-page" class="gpu-layer">
   <div class="vertical-spacer">
 
-    <div>
-      <span id="button-support" (click)="openDialogSupport()">
+    <div class="row inner-spacer wrap">
+      <span class="clickable underline" (click)="openDialogSupport()">
         Support the project!
       </span>
+
+      <a href="https://mods.factorio.com/mod/factorio-data-exporter" target="_blank">Mod: data exporter</a>
     </div>
 
     <div id="wrapper-tips" class="gpu-layer" [@tips]="showTips ? 'visible' : 'hidden'">
