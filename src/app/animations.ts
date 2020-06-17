@@ -34,3 +34,32 @@ export const fadeInOut2 = trigger('fadeInOut', [
     opacity: '0',
   }))),
 ]);
+
+export const collapseHorizontal = trigger('collapseHorizontal', [
+  state('void', style({
+    opacity: 0,
+    width: 0,
+    marginLeft: 0,
+    marginRight: 0,
+  })),
+  transition(':enter', [
+    animate('.25s ease', style({
+      width: '*',
+      marginLeft: '*',
+      marginRight: '*',
+    })),
+    animate('.25s ease', style({
+      opacity: 1,
+    })),
+  ]),
+  transition(':leave', [
+    animate('.25s ease', style({
+      opacity: 0,
+    })),
+    animate('.25s ease', style({
+      width: 0,
+      marginLeft: 0,
+      marginRight: 0,
+    })),
+  ]),
+])

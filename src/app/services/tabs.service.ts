@@ -10,6 +10,7 @@ export class TabsService {
 
   public tabs$ = new BehaviorSubject([]);
   public idActiveTab$ = new BehaviorSubject(0);
+  public tabsCount$ = new BehaviorSubject(0);
 
   constructor(
     private settingsService: SettingsService
@@ -25,6 +26,7 @@ export class TabsService {
     } else {
       this.tabs$.next(['automation-science-pack']);
     }
+    this.updateTabsCount()
   }
 
   public getLastTabId(): number {
@@ -33,6 +35,7 @@ export class TabsService {
 
   public addTab(name: string) {
     this.tabs$.next([...this.tabs$.value, name]);
+    this.updateTabsCount()
     this.idActiveTab$.next(this.tabs$.value.length - 1);
     this.saveTabs();
   }
@@ -45,6 +48,7 @@ export class TabsService {
     const tabs = this.tabs$.value;
     tabs[id] = null;
     this.tabs$.next(tabs);
+    this.updateTabsCount()
     if (id === this.idActiveTab$.value) {
       this.selectPreviousTab();
     }
@@ -71,7 +75,18 @@ export class TabsService {
     const tabs = this.tabs$.value;
     tabs[id] = name;
     this.tabs$.next(tabs);
+    this.updateTabsCount()
     this.saveTabs();
+  }
+
+  public updateTabsCount() {
+    let count = 0;
+    this.tabs$.value.forEach(tab => {
+      if (tab) {
+        count++
+      }
+    })
+    this.tabsCount$.next(count)
   }
 
   private saveTabs() {

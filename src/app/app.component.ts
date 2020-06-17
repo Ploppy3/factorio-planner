@@ -7,7 +7,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { AppInstallComponent } from 'app/app-install/app-install.component';
 import { TabsService } from 'app/services/tabs.service';
 import { DialogSupportComponent } from 'app/dialog-support/dialog-support.component';
-import { fadeInOut } from 'app/animations';
+import { fadeInOut, collapseHorizontal } from 'app/animations';
 import { SwUpdate } from '@angular/service-worker';
 import { UpdateComponent } from 'app/update/update.component';
 import { SettingsService, Settings } from 'app/services/settings.service';
@@ -18,6 +18,7 @@ import { SettingsService, Settings } from 'app/services/settings.service';
   styleUrls: ['./app.component.scss'],
   animations: [
     fadeInOut,
+    collapseHorizontal,
     trigger('tips', [
       state('hidden', style({
         display: 'none',
@@ -32,35 +33,13 @@ import { SettingsService, Settings } from 'app/services/settings.service';
         })),
       ]),
     ]),
-    trigger('tabButton', [
-      transition(':enter', [
-        style({
-          width: 0,
-          opacity: 0,
-        }),
-        animate('.25s ease-in-out', style({
-          width: '*',
-        })),
-        animate('.25s ease-in-out', style({
-          opacity: 1,
-        })),
-      ]),
-      transition(':leave', [
-        animate('.25s ease-in-out', style({
-          opacity: 0,
-        })),
-        animate('.25s ease-in-out', style({
-          width: 0,
-        })),
-      ]),
-    ]),
   ],
 })
 export class AppComponent implements OnInit {
 
   @HostBinding('class.dark-theme') darkTheme = false;
 
-  public showTips = true;
+  public showTips = this.settingsService.get(Settings.SHOW_TIPS_ON_STARTUP, true);
 
   @HostListener('window:focus', ['$event'])
   onFocus(event: any): void {
@@ -128,21 +107,4 @@ export class AppComponent implements OnInit {
     this.settingsService.setValue(Settings.DARK_THEME, this.darkTheme);
     this.setThemeToOverlay();
   }
-
-  // public selectPreviousTab() {
-  //   for (let i = this.activeTabId; i >= 0; i--) {
-  //     if (this.tabs[i] != null) {
-  //       this.activeTabId = i;
-  //       return;
-  //     }
-  //   }
-  //   for (let i = this.activeTabId + 1; i < this.tabs.length; i++) {
-  //     if (this.tabs[i] != null) {
-  //       this.activeTabId = i;
-  //       return;
-  //     }
-  //   }
-  //   this.activeTabId = -1;
-  //   this.noTabs = true;
-  // }
 }

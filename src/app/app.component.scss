@@ -23,7 +23,6 @@ mat-toolbar-row {
     border-style: solid;
     border-radius: 4px;
     padding-right: 8px;
-    margin: 0 8px;
     display: flex;
     align-items: center;
     transition: background-color .5s;
@@ -63,15 +62,12 @@ mat-toolbar-row {
     padding-right: 8px;
 }
 #toolbar-tabs {
-    height: auto;
-    overflow: auto;
+    height: 48px;
+    overflow: hidden auto;
     padding: 0;
     &>div {
         display: flex;
         align-items: center;
         padding: 4px 8px;
-    }
-    button {
-        margin: 0 8px;
     }
 }

@@ -66,4 +66,5 @@ export class SettingsService {
 export enum Settings {
   DARK_THEME = 'fp_dark_theme',
   TABS = 'fp_tabs',
+  SHOW_TIPS_ON_STARTUP = 'fp_show_tips_on_startup',
 }

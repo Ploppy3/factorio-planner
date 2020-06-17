@@ -13,9 +13,9 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row id="toolbar-tabs">
-    <div>
+    <div class="row spacer">
       <ng-container *ngFor="let tab of tabsService.tabs$ | async; index as i; trackBy:trackByTabButton">
-        <span class="wrapper-button-tab" *ngIf="tab != null" @tabButton>
+        <span class="wrapper-button-tab" *ngIf="tab != null" @collapseHorizontal>
           <span class="tab inverted-border clickable" [class.selected]="i == (tabsService.idActiveTab$ | async)"
             matRipple matRippleColor="rgba(0,0,0,.12)">
             <span (click)="tabsService.selectTab(i)">{{(tabsService.tabs$ | async)[i] || '-'}}</span>
@@ -23,7 +23,10 @@
           </span>
         </span>
       </ng-container>
-      <button (click)="addTab()" @fadeInOut mat-flat-button>
+      <button *ngIf="(tabsService.tabsCount$ | async) > 0" (click)="addTab()" @collapseHorizontal mat-icon-button>
+        <i-plus></i-plus>
+      </button>
+      <button *ngIf="(tabsService.tabsCount$ | async) == 0" (click)="addTab()" @collapseHorizontal mat-flat-button>
         <i-plus></i-plus>
         <span>add tab</span>
       </button>
