@@ -25,6 +25,8 @@ import { DiagramComponent } from './diagram/diagram.component';
 import { ScrollShadowDirective } from './directives/scroll-shadow.directive';
 import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { AddVersionComponent } from './components/add-version/add-version.component';
+import { HorizontalScrollerComponent } from 'app/components/horizontal-scroller/horizontal-scroller.component';
+import { ToolbarRowComponent } from 'app/components/toolbar-row/toolbar-row.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { AddVersionComponent } from './components/add-version/add-version.compon
     ScrollShadowDirective,
     InfoPanelComponent,
     AddVersionComponent,
+    HorizontalScrollerComponent,
+    ToolbarRowComponent,
   ],
   imports: [
     MaterialModule,

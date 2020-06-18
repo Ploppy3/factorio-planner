@@ -1,9 +1,10 @@
 <div mat-dialog-title>Resource Overview</div>
 <mat-dialog-content>
-  <div class="flex wrap">
-    <div class="wrapper-item" *ngFor="let resource of sharedResources" [matTooltipDisabled]="resource.error" [matTooltip]="resource.name">
-      <img [src]="'https://wiki.factorio.com/images/' + (resource.name | urlImg) + '.png'" (error)="resource.error = true" [hidden]="resource.error"
-        [alt]="resource.name">
+  <div class="row wrap">
+    <div class="wrapper-item" *ngFor="let resource of sharedResources" [matTooltipDisabled]="resource.error"
+      [matTooltip]="resource.name">
+      <img [src]="'https://wiki.factorio.com/images/' + (resource.name | urlImg) + '.png'"
+        (error)="resource.error = true" [hidden]="resource.error" [alt]="resource.name">
       <span class="node-name" *ngIf="resource.error">{{resource.name}}</span>
       <span>{{resource.throughput | number:'1.2-2'}} /s</span>
     </div>

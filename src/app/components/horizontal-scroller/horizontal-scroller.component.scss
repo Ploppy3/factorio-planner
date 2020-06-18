@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.wrapper-content {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  min-width: 100%;
+}
+.content {
+  white-space: nowrap;
+  height: 100%;
+}

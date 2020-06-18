@@ -1,48 +1,47 @@
-<mat-toolbar class="mat-elevation-z1" color="primary">
-
-  <mat-toolbar-row id="toolbar-main">
-    <b>Factorio Planner</b>
-    <span class="flex-grow"></span>
-    <button (click)="switchTheme()" matTooltip="Toggle dark mode" mat-icon-button>
-      <i-moon *ngIf="!darkTheme"></i-moon>
-      <i-sun *ngIf="darkTheme"></i-sun>
-    </button>
-    <button (click)="showChangelog()" mat-icon-button>
-      <i-info matTooltip="About"></i-info>
-    </button>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row id="toolbar-tabs">
-    <div class="row spacer">
-      <ng-container *ngFor="let tab of tabsService.tabs$ | async; index as i; trackBy:trackByTabButton">
-        <span class="wrapper-button-tab" *ngIf="tab != null" @collapseHorizontal>
-          <span class="tab inverted-border clickable" [class.selected]="i == (tabsService.idActiveTab$ | async)"
-            matRipple matRippleColor="rgba(0,0,0,.12)">
-            <span (click)="tabsService.selectTab(i)">{{(tabsService.tabs$ | async)[i] || '-'}}</span>
-            <i-x-circle (click)="tabsService.removeTab(i)">close</i-x-circle>
-          </span>
-        </span>
-      </ng-container>
-      <button *ngIf="(tabsService.tabsCount$ | async) > 0" (click)="addTab()" @collapseHorizontal mat-icon-button>
-        <i-plus></i-plus>
-      </button>
-      <button *ngIf="(tabsService.tabsCount$ | async) == 0" (click)="addTab()" @collapseHorizontal mat-flat-button>
-        <i-plus></i-plus>
-        <span>add tab</span>
-      </button>
+<div class="inverted">
+  <app-toolbar-row class="mat-elevation-z1">
+    <div class="row spacer center-items">
+      <b class="grow">Factorio Planner</b>
+      <div>
+        <button (click)="switchTheme()" matTooltip="Toggle dark mode" mat-icon-button>
+          <i-moon *ngIf="!darkTheme"></i-moon>
+          <i-sun *ngIf="darkTheme"></i-sun>
+        </button>
+        <button (click)="showChangelog()" mat-icon-button>
+          <i-info matTooltip="About"></i-info>
+        </button>
+      </div>
     </div>
-  </mat-toolbar-row>
-
-</mat-toolbar>
+  </app-toolbar-row>
+</div>
+<app-toolbar-row class="mat-elevation-z1">
+  <div class="wrapper-tabs row spacer center-items">
+    <ng-container *ngFor="let tab of tabsService.tabs$ | async; index as i; trackBy:trackByTabButton">
+      <span class="wrapper-button-tab" *ngIf="tab != null" @collapseHorizontal>
+        <span class="tab inverted-border clickable" [class.selected]="i == (tabsService.idActiveTab$ | async)" matRipple
+          matRippleColor="rgba(0,0,0,.12)">
+          <span (click)="tabsService.selectTab(i)">{{(tabsService.tabs$ | async)[i] || '-'}}</span>
+          <i-x-circle (click)="tabsService.removeTab(i)">close</i-x-circle>
+        </span>
+      </span>
+    </ng-container>
+    <button *ngIf="(tabsService.tabsCount$ | async) > 0" (click)="addTab()" @collapseHorizontal mat-icon-button>
+      <i-plus></i-plus>
+    </button>
+    <button *ngIf="(tabsService.tabsCount$ | async) == 0" (click)="addTab()" @collapseHorizontal mat-flat-button>
+      <i-plus></i-plus>
+      <span>add tab</span>
+    </button>
+  </div>
+</app-toolbar-row>
 
 <div id="wrapper-page" class="gpu-layer">
   <div class="vertical-spacer">
 
-    <div class="row inner-spacer wrap">
+    <div class="wrapper-links row inner-spacer wrap">
       <span class="clickable underline" (click)="openDialogSupport()">
         Support the project!
       </span>
-
       <a href="https://mods.factorio.com/mod/factorio-data-exporter" target="_blank">Mod: data exporter</a>
     </div>
 
