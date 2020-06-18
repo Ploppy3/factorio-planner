@@ -1,11 +1,11 @@
 <div mat-dialog-title>Changelog & Settings</div>
 <mat-dialog-content appScrollShadow>
+  <div class=" wrapper-controls col inner-spacer">
+    <mat-slide-toggle [formControl]="controlShowTips">Show tips on startup</mat-slide-toggle>
+    <button (click)="settingsService.reset()" mat-stroked-button>Reset application</button>
+  </div>
   <div class="wrapper-version primary">App version : {{appVersion}}</div>
   <div class="wrapper-version primary">Angular version : {{angularVersion}}</div>
-  <div class="col inner-spacer wrapper-controls">
-    <button (click)="settingsService.reset()" mat-stroked-button>Reset application</button>
-    <mat-slide-toggle [formControl]="controlShowTips">Show tips on startup</mat-slide-toggle>
-  </div>
   <div *ngFor="let version of versions" class="wrapper-version">
     <div>{{version.name}}</div>
     <ul>
