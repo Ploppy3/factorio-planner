@@ -1,5 +1,5 @@
 import { Component, OnInit, VERSION } from '@angular/core';
-import { Version, Versions } from 'changelog';
+import { Versions } from 'changelog';
 import { FormControl } from '@angular/forms';
 import { SettingsService, Settings } from 'app/services/settings.service';
 

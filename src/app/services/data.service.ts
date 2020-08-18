@@ -7,6 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class DataService {
   public dataVersions: Version[] = [
+    { name: '1.0.0', fileName: '1.0.0.json' },
+    { name: '1.0.0+marathon', fileName: '1.0.0-marathon.json' },
+    { name: '18', fileName: 'v18.json' },
+    { name: '18+marathon', fileName: 'v18-marathon.json' },
     { name: '18', fileName: 'v18.json' },
     { name: '18+marathon', fileName: 'v18-marathon.json' },
     { name: '17', fileName: 'v17.json' },
