@@ -7,6 +7,12 @@ export interface Version {
 
 export const Versions: Version[] = [
     {
+        name: 'Version 2.7.3 - 2021/01/31',
+        changes: [
+            'Add Factorio versions 1.1.19 and 1.1.19-marathon',
+        ]
+    },
+    {
         name: 'Version 2.7.3 - 2020/06/17',
         changes: [
             'Add Factorio versions 1.0.0 and 1.0.0-marathon',

@@ -1,12 +1,13 @@
-import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { TreeNode } from '../tree-node';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DataService {
   public dataVersions: Version[] = [
+    { name: '1.1.19', fileName: '1.1.19.json' },
+    { name: '1.1.19+marathon', fileName: '1.1.19-marathon.json' },
     { name: '1.0.0', fileName: '1.0.0.json' },
     { name: '1.0.0+marathon', fileName: '1.0.0-marathon.json' },
     { name: '18', fileName: 'v18.json' },
@@ -49,7 +50,7 @@ export class DataService {
       name,
       isCustom: true,
       customData: data,
-    })
+    });
     this.onVersionChange$.next();
   }
 
@@ -66,12 +67,12 @@ export class DataService {
   public loadData(index: number) {
     console.log('loading data at index:' + index);
     if (this.dataVersions[index].isCustom) {
-      this.processModernData(this.dataVersions[index].customData)
+      this.processModernData(this.dataVersions[index].customData);
     } else if (this.dataVersions[index].fileName) { // if new version
       try {
         this.httpClient.get('/assets/factorio-data/' + this.dataVersions[index].fileName).subscribe(
           data => {
-            this.processModernData(data)
+            this.processModernData(data);
           }
         );
       } catch (error) {
@@ -142,7 +143,7 @@ export class DataService {
               }
             });
             if (_category === category && ingredient_count >= recipeIngredients && enabledInSettings) {
-              const _machine = { name: machine.name, crafting_speed: machine.craftingSpeed }
+              const _machine = { name: machine.name, crafting_speed: machine.craftingSpeed };
               response.push(_machine);
             }
           }
