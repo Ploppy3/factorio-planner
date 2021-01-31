@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ToolbarRowComponent } from './toolbar-row.component';
 
@@ -6,7 +6,7 @@ describe('ToolbarRowComponent', () => {
   let component: ToolbarRowComponent;
   let fixture: ComponentFixture<ToolbarRowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ToolbarRowComponent ]
     })
